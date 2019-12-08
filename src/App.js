@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { SignUpPage } from "pages";
+import { configureDataStore } from "store/dataStore";
+import { useStore } from "store";
 
-function App() {
+configureDataStore();
+
+const App = () => {
+  const [state, dispatch] = useStore();
+  // const [counter, setCounter] = useState(state.counter);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SignUpPage />
     </div>
   );
-}
+};
 
 export default App;

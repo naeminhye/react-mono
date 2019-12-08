@@ -1,0 +1,37 @@
+.btn {
+    margin: 30px;
+    font-size: 18px;
+    height: 48px;
+    min-width: 250px;
+    max-width: 100%;
+    border-radius: 4px;
+    border-width: 2;
+    background-color: #fff;
+    border-color: #d9d9d9;
+
+    cursor: pointer;
+    position: relative;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        border-color: #a3a3a3;
+    }
+    &:active {
+        border-color: #d9d9d9;
+        background-color: #d9d9d9;
+    }
+
+    &__icon {
+        position: absolute;
+        left: 10px;
+    }
+
+    &__content {
+        color: rgba(0,0,0,0.65);
+        font-weight: 600;
+    }
+}
+
