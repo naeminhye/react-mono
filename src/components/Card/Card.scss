@@ -1,0 +1,17 @@
+@import '../../common/styles/settings';
+
+.card__box {
+    margin: 0 auto;
+
+    &__title {
+        font-weight: 900;
+
+        font-family: Inconsolata, Montserrat, Arial;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

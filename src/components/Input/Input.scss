@@ -1,0 +1,20 @@
+@import '../../common/styles/settings';
+
+@import '../../common/styles/settings';
+
+.normal__input {
+    padding: 0 10px;
+    font-size: 18px;
+    height: 48px;
+    min-width: 250px;
+    max-width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 2px solid $clr_classic_blue;
+    background-color: #FFFFFF;
+    font-family: Inconsolata, Montserrat, Arial;
+    // &__label {
+
+    // }
+}

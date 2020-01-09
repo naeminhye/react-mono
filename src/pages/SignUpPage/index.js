@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "components";
+import { Input, Button, Card } from "components";
 
 const GoogleIcon = ({ size, fill }) => (
   <svg
@@ -18,9 +18,11 @@ const GoogleIcon = ({ size, fill }) => (
 
 const SignUpPage = props => {
   return (
-    <div>
-      <Button style={{ backgroundColor: "#4385F5" }} icon={<GoogleIcon size={24} fill="#FFFFFF" />}>Hello</Button>
-    </div>
+    <Card width={400}>
+      <Input style={{ marginBottom: 8 }} />
+      <Input type="password" style={{ marginBottom: 8 }} />
+      <Button>Sign Up</Button>
+    </Card>
   );
 };
 

@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat:300,400,700,900&display=swap&subset=vietnamese');
+
+$clr_like_black: #041421;
+$clr_dark_blue: #0A3961;
+$clr_classic_blue: #0F4C81;
+$clr_light_blue: #9FB7CD;
+$clr_beige: #E8A188;
+$clr_ivory: #F8EFE1;
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
