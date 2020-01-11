@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { SignUpPage } from "pages";
+import { LogInPage } from "pages";
 import { configureDataStore } from "store/dataStore";
 import { useStore } from "store";
 
@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div>
-      <SignUpPage />
+      <LogInPage />
     </div>
   );
 };

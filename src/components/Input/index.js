@@ -12,10 +12,7 @@ const Input = props => {
   });
 
   return (
-    <div>
-      <div>{label}</div>
-      <input className={classes} {...others} />
-    </div>
+    <input className={classes} {...others} />
   );
 };
 

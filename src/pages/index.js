@@ -1,5 +1,5 @@
-import SignUpPage from './SignUpPage'
+import LogInPage from './LogInPage'
 
 export {
-    SignUpPage
+    LogInPage
 }
