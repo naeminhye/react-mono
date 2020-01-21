@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from 'prop-types'; 
-import "./Input.scss";
 
 const Input = props => {
   const { children, className, icon, label, ...others } = props;

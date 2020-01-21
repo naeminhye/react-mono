@@ -1,0 +1,78 @@
+.select {
+    padding: 0 10px;
+    font-size: 18px;
+    height: 48px;
+    min-width: 250px;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 2px solid #0F4C81;
+    background-color: #FFFFFF;
+    font-family: Inconsolata, Montserrat, Arial;
+    border-radius: 0;
+
+    position: relative;
+
+    // select {
+    //     display: none; /*hide original SELECT element: */
+    // }
+
+    .option-lists {
+        /* Style items (options): */
+        position: absolute;
+        background-color: DodgerBlue;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+
+        /* Hide the items when the select box is closed: */
+        &.hide {
+            display: none;
+        }
+        .option-item {
+            color: #ffffff;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            cursor: pointer;
+
+            &.selected-item {
+                &::after {
+                    position: absolute;
+                    content: "";
+                    top: 14px;
+                    right: 10px;
+                    width: 0;
+                    height: 0;
+                    border: 6px solid transparent;
+                    border-color: #000 transparent transparent transparent;
+                }
+                &.select-arrow-active:after {
+                    border-color: transparent transparent #fff transparent;
+                    top: 7px;
+                  }
+            }
+
+        }
+    }
+}
+
+
+
+/* Point the arrow upwards when the select box is open (active): */
+
+  
+  /* style the items (options), including the selected item: */
+  .select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
