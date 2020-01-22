@@ -6,7 +6,7 @@ const Input = props => {
   const { children, className, icon, label, ...others } = props;
 
   const classes = classNames({
-    normal__input: true,
+    'mono__input': true,
     className: className || ""
   });
 

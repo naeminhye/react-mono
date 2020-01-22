@@ -20,7 +20,7 @@ const CheckBoxItem = props => {
   return (
     <div
       {...others}
-      className={`checkbox__item${_checked ? " checkbox--checked" : ""}${
+      className={`mono__checkbox--item${_checked ? " checkbox--checked" : ""}${
         className ? " " + className : ""
       }`}
       onClick={() => {
@@ -29,11 +29,11 @@ const CheckBoxItem = props => {
       }}
     >
       <input checked={_checked} type="checkbox" name={name} />
-      <div className="checkbox__content">
+      <div className="mono__checkbox--item-content">
         {icon}
-        <div className="checkbox__content__label">{label}</div>
+        <div className="mono__checkbox--item-content__label">{label}</div>
       </div>
-      <div className="check--icon"></div>
+      <div className="mono__checkbox--item-icon"></div>
     </div>
   );
 };
@@ -56,7 +56,7 @@ const CheckBox = props => {
   };
 
   return (
-    <div className="checkbox__group" {...others}>
+    <div className="mono__checkbox" {...others}>
       {options.map((option, index) => (
         <CheckBoxItem
           name={name}

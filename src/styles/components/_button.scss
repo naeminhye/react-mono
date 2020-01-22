@@ -1,4 +1,4 @@
-.btn {
+.mono__btn {
     font-size: 18px;
     height: 48px;
     min-width: 250px;
@@ -41,7 +41,7 @@
     }
 
     &--primary {
-        .btn__content {
+        .mono__btn__content {
             color: #fff;
         }
         background-color: $clr_classic_blue;
