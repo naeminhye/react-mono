@@ -6,14 +6,14 @@ const Button = props => {
   const { children, className, icon, type, ...others } = props;
 
   const classes = classNames({
-    btn: true,
+    mono__btn: true,
     className: className || "",
-    [`btn--${type}`]: type && type !== "default"
+    [`mono__btn--${type}`]: type && type !== "default"
   });
 
   return (
     <button className={classes} {...others}>
-      <div className="btn__content">{children}</div>
+      <div className="mono__btn__content">{children}</div>
     </button>
   );
 };
