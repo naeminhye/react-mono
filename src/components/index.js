@@ -1,6 +1,7 @@
 import Button from "./Button";
 import Card from "./Card";
 import CheckBox from "./CheckBox";
+import DatePicker from "./DatePicker";
 import DropDown from "./DropDown";
 import Icons from "./Icons";
 import Input from "./Input";
@@ -11,6 +12,7 @@ export {
     Button,
     Card, 
     CheckBox,
+    DatePicker,
     DropDown,
     Input,
     Icons,
