@@ -6,6 +6,7 @@ import Icons from "./Icons";
 import Input from "./Input";
 import Form from "./Form";
 import RadioBox from "./RadioBox";
+import Uploader from "./Uploader";
 
 export { 
     Button,
@@ -15,5 +16,6 @@ export {
     Input,
     Icons,
     Form,
-    RadioBox
+    RadioBox,
+    Uploader
 };
