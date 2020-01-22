@@ -1,20 +1,20 @@
-.form {
+.mono__form {
     margin: 24px;    
     padding: 32px;
     &.border {
         border: 1px solid $clr_dark_gray;
     }
 
-    .form__title {
+    .mono__form--title {
         font-size: 24px;
         font-weight: 600;
         margin-bottom: 16px;
         @include highlight($clr_beige);
     }
 
-    &__item {
+    &--item {
         margin: 5px 0;
-        &__label {
+        &-label {
             font-family: Inconsolata, Montserrat, Arial;
             color: $clr_eclipse;
             padding-bottom: 5px;
@@ -32,10 +32,10 @@
         }
 
     }
-    &__action-group {   
+    &--action-group {   
         display: flex;
         margin-top: 16px;
-        .form__action {
+        .mono__form--action {
             &.left-space {
                 margin-left: 5px;
             }
