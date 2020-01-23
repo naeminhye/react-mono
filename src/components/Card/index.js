@@ -7,7 +7,7 @@ const Card = props => {
 
   const classes = classNames({
     card__box: true,
-    className: className || ""
+    [className]: className || ""
   });
 
   return (

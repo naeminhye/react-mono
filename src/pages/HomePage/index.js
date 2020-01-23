@@ -1,5 +1,17 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Form, Button, Icons,  Input, CheckBox, RadioBox, Uploader } from "components";
+=======
+import {
+  Form,
+  Button,
+  DatePicker,
+  Icons,
+  Input,
+  CheckBox,
+  RadioBox
+} from "components";
+>>>>>>> 3f51ed0de88ea95f6d4e1a907c6dadbf6296b93e
 
 const transportationOptions = [
   // {
@@ -47,14 +59,17 @@ const HomePage = props => {
     <div>
       {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
       <Form title="Form Title" border>
+        <Form.Item label="Date">
+          <DatePicker value="1/22/20" format="M/D/YY"/>
+        </Form.Item>
         <Form.Item label="Input" isRequired>
           <Input placeholder="Input"/>
         </Form.Item>
         <Form.Item label="Transportation">
-          <CheckBox options={transportationOptions}/>
+          <CheckBox options={transportationOptions} />
         </Form.Item>
         <Form.Item label="Gender">
-          <RadioBox options={genderOptions}/>
+          <RadioBox options={genderOptions} />
         </Form.Item>
         <Form.Item label="Upload File">
           <Uploader />
