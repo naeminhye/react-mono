@@ -33,7 +33,7 @@ var _show = false
 
   const classes = classNames({
     select: true,
-    className: className || ""
+    [className]: className || ""
   });
 
   const toggleOptions = () => {

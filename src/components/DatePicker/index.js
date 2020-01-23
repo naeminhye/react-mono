@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -19,14 +19,29 @@ const MONTHS = [
   "November",
   "December"
 ];
-// var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+const SHORT_MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec"
+];
 
 const getMonthIndex = month => MONTHS.indexOf(month);
 
 const DaySlot = props => {
   return (
     <td
-      className={`slot${props.selected === props.value ? " selected" : ""}${props.today === props.value ? " today" : ""}`}
+      className={`slot${props.selected === props.value ? " selected" : ""}${
+        props.today === props.value ? " today" : ""
+      }`}
       onClick={() => props.onSelectDay(props.value)}
     >
       <span className="mono__calendar--day">{props.value}</span>
@@ -47,19 +62,19 @@ const CalendarTable = props => {
     } else {
       return -1;
     }
-  }
+  };
 
   const getSelectedDay = () => {
     // check if month and year is the same
     if (
-      parseInt(props.selectedDate.format("M")) === targetMonth &&
-      props.selectedDate.format("YYYY") === targetYear
+      parseInt(props.selectedDate.format("M")) === parseInt(targetMonth) &&
+      parseInt(props.selectedDate.format("YYYY")) === parseInt(targetYear)
     ) {
       return parseInt(props.selectedDate.format("D"));
     } else {
       return -1;
     }
-  }
+  };
 
   const getFirstDayIndexOfMonth = () => {
     return WEEKDAYS.indexOf(
@@ -109,7 +124,7 @@ const CalendarTable = props => {
   };
 
   return (
-    <table>
+    <table className="mono__calendar--content-by-days">
       <thead>
         <tr>
           {WEEKDAYS.map((day, index) => (
@@ -122,92 +137,217 @@ const CalendarTable = props => {
   );
 };
 
+const MonthSelector = props => {
+  return (
+    <div className="mono__calendar--content-by-months">
+      {SHORT_MONTHS.map((month, index) => {
+        return (
+          <div
+            key={index}
+            className={`item`}
+            onClick={() => props.onSelectMonth(index)}
+          >
+            {month}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const YearSelector = props => {
+  let years = [];
+  for (let index = 0; index < 12; index++) {
+    years.push(<div key={index} className="item" onClick={() => props.onSelectYear(props.startYear + index)}>
+    {props.startYear + index}
+  </div>)
+  }
+  return (
+    <div className="mono__calendar--content-by-months">
+      {years}
+    </div>
+  )
+}
+
 const DatePicker = props => {
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
-    moment(props.value, "YYYY-MM-DD")
+    moment(props.value, props.format).isValid()
+      ? moment(props.value, props.format)
+      : moment()
   );
+  const datePickerRef = useRef(null);
 
   // for display only
   const [month, setMonth] = useState(
     getMonthIndex(selectedDate.format("MMMM"))
   );
   const [year, setYear] = useState(selectedDate.format("YYYY"));
+  const [startYear, setStartYear] = useState(Math.floor(year / 12) * 12);
 
-  const nextMonth = () => {
-    if (month === 11) {
-      setMonth(0);
-      setYear(year + 1);
-    } else {
-      setMonth(month + 1);
+  const [display, setDisplay] = useState("BY_DAYS"); // BY_DAYS|BY_MONTHS|BY_YEARS
+
+  const goNext = () => {
+    if (display === "BY_DAYS") {
+      if (month === 11) {
+        setMonth(0);
+        setYear(parseInt(year) + 1);
+      } else {
+        setMonth(month + 1);
+      }
+    }
+    else if (display === "BY_MONTHS") {
+      setYear(parseInt(year) + 1);
+    }
+    else {
+      setStartYear(startYear + 12);
     }
   };
 
-  const prevMonth = () => {
-    if (month === 0) {
-      setMonth(11);
-      setYear(year - 1);
-    } else {
-      setMonth(month - 1);
+  const goPrev = () => {
+    if (display === "BY_DAYS") {
+      if (month === 0) {
+        setMonth(11);
+        setYear(parseInt(year) - 1);
+      } else {
+        setMonth(month - 1);
+      }
+    }
+    else if (display === "BY_MONTHS") {
+      setYear(parseInt(year) - 1);
+    }
+    else {
+      setStartYear(startYear - 12);
     }
   };
 
   const goToToday = () => {
-    setSelectedDate(moment())
-    setMonth(moment().format("M") - 1)
+    setSelectedDate(moment());
+    setMonth(getMonthIndex(selectedDate.format("MMMM")));
+    setYear(selectedDate.format("YYYY"));
+    setStartYear(Math.floor(year / 12) * 12)
+    setDisplay("BY_DAYS");
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setSelectedDate(
+      moment(props.value, props.format).isValid()
+        ? moment(props.value, props.format)
+        : moment()
+    );
+    setMonth(moment().format("M") - 1);
     setYear(moment().format("YYYY"));
+    setStartYear(Math.floor(year / 12) * 12)
+    setDisplay("BY_DAYS");
     setOpen(false);
   }
 
   useEffect(() => {
-    // console.log("selectedDate:", selectedDate);
-  });
+    const handleClickOutside = event => {
+      if (datePickerRef && !datePickerRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleClickOutside);
+
+    // clean up
+    return () => window.removeEventListener("mousedown", handleClickOutside);
+  }, []); // empty array => run only once
 
   // open
   return (
-    <div className={`mono__datepicker--wrapper${open ? " open" : ""}`}>
+    <div
+      ref={datePickerRef}
+      className={`mono__datepicker--wrapper${open ? " open" : ""}`}
+    >
       <Input
-        value={selectedDate.format("YYYY-MM-DD")}
+        value={selectedDate.format(props.format)}
         className="mono__datepicker--input"
         placeholder="Try me.."
         onFocus={() => setOpen(true)}
-        // onBlur={() => setOpen(false)}
+        suffix={<Icons.Calendar size={24} fill="#AEAEAE" />}
       />
-      {/* <Icons.Calendar size={24} fill="#AEAEAE"/> */}
       <div className="mono__calendar">
         <div className="mono__calendar--months">
-          <div
-            className="mono__calendar--months-prev-month"
-            onClick={prevMonth}
-          >
-            &lt;
-          </div>
-          <div className="mono__calendar--months-current">
-            <span className="mono__calendar--months-current-month">
-              {MONTHS[month]}
-            </span>
-            <span className="mono__calendar--months-current-year">{year}</span>
+          <div className="mono__calendar--months-prev-month" onClick={goPrev}>
+            <Icons.ArrowLeft size={16} />
           </div>
           <div
-            className="mono__calendar--months-next-month"
-            onClick={nextMonth}
+            className="mono__calendar--months-current"
+            onClick={() =>
+              display === "BY_YEARS"
+                ? setDisplay("BY_DAYS")
+                : display === "BY_DAYS"
+                ? setDisplay("BY_MONTHS")
+                : setDisplay("BY_YEARS")
+            }
           >
-            &gt;
+            {display === "BY_DAYS" && (
+              <>
+                <span className="mono__calendar--months-current-month">
+                  {MONTHS[month]}
+                </span>
+                <span className="mono__calendar--months-current-year">
+                  {year}
+                </span>
+              </>
+            )}
+            {display === "BY_MONTHS" && (
+              <span className="mono__calendar--months-current-year">
+                {year}
+              </span>
+            )}
+            {display === "BY_YEARS" && (
+              <span className="mono__calendar--months-current-year">
+                {startYear} - {startYear + 11}
+              </span>
+            )}
+          </div>
+          <div className="mono__calendar--months-next-month" onClick={goNext}>
+            <Icons.ArrowRight size={16} />
           </div>
         </div>
-        <CalendarTable
-          targetMonth={month + 1}
-          targetYear={year}
-          selectedDate={selectedDate}
-          onSelectDayOfMonth={day => {
-            setSelectedDate(
-              moment(year + "-" + (month + 1) + "-" + day, "YYYY-M-D")
-            );
-            setOpen(false);
-          }}
-        />
-        <div style={{textAlign: 'center'}}>
-          <Button size="sm" onClick={goToToday}>Today</Button>
+
+        <div className="mono__calendar--content">
+          {display === "BY_DAYS" && (
+            <CalendarTable
+              targetMonth={month + 1}
+              targetYear={year}
+              selectedDate={selectedDate}
+              onSelectDayOfMonth={day => {
+                setSelectedDate(
+                  moment(year + "-" + (month + 1) + "-" + day, "YYYY-M-D")
+                );
+                setOpen(false);
+              }}
+            />
+          )}
+          {display === "BY_MONTHS" && (
+            <MonthSelector
+              onSelectMonth={monthIndex => {
+                setMonth(monthIndex);
+                setDisplay("BY_DAYS");
+              }}
+            />
+          )}
+          {display === "BY_YEARS" && (
+            <YearSelector startYear={startYear} 
+              onSelectYear={year => {
+                setYear(year);
+                setDisplay("BY_MONTHS");
+              }}/>
+          )}
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <Button size="sm" style={{width: "50%"}} onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button type="primary" size="sm" style={{width: "50%"}} onClick={goToToday}>
+            Today
+          </Button>
         </div>
       </div>
     </div>
@@ -217,11 +357,22 @@ const DatePicker = props => {
 DatePicker.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  format: PropTypes.oneOf([
+    "YYYY-MM-DD",
+    "YYYY/MM/DD",
+    "M/D/YYYY",
+    "M/D/YY",
+    "MM/DD/YY",
+    "MM/DD/YYYY",
+    "YY/MM/DD",
+    "DD-MMM-YY"
+  ])
 };
 
 DatePicker.defaultProps = {
-  value: moment().format("YYYY-MM-DD")
+  value: moment().format("YYYY-MM-DD"),
+  format: "YYYY-MM-DD"
 };
 
 export default DatePicker;

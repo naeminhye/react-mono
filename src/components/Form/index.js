@@ -16,7 +16,7 @@ const Item = props => {
 
   const classes = classNames({
     "mono__form--item": true,
-    className: className || ""
+    [className]: className || ""
   });
 
   const labelClasses = classNames({
@@ -39,7 +39,7 @@ const Form = props => {
   const classes = classNames({
     mono__form: true,
     border: border || "",
-    className: className || ""
+    [className]: className || ""
   });
 
   return (
