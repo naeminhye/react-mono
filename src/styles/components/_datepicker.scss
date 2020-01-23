@@ -28,12 +28,20 @@
         &-current {
           cursor: pointer;
           font-weight: 600;
+          border-radius: 12px;
+          padding: 4px 10px;
+          color: $clr_dark_gray;
+          &:hover {
+            background-color: $clr_dark_gray;
+            color: $clr_eclipse;
+            border-color: $clr_dark_gray;
+          }
           &-month {
+            color: $clr_eclipse;
             margin: 0 2px;
           }
           &-year {
             margin: 0 2px;
-            color: $clr_dark_gray;
           }
         }
 
@@ -94,7 +102,7 @@
         }
 
         &-by-months {
-          width: 100%;
+          width: 300px;
           height: 240px;
           display: flex;
           flex-direction: row;
@@ -109,8 +117,7 @@
             margin-bottom: 5px;
             text-align: center;
             cursor: pointer;
-            border-radius: 50%;
-            
+
             &:hover {
               background-color: $clr_dark_gray;
               color: $clr_eclipse;

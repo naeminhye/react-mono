@@ -141,13 +141,33 @@ const MonthSelector = props => {
   return (
     <div className="mono__calendar--content-by-months">
       {SHORT_MONTHS.map((month, index) => {
-        return (<div key={index} className={`item`} onClick={() => props.onSelectMonth(index)}>
-          {month}
-        </div>);
+        return (
+          <div
+            key={index}
+            className={`item`}
+            onClick={() => props.onSelectMonth(index)}
+          >
+            {month}
+          </div>
+        );
       })}
     </div>
   );
 };
+
+const YearSelector = props => {
+  let years = [];
+  for (let index = 0; index < 12; index++) {
+    years.push(<div key={index} className="item" onClick={() => props.onSelectYear(props.startYear + index)}>
+    {props.startYear + index}
+  </div>)
+  }
+  return (
+    <div className="mono__calendar--content-by-months">
+      {years}
+    </div>
+  )
+}
 
 const DatePicker = props => {
   const [open, setOpen] = useState(false);
@@ -163,33 +183,63 @@ const DatePicker = props => {
     getMonthIndex(selectedDate.format("MMMM"))
   );
   const [year, setYear] = useState(selectedDate.format("YYYY"));
+  const [startYear, setStartYear] = useState(Math.floor(year / 12) * 12);
 
   const [display, setDisplay] = useState("BY_DAYS"); // BY_DAYS|BY_MONTHS|BY_YEARS
 
-  const nextMonth = () => {
-    if (month === 11) {
-      setMonth(0);
-      setYear(year + 1);
-    } else {
-      setMonth(month + 1);
+  const goNext = () => {
+    if (display === "BY_DAYS") {
+      if (month === 11) {
+        setMonth(0);
+        setYear(parseInt(year) + 1);
+      } else {
+        setMonth(month + 1);
+      }
+    }
+    else if (display === "BY_MONTHS") {
+      setYear(parseInt(year) + 1);
+    }
+    else {
+      setStartYear(startYear + 12);
     }
   };
 
-  const prevMonth = () => {
-    if (month === 0) {
-      setMonth(11);
-      setYear(year - 1);
-    } else {
-      setMonth(month - 1);
+  const goPrev = () => {
+    if (display === "BY_DAYS") {
+      if (month === 0) {
+        setMonth(11);
+        setYear(parseInt(year) - 1);
+      } else {
+        setMonth(month - 1);
+      }
+    }
+    else if (display === "BY_MONTHS") {
+      setYear(parseInt(year) - 1);
+    }
+    else {
+      setStartYear(startYear - 12);
     }
   };
 
   const goToToday = () => {
     setSelectedDate(moment());
-    setMonth(moment().format("M") - 1);
-    setYear(moment().format("YYYY"));
+    setMonth(getMonthIndex(selectedDate.format("MMMM")));
+    setYear(selectedDate.format("YYYY"));
     setOpen(false);
   };
+
+  const handleCancel = () => {
+    setSelectedDate(
+      moment(props.value, props.format).isValid()
+        ? moment(props.value, props.format)
+        : moment()
+    );
+    setMonth(moment().format("M") - 1);
+    setYear(moment().format("YYYY"));
+    setStartYear(Math.floor(year / 12) * 12)
+    setDisplay("BY_DAYS");
+    setOpen(false);
+  }
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -219,38 +269,41 @@ const DatePicker = props => {
       />
       <div className="mono__calendar">
         <div className="mono__calendar--months">
-          <div
-            className="mono__calendar--months-prev-month"
-            onClick={prevMonth}
-          >
+          <div className="mono__calendar--months-prev-month" onClick={goPrev}>
             <Icons.ArrowLeft size={16} />
           </div>
-          <div className="mono__calendar--months-current">
-            <span
-              className="mono__calendar--months-current-month"
-              onClick={() =>
-                display === "BY_MONTHS"
-                  ? setDisplay("BY_DAYS")
-                  : setDisplay("BY_MONTHS")
-              }
-            >
-              {MONTHS[month]}
-            </span>
-            <span
-              className="mono__calendar--months-current-year"
-              onClick={() =>
-                display === "BY_YEARS"
-                  ? setDisplay("BY_DAYS")
-                  : setDisplay("BY_YEARS")
-              }
-            >
-              {year}
-            </span>
-          </div>
           <div
-            className="mono__calendar--months-next-month"
-            onClick={nextMonth}
+            className="mono__calendar--months-current"
+            onClick={() =>
+              display === "BY_YEARS"
+                ? setDisplay("BY_DAYS")
+                : display === "BY_DAYS"
+                ? setDisplay("BY_MONTHS")
+                : setDisplay("BY_YEARS")
+            }
           >
+            {display === "BY_DAYS" && (
+              <>
+                <span className="mono__calendar--months-current-month">
+                  {MONTHS[month]}
+                </span>
+                <span className="mono__calendar--months-current-year">
+                  {year}
+                </span>
+              </>
+            )}
+            {display === "BY_MONTHS" && (
+              <span className="mono__calendar--months-current-year">
+                {year}
+              </span>
+            )}
+            {display === "BY_YEARS" && (
+              <span className="mono__calendar--months-current-year">
+                {startYear} - {startYear + 11}
+              </span>
+            )}
+          </div>
+          <div className="mono__calendar--months-next-month" onClick={goNext}>
             <Icons.ArrowRight size={16} />
           </div>
         </div>
@@ -269,14 +322,28 @@ const DatePicker = props => {
               }}
             />
           )}
-          {display === "BY_MONTHS" && <MonthSelector onSelectMonth={(monthIndex) => {
+          {display === "BY_MONTHS" && (
+            <MonthSelector
+              onSelectMonth={monthIndex => {
                 setMonth(monthIndex);
-                setDisplay("BY_DAYS")
-          }}/>}
+                setDisplay("BY_DAYS");
+              }}
+            />
+          )}
+          {display === "BY_YEARS" && (
+            <YearSelector startYear={startYear} 
+              onSelectYear={year => {
+                setYear(year);
+                setDisplay("BY_MONTHS");
+              }}/>
+          )}
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <Button size="sm" onClick={goToToday}>
+          <Button size="sm" style={{width: "50%"}} onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button type="primary" size="sm" style={{width: "50%"}} onClick={goToToday}>
             Today
           </Button>
         </div>
