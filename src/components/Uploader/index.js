@@ -6,11 +6,10 @@ import Button from "../Button";
 const Uploader = props => {
   return (
     <div className="mono__uploader">
-      <div className="mono__uploader__drag">
-        <Button>Upload a file</Button>
-        <div className="mono__uploader__drag--hint">
-          Drag & drop any images or documents that might be helpful in
-          explaining your project brief here.
+      <div className="mono__uploader--drag">
+        <input type="file" id="uploader__input" className="mono__uploader--input" />
+        <div className="mono__uploader--drag-hint">
+          <label for="uploader__input"> Drag & drop files or folders here or browse file</label>
         </div>
       </div>
       {/*  className="mono__uploader__button" */}

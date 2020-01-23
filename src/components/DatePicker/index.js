@@ -342,10 +342,10 @@ const DatePicker = props => {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <Button size="sm" style={{width: "50%"}} onClick={handleCancel}>
+          <Button size="xs" style={{width: "50%"}} onClick={handleCancel}>
             Cancel
           </Button>
-          <Button type="primary" size="sm" style={{width: "50%"}} onClick={goToToday}>
+          <Button type="primary" size="xs" style={{width: "50%"}} onClick={goToToday}>
             Today
           </Button>
         </div>

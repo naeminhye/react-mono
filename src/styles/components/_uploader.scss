@@ -1,5 +1,5 @@
 .mono__uploader {
-  &__drag {
+  &--drag {
     padding: 24px 36px;
     text-align: center;
     background: #fafafa;
@@ -7,7 +7,7 @@
     cursor: pointer;
     -webkit-transition: border-color 0.3s;
     transition: border-color 0.3s;
-    &--hint {
+    &-hint {
       margin-top: 24px;
     }
   }
