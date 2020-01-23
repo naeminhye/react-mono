@@ -6,7 +6,8 @@ import {
   Icons,
   Input,
   CheckBox,
-  RadioBox
+  RadioBox,
+  Uploader
 } from "components";
 
 const transportationOptions = [
@@ -59,13 +60,16 @@ const HomePage = props => {
           <DatePicker value="1/22/20" format="M/D/YY"/>
         </Form.Item>
         <Form.Item label="Input" isRequired>
-          <Input></Input>
+          <Input placeholder="Input"/>
         </Form.Item>
         <Form.Item label="Transportation">
           <CheckBox options={transportationOptions} />
         </Form.Item>
         <Form.Item label="Gender">
           <RadioBox options={genderOptions} />
+        </Form.Item>
+        <Form.Item label="Upload File">
+          <Uploader />
         </Form.Item>
       </Form>
     </div>
