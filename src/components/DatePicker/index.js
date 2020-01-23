@@ -225,6 +225,8 @@ const DatePicker = props => {
     setSelectedDate(moment());
     setMonth(getMonthIndex(selectedDate.format("MMMM")));
     setYear(selectedDate.format("YYYY"));
+    setStartYear(Math.floor(year / 12) * 12)
+    setDisplay("BY_DAYS");
     setOpen(false);
   };
 
