@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-import { Form, Button, Icons,  Input, CheckBox, RadioBox, Uploader } from "components";
-=======
 import {
   Form,
   Button,
@@ -9,9 +6,9 @@ import {
   Icons,
   Input,
   CheckBox,
-  RadioBox
+  RadioBox,
+  Uploader
 } from "components";
->>>>>>> 3f51ed0de88ea95f6d4e1a907c6dadbf6296b93e
 
 const transportationOptions = [
   // {
