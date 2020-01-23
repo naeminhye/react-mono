@@ -28,7 +28,7 @@ const CheckBoxItem = props => {
         setChecked(!_checked);
       }}
     >
-      <input checked={_checked} type="checkbox" name={name} />
+      {/* <input checked={_checked} type="checkbox" name={name} /> */}
       <div className="mono__checkbox--item-content">
         {icon}
         <div className="mono__checkbox--item-content__label">{label}</div>

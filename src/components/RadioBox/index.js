@@ -24,7 +24,7 @@ const RadioBoxItem = props => {
         onChange(!checked);
       }}
     >
-      <input checked={checked} type="checkbox" name={name} />
+      {/* <input checked={checked} type="checkbox" name={name} /> */}
       <div className="mono__checkbox--item-content">
         {icon}
         <div className="mono__checkbox--item-content__label">{label}</div>
