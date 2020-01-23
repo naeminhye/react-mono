@@ -125,7 +125,7 @@ const CalendarTable = props => {
 const DatePicker = props => {
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
-    moment(props.value, "YYYY-MM-DD")
+    moment(props.value, props.format).isValid() ? moment(props.value, props.format) : moment()
   );
 
   // for display only
@@ -165,15 +165,16 @@ const DatePicker = props => {
 
   // open
   return (
-    <div className={`mono__datepicker--wrapper${open ? " open" : ""}`}>
+    <div className={`mono__datepicker--wrapper${open ? " open" : ""}`} 
+      // onBlur={() => setOpen(false)}
+      >
       <Input
-        value={selectedDate.format("YYYY-MM-DD")}
+        value={selectedDate.format(props.format)}
         className="mono__datepicker--input"
         placeholder="Try me.."
         onFocus={() => setOpen(true)}
-        // onBlur={() => setOpen(false)}
+        suffix={<Icons.Calendar size={24} fill="#AEAEAE"/>}
       />
-      {/* <Icons.Calendar size={24} fill="#AEAEAE"/> */}
       <div className="mono__calendar">
         <div className="mono__calendar--months">
           <div
@@ -217,11 +218,22 @@ const DatePicker = props => {
 DatePicker.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  format: PropTypes.oneOf([
+    "YYYY-MM-DD",
+    "YYYY/MM/DD",
+    "M/D/YYYY",
+    "M/D/YY",
+    "MM/DD/YY",
+    "MM/DD/YYYY",
+    "YY/MM/DD",
+    "DD-MMM-YY",
+  ])
 };
 
 DatePicker.defaultProps = {
-  value: moment().format("YYYY-MM-DD")
+  value: moment().format("YYYY-MM-DD"),
+  format: "YYYY-MM-DD"
 };
 
 export default DatePicker;
