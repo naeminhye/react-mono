@@ -67,8 +67,8 @@ const CalendarTable = props => {
   const getSelectedDay = () => {
     // check if month and year is the same
     if (
-      parseInt(props.selectedDate.format("M")) === targetMonth &&
-      props.selectedDate.format("YYYY") === targetYear
+      parseInt(props.selectedDate.format("M")) === parseInt(targetMonth) &&
+      parseInt(props.selectedDate.format("YYYY")) === parseInt(targetYear)
     ) {
       return parseInt(props.selectedDate.format("D"));
     } else {
