@@ -1,0 +1,80 @@
+@import '../../styles/settings';
+
+.mono__btn {
+    height: 48px;
+    min-width: 250px;
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: $clr_whisper;
+
+    // size
+    &--xs {    
+        height: 32px;
+        min-width: 140px;
+        .mono__btn__content {
+            font-size: 14px;
+        }
+    }
+    // size
+    &--sm {    
+        height: 36px;
+        min-width: 140px;
+        .mono__btn__content {
+            font-size: 16px;
+        }
+    }
+    // size
+    &--lg {
+        
+    }
+
+    cursor: pointer;
+    position: relative;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        background-color: $clr_dark_gray;
+    }
+    &:active {
+        background-color: $clr_dark_gray;
+    }
+
+    &__icon {
+        position: absolute;
+        left: 10px;
+    }
+
+    &__content {
+        // color: rgba(0,0,0,0.65);
+        color: $clr_eclipse;
+        font-weight: 600;
+
+        font-family: Inconsolata, Montserrat, Arial;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: normal;
+        letter-spacing: 1.8px;
+        // line-height: 48px;
+        text-transform: uppercase;
+    }
+
+    &--primary {
+        .mono__btn__content {
+            color: #fff;
+        }
+        background-color: $clr_classic_blue;
+
+        &:hover {
+            background-color: $clr_dark_blue;
+        }
+        &:active {
+            background-color: $clr_dark_blue;
+        }
+    }
+
+}
+

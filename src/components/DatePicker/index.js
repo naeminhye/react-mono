@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
+import styles from './DatePicker.module.scss'; 
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Button, Icons, Input } from "components";
@@ -37,14 +38,23 @@ const SHORT_MONTHS = [
 const getMonthIndex = month => MONTHS.indexOf(month);
 
 const DaySlot = props => {
+
+  // style classes for DaySlot
+  const daySlotClasses = classNames({
+    [styles[`slot`]]: true,
+    [styles[`selected`]]: props.selected === props.value,
+    [styles[`today`]]: props.today === props.value
+  });
+
   return (
     <td
-      className={`slot${props.selected === props.value ? " selected" : ""}${
-        props.today === props.value ? " today" : ""
-      }`}
+      className={daySlotClasses}
+      // className={`slot${props.selected === props.value ? " selected" : ""}${
+      //   props.today === props.value ? " today" : ""
+      // }`}
       onClick={() => props.onSelectDay(props.value)}
     >
-      <span className="mono__calendar--day">{props.value}</span>
+      <span className={styles["mono__calendar--day"]}>{props.value}</span>
     </td>
   );
 };
@@ -124,7 +134,7 @@ const CalendarTable = props => {
   };
 
   return (
-    <table className="mono__calendar--content-by-days">
+    <table className={styles["mono__calendar--content-by-days"]}>
       <thead>
         <tr>
           {WEEKDAYS.map((day, index) => (
@@ -139,12 +149,12 @@ const CalendarTable = props => {
 
 const MonthSelector = props => {
   return (
-    <div className="mono__calendar--content-by-months">
+    <div className={styles["mono__calendar--content-by-months"]}>
       {SHORT_MONTHS.map((month, index) => {
         return (
           <div
             key={index}
-            className={`item`}
+            className={styles["item"]}
             onClick={() => props.onSelectMonth(index)}
           >
             {month}
@@ -158,25 +168,36 @@ const MonthSelector = props => {
 const YearSelector = props => {
   let years = [];
   for (let index = 0; index < 12; index++) {
-    years.push(<div key={index} className="item" onClick={() => props.onSelectYear(props.startYear + index)}>
+    years.push(<div key={index} className={styles["item"]} onClick={() => props.onSelectYear(props.startYear + index)}>
     {props.startYear + index}
   </div>)
   }
   return (
-    <div className="mono__calendar--content-by-months">
+    <div className={styles["mono__calendar--content-by-months"]}>
       {years}
     </div>
   )
 }
 
 const DatePicker = props => {
+  // props
+  const { className, format, value } = props;
+
+  // states
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
-    moment(props.value, props.format).isValid()
-      ? moment(props.value, props.format)
+    moment(value, format).isValid()
+      ? moment(value, format)
       : moment()
   );
   const datePickerRef = useRef(null);
+
+  // style classes
+  const classes = classNames({
+    [styles[`mono__datepicker--wrapper`]]: true,
+    [className]: className,
+    [styles[`open`]]: open,
+  });
 
   // for display only
   const [month, setMonth] = useState(
@@ -232,8 +253,8 @@ const DatePicker = props => {
 
   const handleCancel = () => {
     setSelectedDate(
-      moment(props.value, props.format).isValid()
-        ? moment(props.value, props.format)
+      moment(value, format).isValid()
+        ? moment(value, format)
         : moment()
     );
     setMonth(moment().format("M") - 1);
@@ -260,22 +281,23 @@ const DatePicker = props => {
   return (
     <div
       ref={datePickerRef}
-      className={`mono__datepicker--wrapper${open ? " open" : ""}`}
+      className={classes}
+      // className={`mono__datepicker--wrapper${open ? " open" : ""}`}
     >
       <Input
-        value={selectedDate.format(props.format)}
-        className="mono__datepicker--input"
+        value={selectedDate.format(format)}
+        className={styles["mono__datepicker--input"]}
         placeholder="Try me.."
         onFocus={() => setOpen(true)}
         suffix={<Icons.Calendar size={24} fill="#AEAEAE" />}
       />
-      <div className="mono__calendar">
-        <div className="mono__calendar--months">
-          <div className="mono__calendar--months-prev-month" onClick={goPrev}>
+      <div className={styles["mono__calendar"]}>
+        <div className={styles["mono__calendar--months"]}>
+          <div className={styles["mono__calendar--months-prev-month"]} onClick={goPrev}>
             <Icons.ArrowLeft size={16} />
           </div>
           <div
-            className="mono__calendar--months-current"
+            className={styles["mono__calendar--months-current"]}
             onClick={() =>
               display === "BY_YEARS"
                 ? setDisplay("BY_DAYS")
@@ -286,31 +308,31 @@ const DatePicker = props => {
           >
             {display === "BY_DAYS" && (
               <>
-                <span className="mono__calendar--months-current-month">
+                <span className={styles["mono__calendar--months-current-month"]}>
                   {MONTHS[month]}
                 </span>
-                <span className="mono__calendar--months-current-year">
+                <span className={styles["mono__calendar--months-current-year"]}>
                   {year}
                 </span>
               </>
             )}
             {display === "BY_MONTHS" && (
-              <span className="mono__calendar--months-current-year">
+              <span className={styles["mono__calendar--months-current-year"]}>
                 {year}
               </span>
             )}
             {display === "BY_YEARS" && (
-              <span className="mono__calendar--months-current-year">
+              <span className={styles["mono__calendar--months-current-year"]}>
                 {startYear} - {startYear + 11}
               </span>
             )}
           </div>
-          <div className="mono__calendar--months-next-month" onClick={goNext}>
+          <div className={styles["mono__calendar--months-next-month"]} onClick={goNext}>
             <Icons.ArrowRight size={16} />
           </div>
         </div>
 
-        <div className="mono__calendar--content">
+        <div className={styles["mono__calendar--content"]}>
           {display === "BY_DAYS" && (
             <CalendarTable
               targetMonth={month + 1}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import styles from './RadioBox.module.scss'; 
 
 const RadioBoxItem = props => {
   const {
@@ -17,19 +18,19 @@ const RadioBoxItem = props => {
   return (
     <div
       {...others}
-      className={`mono__checkbox--item${checked ? " checkbox--checked" : ""}${
+      className={`mono__radiobox--item${checked ? " radiobox--checked" : ""}${
         className ? " " + className : ""
       }`}
       onClick={() => {
         onChange(!checked);
       }}
     >
-      {/* <input checked={checked} type="checkbox" name={name} /> */}
-      <div className="mono__checkbox--item-content">
+      {/* <input checked={checked} type="radiobox" name={name} /> */}
+      <div className="mono__radiobox--item-content">
         {icon}
-        <div className="mono__checkbox--item-content__label">{label}</div>
+        <div className="mono__radiobox--item-content__label">{label}</div>
       </div>
-      <div className="mono__checkbox--item-icon"></div>
+      <div className="mono__radiobox--item-icon"></div>
     </div>
   );
 };
@@ -48,7 +49,7 @@ const RadioBox = props => {
   };
 
   return (
-    <div className="mono__checkbox" {...others}>
+    <div className="mono__radiobox" {...others}>
       {options.map((option, index) => (
         <RadioBoxItem
           name={name}
