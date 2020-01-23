@@ -1,11 +1,23 @@
 .mono__btn {
-    font-size: 18px;
     height: 48px;
     min-width: 250px;
     max-width: 100%;
     border: none;
     border-radius: 0;
     background-color: $clr_whisper;
+
+    // size
+    &--sm {    
+        height: 32px;
+        min-width: 140px;
+        .mono__btn__content {
+            font-size: 14px;
+        }
+    }
+    // size
+    &--lg {
+        
+    }
 
     cursor: pointer;
     position: relative;

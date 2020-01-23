@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import Input from "../Input";
-import Icons from "../Icons";
 import moment from "moment";
+import { Button, Icons, Input } from "components";
 
-const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+// var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
+const getMonthIndex = month => MONTHS.indexOf(month);
 
 const DaySlot = props => {
   return (
     <td
-      className={`slot${props.selected === props.value ? " selected" : ""}`}
+      className={`slot${props.selected === props.value ? " selected" : ""}${props.today === props.value ? " today" : ""}`}
       onClick={() => props.onSelectDay(props.value)}
     >
       <span className="mono__calendar--day">{props.value}</span>
@@ -19,14 +35,48 @@ const DaySlot = props => {
 };
 
 const CalendarTable = props => {
-  const { firstDayIndexOfMonth, daysInMonth } = props;
-  const [selected, setSelected] = useState(props.selected || "");
+  const { targetMonth, targetYear } = props;
+
+  const getToday = () => {
+    // check if month and year is the same
+    if (
+      parseInt(moment().format("M")) === targetMonth &&
+      moment().format("YYYY") === targetYear
+    ) {
+      return parseInt(moment().format("D"));
+    } else {
+      return -1;
+    }
+  }
+
+  const getSelectedDay = () => {
+    // check if month and year is the same
+    if (
+      parseInt(props.selectedDate.format("M")) === targetMonth &&
+      props.selectedDate.format("YYYY") === targetYear
+    ) {
+      return parseInt(props.selectedDate.format("D"));
+    } else {
+      return -1;
+    }
+  }
+
+  const getFirstDayIndexOfMonth = () => {
+    return WEEKDAYS.indexOf(
+      moment(targetMonth + "/" + targetYear, "M/YYYY")
+        .startOf("month")
+        .format("ddd")
+    );
+  };
+  const getDaysInMonth = () => {
+    return moment(targetMonth + "/" + targetYear, "M/YYYY").daysInMonth();
+  };
 
   const TableGenerator = () => {
     let table = [];
     let weekCount = 5;
     let dayCount = 1;
-    if (firstDayIndexOfMonth + daysInMonth <= 28) {
+    if (getFirstDayIndexOfMonth() + getDaysInMonth() <= 28) {
       weekCount = 4;
     }
 
@@ -34,17 +84,17 @@ const CalendarTable = props => {
     for (let index = 0; index < weekCount; index++) {
       let weekContent = [];
       for (let _index = 0; _index < 7; _index++) {
-        if (index === 0 && _index === 0 && firstDayIndexOfMonth > 0) {
-          weekContent.push(<td colSpan={firstDayIndexOfMonth}>&nbsp;</td>);
-          _index = firstDayIndexOfMonth - 1;
+        if (index === 0 && _index === 0 && getFirstDayIndexOfMonth() > 0) {
+          weekContent.push(<td colSpan={getFirstDayIndexOfMonth()}>&nbsp;</td>);
+          _index = getFirstDayIndexOfMonth() - 1;
         } else {
-          if (dayCount <= daysInMonth) {
+          if (dayCount <= getDaysInMonth()) {
             weekContent.push(
               <DaySlot
+                today={getToday()}
                 value={dayCount}
-                selected={selected}
+                selected={getSelectedDay()}
                 onSelectDay={day => {
-                  setSelected(day);
                   props.onSelectDayOfMonth(day);
                 }}
               />
@@ -53,7 +103,7 @@ const CalendarTable = props => {
           }
         }
       }
-      table.push(<tr>{weekContent}</tr>);
+      table.push(<tr key={`week--${index}`}>{weekContent}</tr>);
     }
     return table;
   };
@@ -62,8 +112,8 @@ const CalendarTable = props => {
     <table>
       <thead>
         <tr>
-          {weekdays.map((day, index) => (
-            <th key={index}>{day}</th>
+          {WEEKDAYS.map((day, index) => (
+            <th key={`weekday-header--${index}`}>{day}</th>
           ))}
         </tr>
       </thead>
@@ -74,18 +124,43 @@ const CalendarTable = props => {
 
 const DatePicker = props => {
   const [open, setOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(moment(props.value));
-  const [month, setMonth] = useState(selectedDate.format("M"));
+  const [selectedDate, setSelectedDate] = useState(
+    moment(props.value, "YYYY-MM-DD")
+  );
+
+  // for display only
+  const [month, setMonth] = useState(
+    getMonthIndex(selectedDate.format("MMMM"))
+  );
   const [year, setYear] = useState(selectedDate.format("YYYY"));
-  const getFirstDayIndexOfMonth = () => {
-    return weekdays.indexOf(selectedDate.startOf("month").format("ddd"));
-  };
-  const getDaysInMonth = () => {
-    return selectedDate.daysInMonth();
+
+  const nextMonth = () => {
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
+    }
   };
 
+  const prevMonth = () => {
+    if (month === 0) {
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
+    }
+  };
+
+  const goToToday = () => {
+    setSelectedDate(moment())
+    setMonth(moment().format("M") - 1)
+    setYear(moment().format("YYYY"));
+    setOpen(false);
+  }
+
   useEffect(() => {
-    console.log("selectedDate:", selectedDate);
+    // console.log("selectedDate:", selectedDate);
   });
 
   // open
@@ -101,27 +176,39 @@ const DatePicker = props => {
       {/* <Icons.Calendar size={24} fill="#AEAEAE"/> */}
       <div className="mono__calendar">
         <div className="mono__calendar--months">
-          <span className="mono__calendar--months-prev-month">&lt;</span>
+          <div
+            className="mono__calendar--months-prev-month"
+            onClick={prevMonth}
+          >
+            &lt;
+          </div>
           <div className="mono__calendar--months-current">
             <span className="mono__calendar--months-current-month">
-              {selectedDate.format("MMMM")}
+              {MONTHS[month]}
             </span>
-            <span className="mono__calendar--months-current-year">
-              {selectedDate.format("YYYY")}
-            </span>
+            <span className="mono__calendar--months-current-year">{year}</span>
           </div>
-          <span className="mono__calendar--months-next-month">&gt;</span>
+          <div
+            className="mono__calendar--months-next-month"
+            onClick={nextMonth}
+          >
+            &gt;
+          </div>
         </div>
         <CalendarTable
-            selected={selectedDate.format("D")}
-          firstDayIndexOfMonth={getFirstDayIndexOfMonth()}
-          daysInMonth={getDaysInMonth()}
+          targetMonth={month + 1}
+          targetYear={year}
+          selectedDate={selectedDate}
           onSelectDayOfMonth={day => {
-            console.log("current", moment(year + "-" + month + "-" + day, "YYYY-M-D").format("YYYY-MM-DD"));
-            setSelectedDate(moment(year + "-" + month + "-" + day, "YYYY-M-D"))
-            
+            setSelectedDate(
+              moment(year + "-" + (month + 1) + "-" + day, "YYYY-M-D")
+            );
+            setOpen(false);
           }}
         />
+        <div style={{textAlign: 'center'}}>
+          <Button size="sm" onClick={goToToday}>Today</Button>
+        </div>
       </div>
     </div>
   );
