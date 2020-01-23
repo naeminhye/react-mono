@@ -7,7 +7,7 @@ const Button = props => {
 
   const classes = classNames({
     mono__btn: true,
-    className: className || "",
+    [className]: className || "",
     [`mono__btn--${type}`]: type && type !== "default",
     [`mono__btn--${size}`]: size && size !== "md"
   });
