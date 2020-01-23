@@ -246,7 +246,7 @@ const DatePicker = props => {
   useEffect(() => {
     const handleClickOutside = event => {
       if (datePickerRef && !datePickerRef.current.contains(event.target)) {
-        setOpen(false);
+        handleCancel();
       }
     };
 
