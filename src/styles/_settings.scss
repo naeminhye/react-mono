@@ -1,27 +1,33 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat:300,400,700,900&display=swap&subset=vietnamese');
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat:300,400,700,900&display=swap&subset=vietnamese");
 
 // DEFAULT PALETTE
-$clr_whisper: #E5E5E5;
-$clr_dark_gray: #AEAEAE;
+$clr_whisper: #e5e5e5;
+$clr_dark_gray: #aeaeae;
 $clr_eclipse: #363636;
 
 $clr_like_black: #041421;
-$clr_dark_blue: #0A3961;
-$clr_classic_blue: #0F4C81;
-$clr_light_blue: #9FB7CD;
-$clr_beige: #E8A188;
-$clr_ivory: #F8EFE1;
+$clr_dark_blue: #0a3961;
+$clr_classic_blue: #0f4c81;
+$clr_light_blue: #9fb7cd;
+$clr_beige: #e8a188;
+$clr_ivory: #f8efe1;
 
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 @mixin highlight($color) {
-    display: inline-block;
-    line-height: 0em;
-    padding-bottom: 0.5em;
-    background-color: $color;
+  display: inline-block;
+  line-height: 0em;
+  padding-bottom: 0.5em;
+  background-color: $color;
+}
+
+@mixin stroke-text($strokeColor, $strokeWidth, $bgColor) {
+  -webkit-text-fill-color: $bgColor;
+  -webkit-text-stroke-width: $strokeWidth;
+  -webkit-text-stroke-color: $strokeColor;
 }
