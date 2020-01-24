@@ -5,7 +5,7 @@ import { Button } from "components";
 import styles from './FlipCard.module.scss'; 
 
 const FlipCard = props => {
-  const { className, width, height, front, back, clickable, frontButton, backButton, ...others } = props;
+  const { className, style, width, height, front, back, clickable, frontButton, backButton, ...others } = props;
 
   const [flipped, setFlipped] = useState(false);
 
@@ -23,7 +23,7 @@ const FlipCard = props => {
           setFlipped(!flipped);
         }
       }}
-      style={{ width: width, height: height }}
+      style={{ width: width, height: height, ...style }}
     >
       <input
         type="checkbox"
