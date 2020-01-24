@@ -69,7 +69,7 @@ const CheckBox = props => {
         <CheckBoxItem
           name={name}
           key={index}
-          className={index > 0 ? "left-space" : ""}
+          className={index > 0 ? styles["left-space"] : ""}
           checked={selected.indexOf(option.value) !== -1}
           onChange={checked => {
             handleChangeSelect(checked, option);
