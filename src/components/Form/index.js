@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import Button from "../Button";
+import styles from './Form.module.scss'; 
 
 const Item = props => {
   const {
@@ -15,14 +16,14 @@ const Item = props => {
   } = props;
 
   const classes = classNames({
-    "mono__form--item": true,
-    [className]: className || ""
+    [styles["mono__form--item"]]: true,
+    [className]: className
   });
 
   const labelClasses = classNames({
-    "mono__form--item-label": true,
-    labelClassName: labelClassName || "",
-    required: isRequired
+    [styles["mono__form--item-label"]]: true,
+    labelClassName: labelClassName,
+    [styles["required"]]: isRequired
   });
 
   return (
@@ -37,25 +38,23 @@ const Form = props => {
   const { children, className, title, actions, border, ...others } = props;
 
   const classes = classNames({
-    mono__form: true,
-    border: border || "",
-    [className]: className || ""
+    [styles["mono__form"]]: true,
+    [styles["border"]]: border,
+    [className]: className
   });
-
+  
   return (
     <div className={classes} {...others}>
-      <div className="mono__form--title">{title}</div>
+      <div className={styles["mono__form--title"]}>{title}</div>
       {children}
       {actions && (
-        <div className="mono__form--action-group">
+        <div className={styles["mono__form--action-group"]}>
           {actions.map((action, index) => (
             <div
               key={index}
-              className={
-                index > 0
-                  ? "mono__form--action left-space"
-                  : "mono__form--action"
-              }
+              className={classNames({
+                [styles["mono__form--action"]]: true,
+                [styles["left-space"]]: index > 0})}
             >
               {action}
             </div>

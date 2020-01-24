@@ -1,0 +1,35 @@
+@import '../../styles/settings';
+
+.mono__input--wrapper {
+    position: relative;
+    font-family: Inconsolata, Montserrat, Arial;
+
+    .mono__input {
+      padding: 0 10px;
+      font-size: 18px;
+      height: 48px;
+      min-width: 250px;
+      width: 100%;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      border: 1px solid $clr_dark_gray;
+      background-color: #ffffff;
+      font-family: Inconsolata, Montserrat, Arial;
+  
+      &:focus {
+        border: 1px solid $clr_classic_blue;
+      }
+    }
+    .mono__input--prefix {
+      position: absolute;
+      top: 25%;
+      left: 10px;
+    }
+    .mono__input--suffix {
+      position: absolute;
+      top: 25%;
+      right: 10px;
+    }
+  }
+  
