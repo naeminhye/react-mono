@@ -1,0 +1,44 @@
+@import "../../styles/settings";
+
+.mono__table {
+    font-family: Inconsolata, Montserrat, Arial;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+    td,
+    th {
+      padding: 0.75rem;
+    }
+    &.bordered {
+      border: 1px solid $clr_dark_gray;
+      border-collapse: collapse;
+      td,
+      th {
+        border: 1px solid $clr_dark_gray;
+      }
+    }
+    &.striped {
+      .mono__table--body {
+        tr:nth-child(odd) {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+    &.separated {
+      border-collapse: separate;
+    }
+    &--head {
+      .checkbox {
+        width: fit-content;
+      }
+    }
+    &--body {
+      .checkbox {
+        width: fit-content;
+        text-align: center;
+      }
+    }
+    &--foot {
+    }
+  }
+  

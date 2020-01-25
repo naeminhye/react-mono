@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import styles from "./Table.module.scss";
 import { CheckBox } from 'components'
 
 const Table = props => {
@@ -21,20 +22,20 @@ const Table = props => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const classes = classNames({
-    mono__table: true,
+    [styles["mono__table"]]: true,
     [className]: className,
-    bordered: bordered,
-    striped: striped
+    [styles.bordered]: bordered,
+    [styles.striped]: striped
   });
 
   return (
     <div>
       {title && <div>{title}</div>}
       <table className={classes} {...others}>
-        <thead className="mono__table--head">
+        <thead className={styles["mono__table--head"]}>
           <tr>
             {selectable && (
-              <th className="checkbox">
+              <th className={styles["checkbox"]}>
                 <CheckBox type="checkbox" 
                   checked={dataSource.length === selectedRows.length}
                     onChange={event => {
@@ -58,7 +59,7 @@ const Table = props => {
             ))}
           </tr>
         </thead>
-        <tbody className="mono__table--body">
+        <tbody className={styles["mono__table--body"]}>
           {dataSource.map((data, rowIndex) => {
             let keys = Object.keys(data);
             let row = [];
@@ -79,7 +80,7 @@ const Table = props => {
                 {selectable && (
                   <td
                     key={`row--${data.key || rowIndex}--checkbox`}
-                    className="checkbox"
+                    className={styles["checkbox"]}
                   >
                     <CheckBox
                       type="checkbox"
@@ -106,7 +107,7 @@ const Table = props => {
             );
           })}
         </tbody>
-        <tfoot className="mono__table--foot"></tfoot>
+        <tfoot className={styles["mono__table--foot"]}></tfoot>
       </table>
     </div>
   );
