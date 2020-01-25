@@ -16,11 +16,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "babel src/ -d lib/",
-    "prepublish": "npm run build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "flow": "flow"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,11 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/preset-flow": "^7.8.3",
-    "flow-bin": "^0.116.1"
   }
 }
