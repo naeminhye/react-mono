@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogInPage, HomePage } from "pages";
+import { LogInPage, HomePage, LuckyNumberPage } from "pages";
 import { configureDataStore } from "store/dataStore";
 import { useStore } from "store";
 // import 'styles/style.scss'
@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div>
-      <HomePage />
+      <LuckyNumberPage />
     </div>
   );
 };
