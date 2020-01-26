@@ -184,10 +184,10 @@ const Table = props => {
                 if (!col.render) {
                   row.push(<td key={col.dataIndex}>{data[col.dataIndex]}</td>);
                 } else {
-                  row.push(<td>{col.render(data[col.dataIndex], data)}</td>);
+                  row.push(<td key={col.dataIndex}>{col.render(data[col.dataIndex], data)}</td>);
                 }
               } else {
-                row.push(<td></td>);
+                row.push(<td key={col.dataIndex}></td>);
               }
             });
 

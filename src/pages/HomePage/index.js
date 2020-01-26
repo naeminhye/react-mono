@@ -52,31 +52,23 @@ const genderOptions = [
     icon: <Icons.Female size={64} />
   }
 ];
-const dataSource = [
-  {
-    key: "1",
-    name: "Mike",
-    age: 12,
-    address: "10 Downing Street"
-  },
-  {
-    key: "2",
-    name: "John",
-    age: 45,
-    address: "10 Downing Street"
-  },
-  {
-    key: "3",
-    name: "Lisa",
-    age: 80,
-    address: "10 Downing Street"
-  }
-];
+
+const dataSource = [{"id":1,"first_name":"Gorden","last_name":"Sackes","email":"gsackes0@google.it","gender":"Male","city":"Muhur"},
+{"id":2,"first_name":"Lacy","last_name":"Ochterlony","email":"lochterlony1@hostgator.com","gender":"Female","city":"Dieppe"},
+{"id":3,"first_name":"Inga","last_name":"Atto","email":"iatto2@nature.com","gender":"Female","city":"Huangshan"},
+{"id":4,"first_name":"Marlie","last_name":"Domesday","email":"mdomesday3@diigo.com","gender":"Female","city":"Kaduy"},
+{"id":5,"first_name":"Fanechka","last_name":"Benbrick","email":"fbenbrick4@ning.com","gender":"Female","city":"Zhvanets"},
+{"id":6,"first_name":"Wallache","last_name":"Killingback","email":"wkillingback5@cnbc.com","gender":"Male","city":"Ramat Yishay"},
+{"id":7,"first_name":"Robinson","last_name":"Meynell","email":"rmeynell6@g.co","gender":"Male","city":"Bihoro"},
+{"id":8,"first_name":"Merla","last_name":"Driver","email":"mdriver7@lulu.com","gender":"Female","city":"Mingora"},
+{"id":9,"first_name":"Carlen","last_name":"Lougheed","email":"clougheed8@bizjournals.com","gender":"Female","city":"Xishaqiao"},
+{"id":10,"first_name":"Arliene","last_name":"Oats","email":"aoats9@edublogs.org","gender":"Female","city":"Bajiazi"}];
+
 const columns = [
   {
-    dataIndex: "name",
-    title: "Name",
-    key: "name",
+    dataIndex: "first_name",
+    title: "First Name",
+    key: "first_name",
     render: (text, record) => (
       <strong>
         {text}
@@ -85,15 +77,32 @@ const columns = [
     sortable: true
   },
   {
-    dataIndex: "age",
-    title: "Age",
-    key: "age",
+    dataIndex: "last_name",
+    title: "Last Name",
+    key: "last_name",
     sortable: true
   },
   {
-    dataIndex: "address",
-    title: "Address",
-    key: "address"
+    dataIndex: "email",
+    title: "Email",
+    key: "email",
+    sortable: true
+  },
+  {
+    dataIndex: "gender",
+    title: "Gender",
+    key: "gender",
+    render: (text) => (
+      <strong>
+        {text.toUpperCase()}
+      </strong>
+    )
+  },
+  {
+    dataIndex: "city",
+    title: "City",
+    key: "city",
+    sortable: true
   }
 ];
 
