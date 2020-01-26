@@ -8,7 +8,8 @@ import {
   CheckCard,
   RadioBox,
   Uploader,
-  Table
+  Table,
+  DropDown
 } from "components";
 
 const transportationOptions = [
@@ -94,24 +95,78 @@ const columns = [
   }
 ];
 
+const dropdownOptions = [
+  {
+    value: "option-1",
+    label: "Option 1"
+  },
+  {
+    value: "option-2",
+    label: "Option 2"
+  },
+  {
+    value: "option-3",
+    label: "Option 3"
+  },
+  {
+    value: "option-4",
+    label: "Option 4"
+  },
+  {
+    value: "option-5",
+    label: "Option 5"
+  },
+  {
+    value: "option-6",
+    label: "Option 6"
+  },
+  {
+    value: "option-7",
+    label: "Option 7"
+  },
+  {
+    value: "option-8",
+    label: "Option 8"
+  },
+  {
+    value: "option-9",
+    label: "Option 9"
+  },
+  {
+    value: "option-10",
+    label: "Option 11"
+  }
+];
+
 const HomePage = props => {
   return (
     <div>
-      <Table
-        selectable={true}
-        dataSource={dataSource}
-        columns={columns}
-        // bordered={true}
-        striped={true}
-        hover={true}
-      />
       {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
-      {/* <Form title="Form Title" border>
+      <Form title="Form Title" border>
+        <Form.Item label="Table">
+          <Table
+            selectable={true}
+            dataSource={dataSource}
+            columns={columns}
+            bordered={true}
+            striped={true}
+            hover={true}
+          />
+        </Form.Item>
+        <Form.Item label="Dropdown">
+          <DropDown
+            options={dropdownOptions}
+            value="option-2"
+            onChange={value => {
+              console.log("select", value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="Date">
-          <DatePicker value="1/22/20" format="M/D/YY"/>
+          <DatePicker value="1/22/20" format="M/D/YY" />
         </Form.Item>
         <Form.Item label="Input" isRequired>
-          <Input placeholder="Input"/>
+          <Input placeholder="Input" />
         </Form.Item>
         <Form.Item label="Transportation">
           <CheckCard options={transportationOptions} />
@@ -122,7 +177,7 @@ const HomePage = props => {
         <Form.Item label="Upload File">
           <Uploader />
         </Form.Item>
-      </Form> */}
+      </Form>
     </div>
   );
 };

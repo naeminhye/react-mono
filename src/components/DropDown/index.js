@@ -1,85 +1,69 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import styles from "./DropDown.module.scss";
 
-const options = [
-  {
-    value: "option-1",
-    label: "Option 1"
-  },
-  {
-    value: "option-2",
-    label: "Option 2"
-  },
-  {
-    value: "option-3",
-    label: "Option 3"
-  }
-];
-
-const Select = props => {
-  const {
-    children,
-    className,
-    optionClassName,
-    defaultValue,
-    ...others
-  } = props;
-//   const { showOptions, setShowOptions } = useState(false);
-var _show = false
-  const { selectedValue, setSelectedValue } = useState(
-    defaultValue || options[0].value
-  );
+const DropDown = props => {
+  const { options, className, value, onChange, ...others } = props;
+  const [selectedValue, setSelectedValue] = useState(value);
 
   const classes = classNames({
-    select: true,
+    [styles["mono__dropdown"]]: true,
     [className]: className || ""
   });
 
-  const toggleOptions = () => {
-    // setShowOptions(true)
-    _show = !_show;
-    console.log("show",_show)
-  };
-
   return (
-    <div className={classes} onClick={toggleOptions} {...others}>
-      {/* {children} */}
-      {/* <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select> */}
-
-      {_show && <div className="option-lists">
-        {options.map((option, index) => {
-          // if(selectedValue === option.value) {
-          // }
-          const optionClasses = classNames({
-            "option-item": true,
-            optionClassName: optionClassName || "",
-            "selected-item": selectedValue === option.value,
-            hide: !_show
-          });
-
-          return (
-            <div className={optionClasses} key={option.value}>
+    <div className={classes} {...others}>
+      <div className={styles["mono__dropdown--current"]} tabIndex={1}>
+        <div className={styles["mono__dropdown--value"]}>
+          <input
+            className={styles["mono__dropdown--input"]}
+            type="radio"
+            id={selectedValue}
+            defaultValue={2}
+            name="Ben"
+            defaultChecked="checked"
+          />
+          <div className={styles["mono__dropdown--input-text"]}>
+            {options.find(option => option.value === selectedValue).label}
+          </div>
+        </div>
+        <img
+          className={styles["mono__dropdown__icon"]}
+          src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+          alt="Arrow Icon"
+          aria-hidden="true"
+        />
+      </div>
+      <ul className={styles["mono__dropdown__list"]}>
+        {options.map((option, index) => (
+          <li
+            key={index}
+            onClick={() => {
+              onChange(option.value);
+              setSelectedValue(option.value);
+            }}
+          >
+            <label
+              className={styles["mono__dropdown--option"]}
+              htmlFor={option.value}
+              aria-hidden="aria-hidden"
+            >
               {option.label}
-            </div>
-          );
-        })}
-      </div>}
+            </label>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-Select.propTypes = {
+DropDown.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func
 };
 
-Select.defaultProps = {};
+DropDown.defaultProps = {};
 
-export default Select;
+export default DropDown;

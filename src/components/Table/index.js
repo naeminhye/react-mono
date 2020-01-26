@@ -37,6 +37,7 @@ const Table = props => {
             {selectable && (
               <th className={styles["checkbox"]}>
                 <CheckBox type="checkbox" 
+                  halfCheck={dataSource.length > selectedRows.length && selectedRows.length > 0}
                   checked={dataSource.length === selectedRows.length}
                     onChange={event => {
                         let checkedAll = event.target.checked;

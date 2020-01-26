@@ -7,12 +7,14 @@ const CheckBox = props => {
   const {
     children,
     className,
+    halfCheck,
     ...others
   } = props;
 
   const classes = classNames({
     [styles[`mono__checkbox`]]: true,
     [className]: className,
+    [styles[`notall`]] : halfCheck
   });
 
   return (
@@ -21,6 +23,17 @@ const CheckBox = props => {
       {children}
     </div>
   );
+};
+
+CheckBox.propTypes = {
+  className: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  halfCheck: PropTypes.bool
+};
+
+CheckBox.defaultProps = {
+  halfCheck: false
 };
 
 export default CheckBox;
