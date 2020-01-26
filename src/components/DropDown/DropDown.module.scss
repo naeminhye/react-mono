@@ -1,0 +1,135 @@
+@import "../../styles/settings";
+
+.mono__dropdown {
+  font-family: Inconsolata, Montserrat, Arial;
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 18px;
+  color: $clr_eclipse;
+
+  //   @media (min-width: 768px) {
+  //     width: 70%;
+  //   }
+
+  //   @media (min-width: 992px) {
+  //     width: 50%;
+  //   }
+
+  //   @media (min-width: 1200px) {
+  //     width: 30%;
+  //   }
+
+  &--current {
+    position: relative;
+    // box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
+    border: 1px solid $clr_dark_gray;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    display: flex;
+
+    &:focus {
+      border: 1px solid $clr_classic_blue;
+      & + .mono__dropdown__list {
+        opacity: 1;
+
+        // We have to set "animation-name: none;" to make the list visible (read below how it works)
+
+        animation-name: none;
+
+        .mono__dropdown--option {
+          cursor: pointer;
+        }
+      }
+
+      .mono__dropdown__icon {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+  }
+
+  &--value {
+    // display: flex;
+  }
+
+  &--input {
+    display: none;
+
+    &:checked + .mono__dropdown--input-text {
+      display: block;
+    }
+  }
+
+  &--input-text {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 15px;
+    line-height: 46px;
+  }
+
+  &__list {
+    border: 1px solid $clr_dark_gray;
+    position: absolute;
+    top: 48px;
+    // width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    width: 99.60%;
+    overflow-y: auto;
+    max-height: 244px;
+
+    // We need to use animation with delay.
+    // Otherwise the click event will not have time to run on label, because this element disapears immediately when .mono__dropdown--current element loses the focus.
+    // This delay will not be noticed because we set "opacity" to "0".
+    // We also use "animation-fill-mode: forwards" to make the list stay hidden.
+
+    animation-name: HideList;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: step-start;
+
+    li:not(:last-child) {
+      border-bottom: 1px solid #aeaeae;
+    }
+  }
+
+  &--option {
+    display: block;
+    padding: 15px;
+    background-color: #fff;
+
+    &:hover,
+    &:focus {
+      color: $clr_dark_blue;
+      background-color: $clr_light_blue;
+    }
+  }
+}
+
+@keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
