@@ -7,7 +7,13 @@
     border-collapse: collapse;
     td,
     th {
-      padding: 0.75rem;
+      padding: 15px;
+    }
+    th {
+      .mono__table--sort-icon {
+        float: right;
+        cursor: pointer;
+      }
     }
     &.bordered {
       border: 1px solid $clr_dark_gray;

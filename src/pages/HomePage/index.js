@@ -56,19 +56,19 @@ const dataSource = [
   {
     key: "1",
     name: "Mike",
-    age: 32,
+    age: 12,
     address: "10 Downing Street"
   },
   {
     key: "2",
     name: "John",
-    age: 42
-    // address: "10 Downing Street"
+    age: 45,
+    address: "10 Downing Street"
   },
   {
     key: "3",
-    name: "John",
-    // age: 42,
+    name: "Lisa",
+    age: 80,
     address: "10 Downing Street"
   }
 ];
@@ -76,17 +76,19 @@ const columns = [
   {
     dataIndex: "name",
     title: "Name",
-    key: "name"
+    key: "name",
+    render: (text, record) => (
+      <strong>
+        {text}
+      </strong>
+    ),
+    sortable: true
   },
   {
     dataIndex: "age",
     title: "Age",
     key: "age",
-    render: (text, record) => (
-      <span>
-        Hello {record.name} {text}
-      </span>
-    )
+    sortable: true
   },
   {
     dataIndex: "address",
