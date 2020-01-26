@@ -2,8 +2,7 @@ import React, { useState, useRef } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Table.module.scss";
-import { CheckBox } from "components";
-import Icons from "components/Icons";
+import { CheckBox, Pagination, Icons } from "components";
 
 const Table = props => {
   const {
@@ -231,6 +230,8 @@ const Table = props => {
         </tbody>
         <tfoot className={styles["mono__table--foot"]}></tfoot>
       </table>
+
+      <Pagination />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import DropDown from "./DropDown";
 import Icons from "./Icons";
 import Input from "./Input";
 import Form from "./Form";
+import Pagination from "./Pagination";
 import RadioBox from "./RadioBox";
 import Table from "./Table";
 import Uploader from "./Uploader";
@@ -23,6 +24,7 @@ export {
     Input,
     Icons,
     Form,
+    Pagination,
     RadioBox,
     Table,
     Uploader
