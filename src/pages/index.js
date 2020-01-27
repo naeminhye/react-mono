@@ -1,9 +1,9 @@
 import LogInPage from './LogInPage'
-import HomePage from './HomePage'
+import Example from './Example'
 import LuckyNumberPage from './LuckyNumberPage'
 
 export {
     LogInPage,
-    HomePage,
+    Example,
     LuckyNumberPage
 }

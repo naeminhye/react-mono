@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogInPage, HomePage, LuckyNumberPage } from "pages";
+import { Example } from "pages";
 import { configureDataStore } from "store/dataStore";
 import { useStore } from "store";
 // import 'styles/style.scss'
@@ -10,11 +10,7 @@ const App = () => {
   const [state, dispatch] = useStore();
   // const [counter, setCounter] = useState(state.counter);
 
-  return (
-    <div>
-      <HomePage />
-    </div>
-  );
+  return <Example />;
 };
 
 export default App;

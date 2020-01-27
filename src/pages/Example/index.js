@@ -12,6 +12,7 @@ import {
   Uploader,
   Table,
   DropDown,
+  FlipCard,
   Tag
 } from "components";
 
@@ -216,10 +217,9 @@ const dropdownOptions = [
   }
 ];
 
-const HomePage = props => {
+const Example = props => {
   return (
     <div>
-      {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
       <Form title="Form Title" border>
         <Form.Item label="Table">
           <Table
@@ -261,8 +261,47 @@ const HomePage = props => {
         <Form.Item label="Upload File">
           <Uploader />
         </Form.Item>
+        <Form.Item label="Flip Card">
+          <FlipCard
+            clickable={true}
+            front={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  WebkitTextFillColor: "white",
+                  WebkitTextStrokeWidth: "1px",
+                  WebkitTextStrokeColor: "black",
+                  fontFamily: "Montserrat, Arial",
+                  fontSize: "64px",
+                  fontWeight: 900
+                }}
+              >
+                Front
+              </div>
+            }
+            back={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  WebkitTextFillColor: "white",
+                  WebkitTextStrokeWidth: "1px",
+                  WebkitTextStrokeColor: "black",
+                  fontFamily: "Montserrat, Arial",
+                  fontSize: "64px",
+                  fontWeight: 900
+                }}
+              >
+                Back
+              </div>
+            }
+          />
+        </Form.Item>
       </Form>
     </div>
   );
 };
-export default HomePage;
+export default Example;
