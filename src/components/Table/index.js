@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Table.module.scss";
-import { CheckBox, Pagination, Icons } from "components";
+import { CheckBox, Pagination, Icons } from "../index";
 
 const Table = props => {
   const {

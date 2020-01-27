@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./RadioList.module.scss";
-import { RadioBox } from "components";
+import { RadioBox } from "../index";
 
 const RadioListItem = props => {
   const {

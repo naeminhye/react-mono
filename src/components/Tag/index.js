@@ -2,7 +2,7 @@ import React, { Children } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Tag.module.scss";
-import {Icons} from "components";
+import {Icons} from "../index";
 
 const Tag = props => {
   const { className, children, closable, onClose, color, ...others } = props;

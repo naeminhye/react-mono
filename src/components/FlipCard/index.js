@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { Button } from "components";
+import { Button } from "../index";
 import styles from './FlipCard.module.scss'; 
 
 const FlipCard = props => {

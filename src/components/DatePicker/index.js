@@ -3,7 +3,7 @@ import classNames from "classnames";
 import styles from './DatePicker.module.scss'; 
 import PropTypes from "prop-types";
 import moment from "moment";
-import { Button, Icons, Input } from "components";
+import { Button, Icons, Input } from "../index";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = [

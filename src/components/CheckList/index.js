@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./CheckList.module.scss";
-import { CheckBox } from "components";
+import { CheckBox } from "../index";
 
 const IconCheckItem = props => {
   const {

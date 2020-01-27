@@ -1,9 +1,14 @@
 {
   "name": "react-mono",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.0.3",
+  "private": false,
   "description": "A React Component UI Kit",
-  "main": "./src/components/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "babel": {
     "presets": [
       "@babel/preset-react"
@@ -25,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rm -rf node_modules && rm -rf package-lock.json && rm -rf build && rm -rf dist",
+    "prepublish": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__"
   },
   "eslintConfig": {
     "extends": "react-app"
