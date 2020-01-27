@@ -1,7 +1,7 @@
 import Button from "./Button";
 import Card from "./Card";
 import CheckBox from "./CheckBox";
-import CheckCard from "./CheckCard";
+import CheckList from "./CheckList";
 import DatePicker from "./DatePicker";
 import FlipCard from "./FlipCard";
 import DropDown from "./DropDown";
@@ -10,6 +10,7 @@ import Input from "./Input";
 import Form from "./Form";
 import Pagination from "./Pagination";
 import RadioBox from "./RadioBox";
+import RadioList from "./RadioList";
 import Table from "./Table";
 import Uploader from "./Uploader";
 
@@ -17,7 +18,7 @@ export {
     Button,
     Card, 
     CheckBox,
-    CheckCard,
+    CheckList,
     FlipCard,
     DatePicker,
     DropDown,
@@ -26,6 +27,7 @@ export {
     Form,
     Pagination,
     RadioBox,
+    RadioList,
     Table,
     Uploader
 };

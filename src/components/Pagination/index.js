@@ -49,7 +49,7 @@ const Pagination = props => {
             [styles["mono__pagination--item"]]: true,
             [styles["mono__pagination--item-active"]]: (i + 1) === currentPage
           })}
-          tabindex={i}
+          tabIndex={i}
           onClick={() => {
             setCurrentPage(i + 1);
             onChange && onChange(i + 1);
@@ -60,7 +60,7 @@ const Pagination = props => {
       )}
       <li
         title="Next Page"
-        tabindex="0"
+        tabIndex="0"
         className={classNames({
           [styles["mono__pagination--item"]]: true,
           [styles["mono__pagination--item-next"]]: true

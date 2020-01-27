@@ -5,7 +5,7 @@ import {
   DatePicker,
   Icons,
   Input,
-  CheckCard,
+  MultiCheckList,
   RadioBox,
   Uploader,
   FlipCard

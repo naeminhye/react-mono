@@ -5,24 +5,26 @@ import {
   DatePicker,
   Icons,
   Input,
-  CheckCard,
+  CheckList,
+  CheckBox,
   RadioBox,
+  RadioList,
   Uploader,
   Table,
   DropDown
 } from "components";
 
 const transportationOptions = [
-  // {
-  //   label: "Ship",
-  //   value: "ship",
-  //   icon: <Icons.Ship size={64} />
-  // },
-  // {
-  //   label: "Plane",
-  //   value: "plane",
-  //   icon: <Icons.Plane size={64} />
-  // },
+  {
+    label: "Ship",
+    value: "ship",
+    icon: <Icons.Ship size={64} />
+  },
+  {
+    label: "Plane",
+    value: "plane",
+    icon: <Icons.Plane size={64} />
+  },
   {
     label: "Taxi",
     value: "taxi",
@@ -180,10 +182,16 @@ const HomePage = props => {
           <Input placeholder="Input" />
         </Form.Item>
         <Form.Item label="Transportation">
-          <CheckCard options={transportationOptions} />
+          <CheckList options={transportationOptions} />
+        </Form.Item>
+        <Form.Item label="Transportation">
+          <CheckList options={transportationOptions} type="grid"/>
         </Form.Item>
         <Form.Item label="Gender">
-          <RadioBox options={genderOptions} />
+          <RadioList options={genderOptions} />
+        </Form.Item>
+        <Form.Item label="Gender">
+          <RadioList options={genderOptions} type="grid" />
         </Form.Item>
         <Form.Item label="Upload File">
           <Uploader />

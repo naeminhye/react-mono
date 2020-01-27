@@ -3,6 +3,9 @@
 .mono__checkbox {
   font-family: Inconsolata, Montserrat, Arial;
   display: flex;
+  &--list {
+    flex-direction: column;
+  }
   &--item {
     &.left-space {
       margin-left: 5px;

@@ -8,19 +8,21 @@ const CheckBox = props => {
     children,
     className,
     halfCheck,
+    label,
+    defaultChecked,
     ...others
   } = props;
 
   const classes = classNames({
     [styles[`mono__checkbox`]]: true,
     [className]: className,
-    [styles[`notall`]] : halfCheck
+    [styles[`notall`]] : halfCheck,
   });
 
   return (
     <div className={classes}>
       <input type="checkbox" {...others} />
-      {children}
+      {label && <span className={styles["mono__checkbox--label"]}>{label}</span>}
     </div>
   );
 };
@@ -29,11 +31,14 @@ CheckBox.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  halfCheck: PropTypes.bool
+  halfCheck: PropTypes.bool,
+  label: PropTypes.string,
+  defaultChecked: PropTypes.bool,
 };
 
 CheckBox.defaultProps = {
-  halfCheck: false
+  halfCheck: false,
+  defaultChecked: false
 };
 
 export default CheckBox;
