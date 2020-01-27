@@ -1,13 +1,22 @@
 @import "../../styles/settings";
 
-.mono__table {
+.mono__table--container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  .mono__table {
     font-family: Inconsolata, Montserrat, Arial;
     width: 100%;
-    margin-bottom: 1rem;
     border-collapse: collapse;
     td,
     th {
-      padding: 0.75rem;
+      padding: 15px;
+    }
+    th {
+      .mono__table--sort-icon {
+        float: right;
+        cursor: pointer;
+      }
     }
     &.bordered {
       border: 1px solid $clr_dark_gray;
@@ -41,4 +50,4 @@
     &--foot {
     }
   }
-  
+}

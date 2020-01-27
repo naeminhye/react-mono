@@ -1,0 +1,46 @@
+@import "../../styles/settings";
+
+.mono__pagination {
+  font-family: Inconsolata, Montserrat, Arial;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  &--item {
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0;
+    text-align: center;
+    width: 32px;
+    border-radius: 150px;
+    margin: 1px 3px;
+    &:focus {
+      outline: none;
+    }
+    &-prev,
+    &-next {
+      svg {
+        vertical-align: middle;
+      }
+    }
+    &:hover {
+      &:not(.mono__pagination--item-prev) {
+        &:not(.mono__pagination--item-next) {
+          background-color: #aeaeae;
+          color: #363636;
+          border-color: #aeaeae;
+        }
+      }
+    }
+    &-active {
+      background-color: #0a3961;
+      color: #fff;
+      border-color: #0a3961;
+    }
+  }
+}
