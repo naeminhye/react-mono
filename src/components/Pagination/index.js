@@ -5,12 +5,29 @@ import styles from "./Pagination.module.scss";
 import { Icons } from "components";
 
 const Pagination = props => {
-  const { className, ...others } = props;
+  const { total, pageSize, current, className, onChange, onShowSizeChange, ...others } = props;
+  const [currentPage, setCurrentPage] = useState(current);
 
+  const getNumOfPgs = (_total = total, _size = pageSize) => {
+    return (_total % _size > 0) ? (Math.floor(_total / _size) + 1) : Math.floor(_total / _size);
+  }
   const classes = classNames({
     [styles["mono__pagination"]]: true,
     [className]: className
   });
+
+  const prev = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  const next = () => {
+    if (currentPage !== getNumOfPgs()) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
   return (
     <ul className={classes} {...others}>
       <li
@@ -20,49 +37,27 @@ const Pagination = props => {
           [styles["mono__pagination--item-prev"]]: true
         })}
         aria-disabled="true"
+        onClick={prev}
       >
-        <Icons.ArrowLeft size={18} />  
+        <Icons.ArrowLeft size={18} />
+      </li>
 
+      {[...Array(getNumOfPgs())].map((e, i) => 
+        <li
+          title={i + 1}
+          className={classNames({
+            [styles["mono__pagination--item"]]: true,
+            [styles["mono__pagination--item-active"]]: (i + 1) === currentPage
+          })}
+          tabindex={i}
+          onClick={() => {
+            setCurrentPage(i + 1);
+            onChange && onChange(i + 1);
+          }}
+        >
+        <a>{i + 1}</a>
       </li>
-      
-      <li
-        title="1"
-        className={classNames({
-          [styles["mono__pagination--item"]]: true,
-          [styles["mono__pagination--item-active"]]: true
-        })}
-        tabindex="0"
-      >
-        <a>1</a>
-      </li>
-      <li
-        title="2"
-        className={styles["mono__pagination--item"]}
-        tabindex="0"
-      >
-        <a>2</a>
-      </li>
-      <li
-        title="3"
-        className={styles["mono__pagination--item"]}
-        tabindex="0"
-      >
-        <a>3</a>
-      </li>
-      <li
-        title="4"
-        className={styles["mono__pagination--item"]}
-        tabindex="0"
-      >
-        <a>4</a>
-      </li>
-      <li
-        title="5"
-        className={styles["mono__pagination--item"]}
-        tabindex="0"
-      >
-        <a>5</a>
-      </li>
+      )}
       <li
         title="Next Page"
         tabindex="0"
@@ -71,14 +66,26 @@ const Pagination = props => {
           [styles["mono__pagination--item-next"]]: true
         })}
         aria-disabled="false"
+        onClick={next}
       >
-      <Icons.ArrowRight size={18} />  
+        <Icons.ArrowRight size={18} />
       </li>
     </ul>
   );
 };
 
-//current
-// pageSize
-//pageSizeOptions ['5', '10', '20', '30', '40']
+Pagination.defaultProps = {
+  current: 1,
+  pageSize: 5,
+  pageSizeOptions: ['5', '10', '20', '30', '40']
+};
+
+Pagination.propTypes = {
+  current: PropTypes.number,
+  pageSize: PropTypes.number,
+  pageSizeOptions: PropTypes.array,
+  total: PropTypes.number,
+  onChange: PropTypes.func,
+  onShowSizeChange: PropTypes.func,
+};
 export default Pagination;

@@ -8,6 +8,7 @@ const Table = props => {
   const {
     className,
     selectable,
+    pagination,
     hover,
     title,
     columns,
@@ -231,7 +232,7 @@ const Table = props => {
         <tfoot className={styles["mono__table--foot"]}></tfoot>
       </table>
 
-      <Pagination />
+      <Pagination {...pagination} total={dataSource.length}/>
     </div>
   );
 };
@@ -241,7 +242,7 @@ Table.defaultProps = {
   bordered: false,
   striped: false,
   hover: false,
-  separated: false
+  separated: false,
 };
 
 Table.propTypes = {
@@ -267,7 +268,15 @@ Table.propTypes = {
       key: PropTypes.string,
       sortDirection: PropTypes.oneOf(["ascending", "descending"])
     })
-  )
+  ),
+  pagination: PropTypes.objectOf({
+    current: PropTypes.number,
+    pageSize: PropTypes.number,
+    pageSizeOptions: PropTypes.array,
+    total: PropTypes.number,
+    onChange: PropTypes.func,
+    onShowSizeChange: PropTypes.func
+  })
 };
 
 export default Table;
