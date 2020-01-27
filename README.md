@@ -1,4 +1,6 @@
-# Monolab - react-mono
+<img src="logo.png" width="320" alt="Monolab Logo" >
+
+# React Monolab
 
 A React UI library.
 
