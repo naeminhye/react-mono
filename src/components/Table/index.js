@@ -116,123 +116,129 @@ const Table = props => {
 
   return (
     <div>
-      {title && <div>{title}</div>}
-      <table className={classes} {...others} ref={tableRef}>
-        <thead className={styles["mono__table--head"]}>
-          <tr>
-            {selectable && (
-              <th className={styles["checkbox"]}>
-                <CheckBox
-                  type="checkbox"
-                  halfCheck={
-                    dataSource.length > selectedRows.length &&
-                    selectedRows.length > 0
-                  }
-                  checked={dataSource.length === selectedRows.length}
-                  onChange={event => {
-                    let checkedAll = event.target.checked;
-                    let _selectedRows = [];
-                    if (checkedAll) {
-                      dataSource.map((data, rowIndex) => {
-                        let key = data.key || rowIndex;
-                        if (_selectedRows.indexOf(key) === -1) {
-                          _selectedRows.push(key);
-                        }
-                      });
+      <div className={styles["mono__table--container"]}>
+        <table className={classes} {...others} ref={tableRef}>
+          <thead className={styles["mono__table--head"]}>
+            <tr>
+              {selectable && (
+                <th className={styles["checkbox"]}>
+                  <CheckBox
+                    type="checkbox"
+                    halfCheck={
+                      dataSource.length > selectedRows.length &&
+                      selectedRows.length > 0
                     }
-                    setSelectedRows(_selectedRows);
-                  }}
-                />
-              </th>
-            )}
-            {columns.map((col, colIndex) => {
-              let sortIcon = null;
-              if (col.sortable) {
-                sortIcon = <Icons.Sort size={16} fill="gray" />;
-                if (sortingRule && sortingRule.colIndex === colIndex + 1) {
-                  if (sortingRule.sortDirection) {
-                    //=== "ascending"
-                    sortIcon = <Icons.SortDown size={16} fill="gray" />;
-                  } else {
-                    // === "descending"
-                    sortIcon = <Icons.SortUp size={16} fill="gray" />;
+                    checked={dataSource.length === selectedRows.length}
+                    onChange={event => {
+                      let checkedAll = event.target.checked;
+                      let _selectedRows = [];
+                      if (checkedAll) {
+                        dataSource.map((data, rowIndex) => {
+                          let key = data.key || rowIndex;
+                          if (_selectedRows.indexOf(key) === -1) {
+                            _selectedRows.push(key);
+                          }
+                        });
+                      }
+                      setSelectedRows(_selectedRows);
+                    }}
+                  />
+                </th>
+              )}
+              {columns.map((col, colIndex) => {
+                let sortIcon = null;
+                if (col.sortable) {
+                  sortIcon = <Icons.Sort size={16} fill="gray" />;
+                  if (sortingRule && sortingRule.colIndex === colIndex + 1) {
+                    if (sortingRule.sortDirection) {
+                      //=== "ascending"
+                      sortIcon = <Icons.SortDown size={16} fill="gray" />;
+                    } else {
+                      // === "descending"
+                      sortIcon = <Icons.SortUp size={16} fill="gray" />;
+                    }
                   }
                 }
-              }
+                return (
+                  <th key={col.key}>
+                    {col.title}
+                    {sortIcon && (
+                      <div
+                        onClick={() => handleSort(colIndex + 1)}
+                        className={styles["mono__table--sort-icon"]}
+                      >
+                        {sortIcon}
+                      </div>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody className={styles["mono__table--body"]}>
+            {dataSource.map((data, rowIndex) => {
+              let keys = Object.keys(data);
+              let row = [];
+              columns.map(col => {
+                if (keys.indexOf(col.dataIndex) !== -1) {
+                  if (!col.render) {
+                    row.push(
+                      <td key={col.dataIndex}>{data[col.dataIndex]}</td>
+                    );
+                  } else {
+                    row.push(
+                      <td key={col.dataIndex}>
+                        {col.render(data[col.dataIndex], data)}
+                      </td>
+                    );
+                  }
+                } else {
+                  row.push(<td key={col.dataIndex}></td>);
+                }
+              });
+
               return (
-                <th key={col.key}>
-                  {col.title}
-                  {sortIcon && (
-                    <div
-                      onClick={() => handleSort(colIndex + 1)}
-                      className={styles["mono__table--sort-icon"]}
+                <tr key={`row--${data.key || rowIndex}`}>
+                  {selectable && (
+                    <td
+                      key={`row--${data.key || rowIndex}--checkbox`}
+                      className={styles["checkbox"]}
                     >
-                      {sortIcon}
-                    </div>
+                      <CheckBox
+                        type="checkbox"
+                        checked={
+                          data.key
+                            ? selectedRows.indexOf(data.key) !== -1
+                            : selectedRows.indexOf(rowIndex) !== -1
+                        }
+                        onChange={event => {
+                          let checked = event.target.checked;
+                          let key = data.key || rowIndex;
+                          let _selectedRows = [...selectedRows];
+
+                          if (checked && _selectedRows.indexOf(key) === -1) {
+                            _selectedRows.push(key);
+                          } else if (
+                            !checked &&
+                            _selectedRows.indexOf(key) !== -1
+                          ) {
+                            _selectedRows.splice(_selectedRows.indexOf(key), 1);
+                          }
+
+                          setSelectedRows(_selectedRows);
+                        }}
+                      />
+                    </td>
                   )}
-                </th>
+                  {row}
+                </tr>
               );
             })}
-          </tr>
-        </thead>
-        <tbody className={styles["mono__table--body"]}>
-          {dataSource.map((data, rowIndex) => {
-            let keys = Object.keys(data);
-            let row = [];
-            columns.map(col => {
-              if (keys.indexOf(col.dataIndex) !== -1) {
-                if (!col.render) {
-                  row.push(<td key={col.dataIndex}>{data[col.dataIndex]}</td>);
-                } else {
-                  row.push(<td key={col.dataIndex}>{col.render(data[col.dataIndex], data)}</td>);
-                }
-              } else {
-                row.push(<td key={col.dataIndex}></td>);
-              }
-            });
-
-            return (
-              <tr key={`row--${data.key || rowIndex}`}>
-                {selectable && (
-                  <td
-                    key={`row--${data.key || rowIndex}--checkbox`}
-                    className={styles["checkbox"]}
-                  >
-                    <CheckBox
-                      type="checkbox"
-                      checked={
-                        data.key
-                          ? selectedRows.indexOf(data.key) !== -1
-                          : selectedRows.indexOf(rowIndex) !== -1
-                      }
-                      onChange={event => {
-                        let checked = event.target.checked;
-                        let key = data.key || rowIndex;
-                        let _selectedRows = [...selectedRows];
-
-                        if (checked && _selectedRows.indexOf(key) === -1) {
-                          _selectedRows.push(key);
-                        } else if (
-                          !checked &&
-                          _selectedRows.indexOf(key) !== -1
-                        ) {
-                          _selectedRows.splice(_selectedRows.indexOf(key), 1);
-                        }
-
-                        setSelectedRows(_selectedRows);
-                      }}
-                    />
-                  </td>
-                )}
-                {row}
-              </tr>
-            );
-          })}
-        </tbody>
-        <tfoot className={styles["mono__table--foot"]}></tfoot>
-      </table>
-
-      <Pagination {...pagination} total={dataSource.length}/>
+          </tbody>
+          <tfoot className={styles["mono__table--foot"]}></tfoot>
+        </table>
+      </div>
+      <Pagination {...pagination} total={dataSource.length} />
     </div>
   );
 };
@@ -242,7 +248,7 @@ Table.defaultProps = {
   bordered: false,
   striped: false,
   hover: false,
-  separated: false,
+  separated: false
 };
 
 Table.propTypes = {
@@ -253,7 +259,7 @@ Table.propTypes = {
       title: PropTypes.string.isRequired,
       key: PropTypes.string,
       render: PropTypes.func,
-      sortable: PropTypes.bool,
+      sortable: PropTypes.bool
     })
   ).isRequired,
   dataSource: PropTypes.array.isRequired,

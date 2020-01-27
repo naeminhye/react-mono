@@ -1,9 +1,12 @@
 @import "../../styles/settings";
 
-.mono__table {
+.mono__table--container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  .mono__table {
     font-family: Inconsolata, Montserrat, Arial;
     width: 100%;
-    margin-bottom: 1rem;
     border-collapse: collapse;
     td,
     th {
@@ -47,4 +50,4 @@
     &--foot {
     }
   }
-  
+}
