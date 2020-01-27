@@ -253,6 +253,25 @@ const ArrowLeft = props => (
   </svg>
 );
 
+const Close = props => (
+  <svg
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.size || 32}
+    height={props.size || 32}
+  >
+    <path
+      d="M210.282667 835.050667a21.312 21.312 0 0 1-15.082667-36.416L798.613333 195.2a21.312 21.312 0 1 1 30.165334 30.165333L225.365333 828.8a21.269333 21.269333 0 0 1-15.082666 6.250667z"
+      fill={props.fill || "#333333"}
+    />
+    <path
+      d="M813.717333 835.050667a21.269333 21.269333 0 0 1-15.082666-6.250667L195.221333 225.386667a21.312 21.312 0 1 1 30.165334-30.165334L828.8 798.634667a21.312 21.312 0 0 1-15.082667 36.416z"
+      fill={props.fill || "#333333"}
+    />
+  </svg>
+);
+
 const Sort = props => (
   <svg
     viewBox="0 0 1024 1024"
@@ -412,6 +431,7 @@ const Icons = {
   ArrowLeft,
   ArrowRight,
   ArrowUp,
+  Close,
   Sort,
   SortUp,
   SortDown,

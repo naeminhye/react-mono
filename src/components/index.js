@@ -12,22 +12,24 @@ import Pagination from "./Pagination";
 import RadioBox from "./RadioBox";
 import RadioList from "./RadioList";
 import Table from "./Table";
+import Tag from "./Tag";
 import Uploader from "./Uploader";
 
-export { 
-    Button,
-    Card, 
-    CheckBox,
-    CheckList,
-    FlipCard,
-    DatePicker,
-    DropDown,
-    Input,
-    Icons,
-    Form,
-    Pagination,
-    RadioBox,
-    RadioList,
-    Table,
-    Uploader
+export {
+  Button,
+  Card,
+  CheckBox,
+  CheckList,
+  FlipCard,
+  DatePicker,
+  DropDown,
+  Input,
+  Icons,
+  Form,
+  Pagination,
+  RadioBox,
+  RadioList,
+  Table,
+  Tag,
+  Uploader
 };
