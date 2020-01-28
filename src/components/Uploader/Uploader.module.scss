@@ -1,6 +1,7 @@
 @import "../common/settings";
 
 .mono__uploader {
+  font-family: Inconsolata, Montserrat, Arial;
   &--drag {
     padding: 24px 36px;
     text-align: center;
@@ -10,10 +11,58 @@
     -webkit-transition: border-color 0.3s;
     transition: border-color 0.3s;
     &-hint {
-      margin-top: 24px;
+      margin-top: 16px;
+      label {
+        color: $clr_classic_blue;
+        cursor: pointer;
+        font-style: italic;
+      }
     }
   }
-  &__button {
+  &--input {
+    display: none;
   }
+  &--file-list {
+    margin-top: 8px;
+    .mono__uploader--file-item {
+      margin-top: 8px;
+      border: 1px solid #d9d9d9;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      .left-content {
+        display: flex;
+        flex-direction: column;
+    
+        .file-name {
+          font-weight: 600;
+        }
+        .extra-info {
+          display: flex;
+          flex-direction: row;
+          color: $clr_dark_gray;
+          div:first-child {
+            &::after {
+              content: '●';
+              margin: 0 8px;
+            }
+          }
+        }
+      }
 
+      .right-content {
+        margin-left: auto;
+        button {
+          margin-left: 8px;
+        }
+      }
+    }
+    .mono__uploader--file-type {
+
+      margin-right: 16px;
+      path {
+        fill: $clr_dark_gray;
+      }
+    }
+  }
 }

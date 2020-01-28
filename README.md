@@ -36,7 +36,7 @@ const App = () => (
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] Fix **Card** component.
-- [ ] Fix **Uploader** component.
+- [x] Fix **Uploader** component.
 - [ ] Refactor **Icons** component.
 - [ ] Add **Grid** component for layout feature.
 - [ ] Add **Avatar** component.
