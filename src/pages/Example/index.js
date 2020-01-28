@@ -259,7 +259,7 @@ const Example = props => {
           <RadioList options={genderOptions} type="grid" />
         </Form.Item>
         <Form.Item label="Upload File">
-          <Uploader />
+          <Uploader multiple={true} />
         </Form.Item>
         <Form.Item label="Flip Card">
           <FlipCard

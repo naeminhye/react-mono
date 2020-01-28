@@ -28,6 +28,12 @@
   &--lg {
   }
 
+  //size for icon only {
+  &--icon {
+    width: 48px;
+    min-width: 48px;
+  }
+
   cursor: pointer;
   position: relative;
 
@@ -72,6 +78,19 @@
     }
     &:active {
       background-color: $clr_dark_blue;
+    }
+  }
+  &--danger {
+    .mono__btn__content {
+      color: #fff;
+    }
+    background-color: $clr_mordant_red;
+
+    &:hover {
+      background-color: $clr_blood;
+    }
+    &:active {
+      background-color: $clr_blood;
     }
   }
 }
