@@ -50,3 +50,5 @@ const App = () => (
 - [ ] Add **Slider** component.
 - [ ] Add **Steps** component.
 - [ ] Add **TimePicker** component.
+- [ ] Add **Toast Notification** component.
+- [ ] _Disable_ component.
