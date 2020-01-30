@@ -1,10 +1,9 @@
 @import "../common/settings";
 
 .mono__carousel {
-  $base-duration: 600ms;
-  $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
-  $slide-size: 70vmin;
-  $slide-margin: 4vmin;
+  --base-duration: 600ms;
+  --base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
+  // $slide-margin: 4vmin;
   position: relative;
 
   // .visuallyhidden {
@@ -70,11 +69,12 @@
   }
 
   &--list {
+    --item-margin: 600px;
 
     display: flex;
-    margin: 0 ($slide-margin * -1);
+    margin: 0 calc(var(--item-margin) * -1);
     position: absolute;
-    transition: transform $base-duration cubic-bezier(0.25, 1, 0.35, 1);
+    transition: transform var(--base-duration) cubic-bezier(0.25, 1, 0.35, 1);
     padding: 0;
     height: 100%;
 
@@ -127,7 +127,7 @@
     position: relative;
     text-align: center;
     // transition: all .2s ease-in-out;
-    transition: opacity calc($base-duration / 2) $base-ease, transform calc($base-duration / 2) $base-ease;
+    transition: opacity calc(var(--base-duration) / 2) var(--base-ease), transform calc(var(--base-duration) / 2) var(--base-ease);
     width: var(--item-width);
     z-index: 1;
 
@@ -162,68 +162,68 @@
     }
   }
 
-  .slide__image-wrapper {
-    // background-color: var(--color-accent);
-    border-radius: 1%;
-    height: 100%;
-    left: 0%;
-    overflow: hidden;
-    position: absolute;
-    top: 0%;
-    transition: transform calc($base-duration / 4) $base-ease;
-    width: 100%;
-  }
+  // .slide__image-wrapper {
+  //   // background-color: var(--color-accent);
+  //   border-radius: 1%;
+  //   height: 100%;
+  //   left: 0%;
+  //   overflow: hidden;
+  //   position: absolute;
+  //   top: 0%;
+  //   transition: transform calc(var(--base-duration) / 4) var(--base-ease);
+  //   width: 100%;
+  // }
 
-  .slide__image {
-    $__d: 20;
+  // .slide__image {
+  //   $__d: 20;
 
-    height: 110%;
-    left: -5%;
-    object-fit: cover;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    top: -5%;
-    transition: opacity $base-duration $base-ease,
-      transform $base-duration $base-ease;
-    user-select: none;
-    width: 110%;
+  //   height: 110%;
+  //   left: -5%;
+  //   object-fit: cover;
+  //   opacity: 0;
+  //   pointer-events: none;
+  //   position: absolute;
+  //   top: -5%;
+  //   transition: opacity var(--base-duration) var(--base-ease),
+  //     transform var(--base-duration) var(--base-ease);
+  //   user-select: none;
+  //   width: 110%;
 
-    @media (hover: hover) {
-      .slide--current & {
-        transform: translate(calc($x / $__d * 1px), calc($y / $__d * 1px));
-      }
-    }
-  }
+  //   @media (hover: hover) {
+  //     .slide--current & {
+  //       transform: translate(calc($x / $__d * 1px), calc($y / $__d * 1px));
+  //     }
+  //   }
+  // }
 
-  .slide__headline {
-    font-size: 8vmin;
-    font-weight: 600;
-    position: relative;
-  }
+  // .slide__headline {
+  //   font-size: 8vmin;
+  //   font-weight: 600;
+  //   position: relative;
+  // }
 
-  .slide__content {
-    $_d: 60;
+  // .slide__content {
+  //   $_d: 60;
 
-    opacity: 0;
-    padding: 4vmin;
-    position: relative;
-    transition: transform $base-duration $base-ease;
-    visibility: hidden;
+  //   opacity: 0;
+  //   padding: 4vmin;
+  //   position: relative;
+  //   transition: transform var(--base-duration) var(--base-ease);
+  //   visibility: hidden;
 
-    .slide--current & {
-      animation: fade-in calc($base-duration / 2) $base-ease forwards;
-      visibility: visible;
+  //   .slide--current & {
+  //     animation: fade-in calc(var(--base-duration) / 2) var(--base-ease) forwards;
+  //     visibility: visible;
 
-      @media (hover: hover) {
-        transform: translate(calc($x / $_d * -1px), calc($y / $_d * -1px));
-      }
-    }
+  //     @media (hover: hover) {
+  //       transform: translate(calc($x / $_d * -1px), calc($y / $_d * -1px));
+  //     }
+  //   }
 
-    > * + * {
-      margin-top: 2rem;
-    }
-  }
+  //   > * + * {
+  //     margin-top: 2rem;
+  //   }
+  // }
 
   // =========================
   // Animations

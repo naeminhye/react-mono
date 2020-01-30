@@ -97,6 +97,7 @@ const Carousel = props => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef(null);
   const containerRef = useRef(null);
+  const listRef = useRef(null);
 
   const handlePreviousClick = () => {
     const previous = current - 1;
@@ -128,6 +129,7 @@ const Carousel = props => {
     carouselRef.current.style.setProperty("--carousel-margin-left", marginLeft);
     // carouselRef.current.style.setProperty("height", '1000px');
     containerRef.current.style.setProperty("--carousel-height", itemHeight + "px");
+    listRef.current.style.setProperty("--item-margin", itemMargin + "px");
     
     
   })
@@ -135,7 +137,7 @@ const Carousel = props => {
   return (
     <div ref={carouselRef} className={styles["mono__carousel"]}>
       <div ref={containerRef} className={styles["mono__carousel--container"]}>
-        <ul className={styles["mono__carousel--list"]} style={wrapperTransform}>
+        <ul ref={listRef} className={styles["mono__carousel--list"]} style={wrapperTransform}>
           {slides.map((slide, index) => {
             return (
               <CarouselItem
