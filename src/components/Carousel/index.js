@@ -14,6 +14,7 @@ const CarouselItem = props => {
     itemWidth,
     itemMargin,
     inactiveSlideScale,
+    inactiveSlideOpacity,
     current,
     index
   } = props;
@@ -23,6 +24,7 @@ const CarouselItem = props => {
     carouselRef.current.style.setProperty("--item-width", itemWidth + "px");
     carouselRef.current.style.setProperty("--item-margin", itemMargin + "px");
     carouselRef.current.style.setProperty("--item-scale", inactiveSlideScale);
+    carouselRef.current.style.setProperty("--item-opacity", inactiveSlideOpacity);
   });
 
   const handleSlideClick = event => {
@@ -82,15 +84,19 @@ const Carousel = props => {
     heading,
     itemRender,
     itemWidth,
+    itemHeight,
     itemMargin,
     inactiveSlideScale,
+    inactiveSlideOpacity,
     activeSlideAlignment,
     itemClassName,
     indicatorItem,
+    autoplay,
     ...others
   } = props;
   const [current, setCurrent] = useState(0);
-  const listRef = useRef(null);
+  const carouselRef = useRef(null);
+  const containerRef = useRef(null);
 
   const handlePreviousClick = () => {
     const previous = current - 1;
@@ -111,15 +117,24 @@ const Carousel = props => {
 
   const wrapperTransform = {
     transform: `translateX(-${current * (100 / slides.length)}%)`,
-    marginLeft:
-      listRef.current && activeSlideAlignment === "center"
-        ? (listRef.current.offsetWidth - (itemWidth + itemMargin * 2)) / 2
-        : 0
+    // marginLeft: carouselRef.current && activeSlideAlignment === "center"
+    //     ? (carouselRef.current.offsetWidth - (itemWidth + itemMargin * 2)) / 2
+    //     : 0
   };
+  useEffect(() => {
+    const marginLeft = (activeSlideAlignment === "center"
+    ? (carouselRef.current.offsetWidth - (itemWidth + itemMargin * 2)) / 2
+    : 0) + "px";
+    carouselRef.current.style.setProperty("--carousel-margin-left", marginLeft);
+    // carouselRef.current.style.setProperty("height", '1000px');
+    containerRef.current.style.setProperty("--carousel-height", itemHeight + "px");
+    
+    
+  })
 
   return (
-    <div className={styles["mono__carousel"]}>
-      <div ref={listRef} className={styles["mono__carousel--container"]}>
+    <div ref={carouselRef} className={styles["mono__carousel"]}>
+      <div ref={containerRef} className={styles["mono__carousel--container"]}>
         <ul className={styles["mono__carousel--list"]} style={wrapperTransform}>
           {slides.map((slide, index) => {
             return (
@@ -130,11 +145,12 @@ const Carousel = props => {
                 slide={slide}
                 current={current}
                 handleSlideClick={handleSlideClick}
-                itemRender={itemRender}
-                itemWidth={itemWidth}
-                itemMargin={itemMargin}
-                inactiveSlideScale={inactiveSlideScale}
-                activeSlideAlignment={activeSlideAlignment}
+                // itemRender={itemRender}
+                // itemWidth={itemWidth}
+                // itemMargin={itemMargin}
+                // inactiveSlideScale={inactiveSlideScale}
+                // activeSlideAlignment={activeSlideAlignment}
+                {...props}
               />
             );
           })}
@@ -169,22 +185,25 @@ Carousel.propTypes = {
   direction: PropTypes.oneOf(["horizontal", "vertical"]),
   sliderWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sliderHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  itemWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  itemHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  itemWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  itemHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   itemRender: PropTypes.func.isRequired,
-  itemMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  itemMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   inactiveSlideScale: PropTypes.number,
+  inactiveSlideOpacity: PropTypes.number,
   activeSlideAlignment: PropTypes.oneOf(["start", "center"]),
   itemClassName: PropTypes.string,
-  indicatorItem: PropTypes.node
+  indicatorItem: PropTypes.node,
 };
 
 Carousel.defaultProps = {
   direction: "horizontal",
   itemWidth: 500,
+  itemHeight: 500,
   itemMargin: 20,
   inactiveSlideScale: 0.9,
-  activeSlideAlignment: "start"
+  inactiveSlideOpacity: 0.7,
+  activeSlideAlignment: "start",
 };
 
 export default Carousel;

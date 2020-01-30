@@ -21,51 +21,35 @@ const itemRender = data => {
   return (
     <div
       style={{
-        backgroundImage: `url('${data.src}')`,
-        backgroundSize: "cover",
+        // backgroundImage: `url('${data.src}')`,
+        // backgroundSize: "cover",
         width: "100%",
-        height: "100%"
+        height: "fit-content",
+        color: 'black'
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          WebkitTextFillColor: "white",
-          WebkitTextStrokeWidth: "1px",
-          WebkitTextStrokeColor: "black",
-          fontFamily: "Montserrat, Arial",
-          fontSize: "24px",
-          fontWeight: 900
-        }}
-      >
-        {data.headline}
-      </div>
+      <img src={data.src} style={{ width: '100%'}}/>
+      <span>{data.headline}</span>
     </div>
   );
 };
 
 const slideData = [
   {
-    headline: "Focus On The Writing",
-    src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/typewriter.jpg"
+    headline: "Nike Air Force 1 '07 Essential Icon Clash",
+    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/jrmc5yzbdqrloaat4prz/air-force-1-07-essential-icon-clash-shoe-B4HXPf.jpg"
   },
   {
-    headline: "New Fashion Apparel",
-    src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/fashion.jpg"
+    headline: "Nike Air Zoom Pegasus 36",
+    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/rcvjuoidxcq9irtbp5rk/air-zoom-pegasus-36-running-shoe-tBZsLn.jpg"
   },
   {
-    headline: "In The Wilderness",
-    src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/forest.jpg"
+    headline: "Nike P-6000 Icon Clash",
+    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/rijdurhjtaopdca3qofp/p-6000-icon-clash-shoe-Cf06tP.jpg"
   },
   {
-    headline: "For Your Current Mood",
-    src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/guitar.jpg"
-  },
-  {
-    headline: "Focus On The Writing",
-    src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/typewriter.jpg"
+    headline: "Air Jordan 7 Retro",
+    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/t4ege635ov8rjpccsrj7/air-jordan-7-retro-shoe-2XK2cz.jpg"
   }
 ];
 
@@ -279,6 +263,7 @@ const Example = props => {
             heading="Example Slider"
             slides={slideData}
             itemWidth={320}
+            itemHeight={400}
             itemMargin={10}
             itemRender={itemRender}
             activeSlideAlignment="center"
