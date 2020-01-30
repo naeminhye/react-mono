@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Carousel.module.scss";
@@ -8,27 +8,22 @@ import styles from "./Carousel.module.scss";
 // =========================
 
 const CarouselItem = props => {
-  const { itemRender, current, index } = props;
+  const {
+    className,
+    itemRender,
+    itemWidth,
+    itemMargin,
+    inactiveSlideScale,
+    current,
+    index
+  } = props;
   const carouselRef = useRef();
 
-  const handleMouseMove = event => {
-    const el = carouselRef.current;
-    const r = el.getBoundingClientRect();
-
-    el.style.setProperty(
-      "--x",
-      event.clientX - (r.left + Math.floor(r.width / 2))
-    );
-    el.style.setProperty(
-      "--y",
-      event.clientY - (r.top + Math.floor(r.height / 2))
-    );
-  };
-
-  const handleMouseLeave = event => {
-    carouselRef.current.style.setProperty("--x", 0);
-    carouselRef.current.style.setProperty("--y", 0);
-  };
+  useEffect(() => {
+    carouselRef.current.style.setProperty("--item-width", itemWidth + "px");
+    carouselRef.current.style.setProperty("--item-margin", itemMargin + "px");
+    carouselRef.current.style.setProperty("--item-scale", inactiveSlideScale);
+  });
 
   const handleSlideClick = event => {
     props.handleSlideClick(index);
@@ -36,21 +31,15 @@ const CarouselItem = props => {
 
   const itemClasses = classNames({
     [styles[`mono__carousel--item`]]: true,
-    // [className]: className,
+    [className]: className,
     [styles["mono__carousel--item-current"]]: current === index,
     [styles["mono__carousel--item-previous"]]: current - 1 === index,
     [styles["mono__carousel--item-next"]]: current + 1 === index
   });
 
   return (
-    <li
-      ref={carouselRef}
-      className={itemClasses}
-      onClick={handleSlideClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {itemRender ? itemRender(props.slide) : <div></div>}
+    <li ref={carouselRef} className={itemClasses} onClick={handleSlideClick}>
+      {itemRender(props.slide)}
     </li>
   );
 };
@@ -59,23 +48,49 @@ const CarouselItem = props => {
 // Carousel control
 // =========================
 
-const CarouselControl = ({ type, title, handleClick }) => {
+const CarouselControl = ({ type, handleClick }) => {
   return (
-    <button className={`btn btn--${type}`} title={title} onClick={handleClick}>
-      <svg className="icon" viewBox="0 0 24 24">
-        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-      </svg>
-    </button>
+    <div className={styles[`control--${type}`]} onClick={handleClick}></div>
   );
 };
+
+const CarouselIndicators = props => {
+  const { total, indicatorItem, onNavigate, activeIndex } = props;
+  // activeIndex
+
+  return(
+    <div className={styles["mono__carousel--indicators"]}>
+      {[...Array(total)].map((e, index) =>  (
+        indicatorItem ? <div onClick={() => {onNavigate(index)}}>{indicatorItem}</div> : <div onClick={() => {
+          onNavigate(index)
+        }} className={classNames({
+          [styles["mono__carousel--indicators-item"]]: true,
+          [styles["active"]]: activeIndex === index
+        })}></div>
+      ))}
+    </div>
+  )
+}
 
 // =========================
 // Carousel
 // =========================
 
 const Carousel = props => {
-  const { slides, heading, itemRender } = props;
+  const {
+    slides,
+    heading,
+    itemRender,
+    itemWidth,
+    itemMargin,
+    inactiveSlideScale,
+    activeSlideAlignment,
+    itemClassName,
+    indicatorItem,
+    ...others
+  } = props;
   const [current, setCurrent] = useState(0);
+  const listRef = useRef(null);
 
   const handlePreviousClick = () => {
     const previous = current - 1;
@@ -94,33 +109,32 @@ const Carousel = props => {
     }
   };
 
-  const headingId = `slider-heading__${heading
-    .replace(/\s+/g, "-")
-    .toLowerCase()}`;
   const wrapperTransform = {
-    transform: `translateX(-${current * (100 / slides.length)}%)`
+    transform: `translateX(-${current * (100 / slides.length)}%)`,
+    marginLeft:
+      listRef.current && activeSlideAlignment === "center"
+        ? (listRef.current.offsetWidth - (itemWidth + itemMargin * 2)) / 2
+        : 0
   };
 
   return (
     <div className={styles["mono__carousel"]}>
-      <div
-        className={styles["mono__carousel--container"]}
-        aria-labelledby={headingId}
-      >
+      <div ref={listRef} className={styles["mono__carousel--container"]}>
         <ul className={styles["mono__carousel--list"]} style={wrapperTransform}>
-          <h3 id={headingId} className="visuallyhidden">
-            {heading}
-          </h3>
-
           {slides.map((slide, index) => {
             return (
               <CarouselItem
                 key={index}
+                className={itemClassName}
                 index={index}
                 slide={slide}
                 current={current}
                 handleSlideClick={handleSlideClick}
                 itemRender={itemRender}
+                itemWidth={itemWidth}
+                itemMargin={itemMargin}
+                inactiveSlideScale={inactiveSlideScale}
+                activeSlideAlignment={activeSlideAlignment}
               />
             );
           })}
@@ -129,16 +143,23 @@ const Carousel = props => {
       <div className={styles["mono__carousel--controls"]}>
         <CarouselControl
           type="previous"
-          title="Go to previous slide"
           handleClick={handlePreviousClick}
         />
 
         <CarouselControl
           type="next"
-          title="Go to next slide"
           handleClick={handleNextClick}
         />
       </div>
+      <CarouselIndicators
+        activeIndex={current}
+        total={slides.length} 
+        onNavigate={(index) => {
+          if(current !== index)
+            handleSlideClick(index);
+        }}
+        indicatorItem={indicatorItem}
+        />
     </div>
   );
 };
@@ -146,15 +167,24 @@ const Carousel = props => {
 Carousel.propTypes = {
   className: PropTypes.string,
   direction: PropTypes.oneOf(["horizontal", "vertical"]),
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sliderWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sliderHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   itemWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   itemHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  itemRender: PropTypes.func.isRequired
+  itemRender: PropTypes.func.isRequired,
+  itemMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  inactiveSlideScale: PropTypes.number,
+  activeSlideAlignment: PropTypes.oneOf(["start", "center"]),
+  itemClassName: PropTypes.string,
+  indicatorItem: PropTypes.node
 };
 
 Carousel.defaultProps = {
-  direction: "horizontal"
+  direction: "horizontal",
+  itemWidth: 500,
+  itemMargin: 20,
+  inactiveSlideScale: 0.9,
+  activeSlideAlignment: "start"
 };
 
 export default Carousel;

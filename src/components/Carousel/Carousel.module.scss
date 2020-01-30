@@ -1,54 +1,55 @@
 @import "../common/settings";
 
 .mono__carousel {
-  :root {
-    --color-primary: #6b7a8f;
-    --color-secondary: #101118;
-    --color-accent: #1d1f2f;
-    --color-focus: #6d64f7;
-    --base-duration: 600ms;
-    --base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
-  }
+  $base-duration: 600ms;
+  $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
+  $slide-size: 70vmin;
+  $slide-margin: 4vmin;
+  position: relative;
 
-  .visuallyhidden {
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    overflow: hidden;
-    position: absolute !important;
-    white-space: nowrap;
-    width: 1px;
-  }
+  // .visuallyhidden {
+  //   clip: rect(1px, 1px, 1px, 1px);
+  //   height: 1px;
+  //   overflow: hidden;
+  //   position: absolute !important;
+  //   white-space: nowrap;
+  //   width: 1px;
+  // }
 
   // =========================
   // Slider controls
   // =========================
 
   &--controls {
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    // justify-content: space-between;
     // position: absolute;
     // top: calc(100% + 1rem);
-    width: 100%;
-
-    .btn {
-      --size: 3rem;
-
-      align-items: center;
-      background-color: transparent;
-      border: 3px solid transparent;
-      border-radius: 100%;
-      display: flex;
-      height: var(--size);
-      padding: 0;
-      width: var(--size);
-
-      &:focus {
-        border-color: var(--color-focus);
-        outline: none;
+    // width: 100%;
+    .control--previous {
+      cursor: pointer;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M346.016 296.992L130.976 512l215.04 215.008 44.992-46.016L254.016 544H896v-64H253.984l137.024-136.992z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      &:hover {
+        transform: scale(1.2);
       }
-
-      &--previous > * {
-        transform: rotate(180deg);
+    }
+    .control--next {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M678.016 296.992L632.96 343.04 770.016 480H128v64h642.016l-137.024 136.992 45.024 46.016L892.96 512z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      &:hover {
+        transform: scale(1.2);
       }
     }
   }
@@ -58,25 +59,48 @@
   // =========================
 
   &--container {
-    overflow-x: hidden;
-    --slide-size: 70vmin;
-    --slide-margin: 4vmin;
+    --carousel-height: 300px;
 
-    height: var(--slide-size);
-    margin: 0 auto;
+    overflow-x: hidden;
+
+    height: var(--carousel-height);
     position: relative;
-    // width: var(--slide-size);
     width: 100%;
-    padding: 20px 0;
+    margin: 20px auto;
   }
 
   &--list {
     display: flex;
-    margin: 0 calc(var(--slide-margin) * -1);
+    margin: 0 ($slide-margin * -1);
     position: absolute;
-    transition: transform var(--base-duration) cubic-bezier(0.25, 1, 0.35, 1);
+    transition: transform $base-duration cubic-bezier(0.25, 1, 0.35, 1);
+    padding: 0;
+    height: 100%;
 
-    // TODO 
+    // TODO
+  }
+
+  // indicators
+  &--indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-item {
+      cursor: pointer;
+      background-color: $clr_whisper;
+      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+      margin: 0 2px;
+      &.active {
+        background-color: $clr_dark_gray;
+      }
+      &:hover {
+        transform: scale(1.2);
+        margin: 0 4px;
+      }
+    }
   }
 
   // =========================
@@ -84,80 +108,72 @@
   // =========================
 
   &--item {
+    --item-width: 600px;
+    --item-margin: 600px;
+    --item-scale: 0.9;
+
+    cursor: pointer;
     align-items: center;
     color: white;
     display: flex;
     flex: 1;
     flex-direction: column;
-    height: var(--slide-size);
+    height: 100%;
     justify-content: center;
-    margin: 0 var(--slide-margin);
+    margin: 0 var(--item-margin);
     opacity: 0.25;
     position: relative;
     text-align: center;
-    transition: opacity calc(var(--base-duration) / 2) var(--base-ease),
-      transform calc(var(--base-duration) / 2) var(--base-ease);
-    width: var(--slide-size);
+    // transition: all .2s ease-in-out;
+    transition: opacity calc($base-duration / 2) $base-ease, transform calc($base-duration / 2) $base-ease;
+    width: var(--item-width);
     z-index: 1;
 
-    &-previous,
-    &-next {
+    .carousel--item-content {
+      width: 100%;
+      height: 100%;
+    }
+    
+    &:not(.mono__carousel--item-current) {
+      transform: scale(var(--item-scale));
       &:hover {
         opacity: 0.5;
       }
     }
 
-    &-previous {
-      cursor: w-resize;
+    // &-previous,
+    // &-next {
+    // }
 
-      &:hover {
-        transform: translateX(2%);
-      }
-    }
+    // &-previous {
+    //   cursor: w-resize;
+    // }
 
-    &-next {
-      cursor: e-resize;
-
-      &:hover {
-        transform: translateX(-2%);
-      }
-    }
+    // &-next {
+    //   cursor: e-resize;
+    // }
 
     &-current {
-      --x: 0;
-      --y: 0;
-      --d: 50;
-
       opacity: 1;
       pointer-events: auto;
       user-select: auto;
-
-      @media (hover: hover) {
-        &:hover .slide__image-wrapper {
-          transform: scale(1.025)
-            translate(
-              calc(var(--x) / var(--d) * 1px),
-              calc(var(--y) / var(--d) * 1px)
-            );
-        }
-      }
     }
   }
 
   .slide__image-wrapper {
-    background-color: var(--color-accent);
+    // background-color: var(--color-accent);
     border-radius: 1%;
     height: 100%;
     left: 0%;
     overflow: hidden;
     position: absolute;
     top: 0%;
-    transition: transform calc(var(--base-duration) / 4) var(--base-ease);
+    transition: transform calc($base-duration / 4) $base-ease;
     width: 100%;
   }
 
   .slide__image {
-    --d: 20;
+    $__d: 20;
 
     height: 110%;
     left: -5%;
@@ -166,17 +182,14 @@
     pointer-events: none;
     position: absolute;
     top: -5%;
-    transition: opacity var(--base-duration) var(--base-ease),
-      transform var(--base-duration) var(--base-ease);
+    transition: opacity $base-duration $base-ease,
+      transform $base-duration $base-ease;
     user-select: none;
     width: 110%;
 
     @media (hover: hover) {
       .slide--current & {
-        transform: translate(
-          calc(var(--x) / var(--d) * 1px),
-          calc(var(--y) / var(--d) * 1px)
-        );
+        transform: translate(calc($x / $__d * 1px), calc($y / $__d * 1px));
       }
     }
   }
@@ -188,24 +201,20 @@
   }
 
   .slide__content {
-    --d: 60;
+    $_d: 60;
 
     opacity: 0;
     padding: 4vmin;
     position: relative;
-    transition: transform var(--base-duration) var(--base-ease);
+    transition: transform $base-duration $base-ease;
     visibility: hidden;
 
     .slide--current & {
-      animation: fade-in calc(var(--base-duration) / 2) var(--base-ease)
-        forwards;
+      animation: fade-in calc($base-duration / 2) $base-ease forwards;
       visibility: visible;
 
       @media (hover: hover) {
-        transform: translate(
-          calc(var(--x) / var(--d) * -1px),
-          calc(var(--y) / var(--d) * -1px)
-        );
+        transform: translate(calc($x / $_d * -1px), calc($y / $_d * -1px));
       }
     }
 

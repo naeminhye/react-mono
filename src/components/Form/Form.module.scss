@@ -36,10 +36,11 @@
     }
     &--action-group {   
         display: flex;
+        flex-wrap: wrap;
         margin-top: 16px;
         .mono__form--action {
-            &.left-space {
-                margin-left: 5px;
+            &:not(:last-child) {
+                margin-right: 5px;
             }
         }
     }
