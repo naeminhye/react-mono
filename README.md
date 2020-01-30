@@ -42,7 +42,7 @@ const App = () => (
 - [ ] Add **Avatar** component.
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
-- [ ] Add **Carousel** component.
+- [x] Add **Carousel** component.
 - [ ] Add **Loading** component.
 - [ ] Add **Menu** component.
 - [ ] Add **Progress** component.
