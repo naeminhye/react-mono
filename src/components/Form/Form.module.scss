@@ -39,6 +39,8 @@
         flex-wrap: wrap;
         margin-top: 16px;
         .mono__form--action {
+            margin-bottom: 5px;
+        
             &:not(:last-child) {
                 margin-right: 5px;
             }

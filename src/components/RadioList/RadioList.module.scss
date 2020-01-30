@@ -3,13 +3,17 @@
 .mono__radiolist {
   font-family: Inconsolata, Montserrat, Arial;
   display: flex;
+  flex-wrap: wrap;
   &--list {
     flex-direction: column;
   }
   &--item {
-    &.left-space {
-      margin-left: 5px;
+    margin-bottom: 5px;
+
+    &:not(:last-child) {
+      margin-right: 5px;
     }
+
     background-color: #fff;
     display: block;
     position: relative;

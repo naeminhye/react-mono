@@ -269,7 +269,7 @@ const Example = props => {
             activeSlideAlignment="center"
           />
         </Form.Item>
-        {/* <Form.Item label="Table">
+        <Form.Item label="Table">
           <Table
             selectable={true}
             dataSource={dataSource}
@@ -347,7 +347,7 @@ const Example = props => {
               </div>
             }
           />
-        </Form.Item> */}
+        </Form.Item>
       </Form>
     </div>
   );
