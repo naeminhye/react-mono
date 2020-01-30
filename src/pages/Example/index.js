@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Form,
   Button,
+  Carousel,
   DatePicker,
   Icons,
   Input,
@@ -13,8 +14,40 @@ import {
   Table,
   DropDown,
   FlipCard,
-  Tag
+  Tag,
 } from "components";
+
+const itemRender = (data) => {
+  return(
+    <div style={{ backgroundImage: `url('${data.src}')`, backgroundSize: 'cover', width: '100%', height: '100%' }}>
+      <div>{data.headline}</div>
+    </div>
+  )
+}
+
+const slideData = [
+  {
+    headline: 'Focus On The Writing',
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/typewriter.jpg'
+  },
+  {
+    headline: 'New Fashion Apparel',
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/fashion.jpg'
+  },
+  {
+    headline: 'In The Wilderness',
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/forest.jpg'
+  },
+  {
+    headline: 'For Your Current Mood',
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/guitar.jpg'
+  },
+  {
+    headline: 'Focus On The Writing',
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/typewriter.jpg'
+  }
+]
+
 
 const transportationOptions = [
   {
@@ -221,7 +254,10 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
-        <Form.Item label="Table">
+        <Form.Item label="Carousel">
+          <Carousel heading="Example Slider" slides={slideData} itemRender={itemRender}/>
+        </Form.Item>
+        {/* <Form.Item label="Table">
           <Table
             selectable={true}
             dataSource={dataSource}
@@ -299,7 +335,7 @@ const Example = props => {
               </div>
             }
           />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </div>
   );

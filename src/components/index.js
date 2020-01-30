@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Card from "./Card";
+import Carousel from "./Carousel";
 import CheckBox from "./CheckBox";
 import CheckList from "./CheckList";
 import DatePicker from "./DatePicker";
@@ -18,6 +19,7 @@ import Uploader from "./Uploader";
 export {
   Button,
   Card,
+  Carousel,
   CheckBox,
   CheckList,
   FlipCard,
@@ -31,5 +33,5 @@ export {
   RadioList,
   Table,
   Tag,
-  Uploader
+  Uploader,
 };
