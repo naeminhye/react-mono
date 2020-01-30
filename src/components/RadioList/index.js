@@ -77,7 +77,6 @@ const RadioList = props => {
             <RadioListItem
               name={name}
               key={index}
-              className={index > 0 ? styles["left-space"] : ""}
               checked={selected === option.value}
               onChange={checked => {
                 handleChangeSelect(checked, option.value);
@@ -91,7 +90,6 @@ const RadioList = props => {
               key={index}
               label={option.label}
               value={option.value}
-              className={index > 0 ? styles["left-space"] : ""}
               checked={selected === option.value}
               onChange={checked => {
                 handleChangeSelect(checked, option.value);

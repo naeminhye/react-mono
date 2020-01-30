@@ -84,7 +84,6 @@ const CheckList = props => {
             <IconCheckItem
               name={name}
               key={index}
-              className={index > 0 ? styles["left-space"] : ""}
               checked={selected.indexOf(option.value) !== -1}
               onChange={checked => {
                 handleChangeSelect(checked, option);
@@ -96,7 +95,6 @@ const CheckList = props => {
             <CheckBox
               label={option.label}
               name={name}
-              className={index > 0 ? styles["left-space"] : ""}
               defaultChecked={selected.indexOf(option.value) !== -1} 
               onChange={e => {
                 let checked = e.target.checked;

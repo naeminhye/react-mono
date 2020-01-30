@@ -52,9 +52,7 @@ const Form = props => {
           {actions.map((action, index) => (
             <div
               key={index}
-              className={classNames({
-                [styles["mono__form--action"]]: true,
-                [styles["left-space"]]: index > 0})}
+              className={styles["mono__form--action"]}
             >
               {action}
             </div>
