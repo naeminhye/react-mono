@@ -1,6 +1,6 @@
 {
   "name": "react-mono",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": false,
   "description": "A React Component UI Kit",
   "main": "dist/index.js",
