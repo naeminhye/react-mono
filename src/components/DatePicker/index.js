@@ -181,7 +181,7 @@ const YearSelector = props => {
 
 const DatePicker = props => {
   // props
-  const { className, format, value } = props;
+  const { className, format, value, bordered } = props;
 
   // states
   const [open, setOpen] = useState(false);
@@ -290,6 +290,7 @@ const DatePicker = props => {
         placeholder="Try me.."
         onFocus={() => setOpen(true)}
         suffix={<Icons.Calendar size={24} fill="#AEAEAE" />}
+        bordered={bordered}
       />
       <div className={styles["mono__calendar"]}>
         <div className={styles["mono__calendar--months"]}>
@@ -389,12 +390,14 @@ DatePicker.propTypes = {
     "MM/DD/YYYY",
     "YY/MM/DD",
     "DD-MMM-YY"
-  ])
+  ]),
+  bordered: PropTypes.bool
 };
 
 DatePicker.defaultProps = {
   value: moment().format("YYYY-MM-DD"),
-  format: "YYYY-MM-DD"
+  format: "YYYY-MM-DD",
+  bordered: false
 };
 
 export default DatePicker;

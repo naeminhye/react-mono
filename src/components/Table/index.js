@@ -248,7 +248,6 @@ Table.defaultProps = {
   bordered: false,
   striped: false,
   hover: false,
-  separated: false
 };
 
 Table.propTypes = {

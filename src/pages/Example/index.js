@@ -274,7 +274,7 @@ const Example = props => {
             selectable={true}
             dataSource={dataSource}
             columns={columns}
-            bordered={true}
+            bordered={false}
             striped={true}
             hover={true}
           />
@@ -289,10 +289,10 @@ const Example = props => {
           />
         </Form.Item>
         <Form.Item label="Date">
-          <DatePicker value="1/22/20" format="M/D/YY" />
+          <DatePicker value="1/22/20" format="M/D/YY" bordered={true} />
         </Form.Item>
         <Form.Item label="Input" isRequired>
-          <Input placeholder="Input" />
+          <Input placeholder="Input" bordered={true}/>
         </Form.Item>
         <Form.Item label="Transportation">
           <CheckList options={transportationOptions} />

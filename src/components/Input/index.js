@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import styles from './Input.module.scss'; 
 
 const Input = props => {
-  const { children, className, prefix, suffix, label, ...others } = props;
+  const { children, className, prefix, suffix, label, bordered, ...others } = props;
 
   const classes = classNames({
     [styles["mono__input"]]: true,
-    [className]: className
+    [className]: className,
+    [styles["mono__input-bordered"]]: bordered
   });
 
   return (
@@ -27,10 +28,12 @@ const Input = props => {
 Input.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string, 
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  bordered: PropTypes.bool
 }
 
 Input.defaultProps = {
+  bordered: false
 }
 
 export default Input;

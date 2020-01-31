@@ -26,6 +26,7 @@ const App = () => (
 ```
 
 ## 🔗 Links
+- [Live Demo](https://naeminhye.github.io/react-mono/)
 
 ## 👨🏻‍💻 Authors
 
@@ -33,22 +34,36 @@ const App = () => (
 
 ## ✅ TODO list
 
+- [x] Added **Dropdown** component.
+- [x] Added **Form** and **Form Item** component.
+- [x] Added **Checkbox** component.
+- [x] Added **Radiobox** component.
+- [x] Added **Simple Input** component.
+- [x] Added **Pagination** component.
+- [x] Added **DatePicker** component.
+- [x] Added **Tag** component.
+- [x] Added **Table** component.
+- [x] Fixed **Uploader** component.
+- [x] Added **Carousel** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] Fix **Card** component.
-- [x] Fix **Uploader** component.
 - [ ] Refactor **Icons** component.
+- [ ] Add **Affix** component.
 - [ ] Add **Grid** component for layout feature.
 - [ ] Add **Avatar** component.
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
-- [x] Add **Carousel** component.
+- [ ] Add **Drawer** component.
 - [ ] Add **Loading** component.
 - [ ] Add **Menu** component.
 - [ ] Add **Progress** component.
 - [ ] Add **Rate** component.
+- [ ] Add **Select** component.
+- [ ] Add **Sidebar** component.
 - [ ] Add **Slider** component.
 - [ ] Add **Steps** component.
 - [ ] Add **TimePicker** component.
 - [ ] Add **Toast Notification** component.
+- [ ] Add **Sidebar** component.
 - [ ] _Disable_ component.
