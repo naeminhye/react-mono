@@ -1,0 +1,31 @@
+.mono__card {
+  font-family: Inconsolata, Montserrat, Arial;
+  &.bordered {
+    border: 1px solid #aeaeae;
+  }
+  &--banner {
+    width: 100%;
+    position: relative;
+    &-video {
+      width: 100%;
+      height: auto;
+    }
+    &-image {
+        width: 100%;
+        height: auto;
+    }
+
+    &-tip {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+    }
+  }
+
+  &--footer {
+    line-height: 1.6em;
+    border-top: 1px solid #eceff2;
+    // padding-top: 24px;
+    // padding: 36px;
+  }
+}
