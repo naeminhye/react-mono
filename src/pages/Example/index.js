@@ -26,10 +26,10 @@ const itemRender = data => {
         // backgroundSize: "cover",
         width: "100%",
         height: "fit-content",
-        color: 'black'
+        color: "black"
       }}
     >
-      <img src={data.src} style={{ width: '100%'}}/>
+      <img src={data.src} style={{ width: "100%" }} />
       <span>{data.headline}</span>
     </div>
   );
@@ -38,19 +38,23 @@ const itemRender = data => {
 const slideData = [
   {
     headline: "Nike Air Force 1 '07 Essential Icon Clash",
-    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/jrmc5yzbdqrloaat4prz/air-force-1-07-essential-icon-clash-shoe-B4HXPf.jpg"
+    src:
+      "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/jrmc5yzbdqrloaat4prz/air-force-1-07-essential-icon-clash-shoe-B4HXPf.jpg"
   },
   {
     headline: "Nike Air Zoom Pegasus 36",
-    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/rcvjuoidxcq9irtbp5rk/air-zoom-pegasus-36-running-shoe-tBZsLn.jpg"
+    src:
+      "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/rcvjuoidxcq9irtbp5rk/air-zoom-pegasus-36-running-shoe-tBZsLn.jpg"
   },
   {
     headline: "Nike P-6000 Icon Clash",
-    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/rijdurhjtaopdca3qofp/p-6000-icon-clash-shoe-Cf06tP.jpg"
+    src:
+      "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/rijdurhjtaopdca3qofp/p-6000-icon-clash-shoe-Cf06tP.jpg"
   },
   {
     headline: "Air Jordan 7 Retro",
-    src: "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/t4ege635ov8rjpccsrj7/air-jordan-7-retro-shoe-2XK2cz.jpg"
+    src:
+      "https://c.static-nike.com/a/images/f_auto/q_auto/t_PDP_864_v1/t4ege635ov8rjpccsrj7/air-jordan-7-retro-shoe-2XK2cz.jpg"
   }
 ];
 
@@ -258,9 +262,6 @@ const dropdownOptions = [
 const Example = props => {
   return (
     <div>
-      <Tooltip placement="bottom" title="Hello">
-      <div>Hello</div>
-      </Tooltip>
       <Form title="Form Title" border>
         <Form.Item label="Carousel">
           <Carousel
@@ -296,7 +297,7 @@ const Example = props => {
           <DatePicker value="1/22/20" format="M/D/YY" bordered={true} />
         </Form.Item>
         <Form.Item label="Input" isRequired>
-          <Input placeholder="Input" bordered={true}/>
+          <Input placeholder="Input" bordered={true} />
         </Form.Item>
         <Form.Item label="Transportation">
           <CheckList options={transportationOptions} />
@@ -351,6 +352,23 @@ const Example = props => {
               </div>
             }
           />
+        </Form.Item>
+
+        <Form.Item label="Tooltip">
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Tooltip title="This is Top Tooltip">
+              <Tag>Top</Tag>
+            </Tooltip>
+            <Tooltip placement="left" title="This is Left Tooltip">
+              <Tag>Left</Tag>
+            </Tooltip>
+            <Tooltip placement="right" title="This is Right Tooltip">
+              <Tag>Right</Tag>
+            </Tooltip>
+            <Tooltip placement="bottom" title="This is Bottom Tooltip">
+              <Tag>Bottom</Tag>
+            </Tooltip>
+          </div>
         </Form.Item>
       </Form>
     </div>
