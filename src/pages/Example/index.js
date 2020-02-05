@@ -14,6 +14,7 @@ import {
   Table,
   DropDown,
   FlipCard,
+  Tooltip,
   Tag
 } from "components";
 
@@ -257,6 +258,9 @@ const dropdownOptions = [
 const Example = props => {
   return (
     <div>
+      <Tooltip placement="bottom" title="Hello">
+      <div>Hello</div>
+      </Tooltip>
       <Form title="Form Title" border>
         <Form.Item label="Carousel">
           <Carousel

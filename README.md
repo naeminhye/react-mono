@@ -45,6 +45,7 @@ const App = () => (
 - [x] Added **Table** component.
 - [x] Fixed **Uploader** component.
 - [x] Added **Carousel** component.
+- [x] Added **Tooltip** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] Fix **Card** component.
