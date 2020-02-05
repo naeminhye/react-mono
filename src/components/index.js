@@ -14,6 +14,7 @@ import RadioBox from "./RadioBox";
 import RadioList from "./RadioList";
 import Table from "./Table";
 import Tag from "./Tag";
+import Tooltip from "./Tooltip";
 import Uploader from "./Uploader";
 
 export {
@@ -33,5 +34,6 @@ export {
   RadioList,
   Table,
   Tag,
+  Tooltip,
   Uploader,
 };
