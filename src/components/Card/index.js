@@ -1,9 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import "./Card.scss";
 import { Icons } from "../index";
-// import styles from "./Card.module.scss";
+import styles from "./Card.module.scss";
 
 const Card = props => {
   const {
@@ -14,17 +13,19 @@ const Card = props => {
     banner,
     bannerType,
     width,
+    height,
     ...others
   } = props;
 
   const classes = classNames({
-    mono__card: true,
+    [styles[`mono__card`]]: true,
     [className]: className,
-    bordered: bordered
+    [styles.bordered]: bordered,
   });
 
   const wrapperStyle = {
-    maxWidth: width ? width + "px" : "100%"
+    width: width ? width + "px" : "inherit",
+    height: height ? height + "px" : "fit-content"
   };
 
   const [hoverTip, hideHoverTip] = useState(false);
@@ -32,12 +33,16 @@ const Card = props => {
   const videoRef = useRef(null);
 
   const handleMouseOver = () => {
-    videoRef.current.play();
-    hideHoverTip(true);
+    if(videoRef.current) {
+      videoRef.current.play();
+      hideHoverTip(true);
+    }
   };
   const handleMouseOut = () => {
-    videoRef.current.pause();
-    hideHoverTip(false);
+    if(videoRef.current) {
+      videoRef.current.pause();
+      hideHoverTip(false);
+    }
   };
 
   useEffect(
@@ -66,15 +71,16 @@ const Card = props => {
           <>
             <video
               ref={videoRef}
-              className="mono__card--banner-video"
-              // loop={banner.loop}
+              className={styles["mono__card--banner-video"]}
+              loop={banner.loop}
               // preload="none"
-              // autoPlay={banner.autoPlay}
+              autoPlay={banner.autoPlay}
+              muted="muted"
             >
               <source src={banner.src} type={banner.type} />
             </video>
             {!hoverTip && (
-              <div className="mono__card--banner-tip">
+              <div className={styles["mono__card--banner-tip"]}>
                 <Icons.Video size={24} fill="#FFF" />
               </div>
             )}
@@ -83,13 +89,13 @@ const Card = props => {
 
         {bannerType === "image" && (
           <img 
-          className="mono__card--banner-image"
-          src="https://cnet1.cbsistatic.com/img/firxUCBYK8N9MRR3MP5jwD6JcOc=/756x567/2019/04/12/f9483088-44fa-4c9a-9a4a-e754f07546b6/screen-shot-2019-04-11-at-4-56-46-pm.png" />
+          className={styles["mono__card--banner-image"]}
+          src={banner.src} />
         )}
 
       </div>
-      <div className="mono__card--body">{children}</div>
-      {footer && <div className="mono__card--footer">{footer}</div>}
+      <div className={styles["mono__card--body"]}>{children}</div>
+      {footer && <div className={styles["mono__card--footer"]}>{footer}</div>}
     </div>
   );
 };
@@ -110,14 +116,15 @@ Card.propTypes = {
   footer: PropTypes.node,
   footerCollapse: PropTypes.bool,
   width: PropTypes.number,
+  // height: PropTypes.number,
   bannerType: PropTypes.oneOf(["video", "image"]),
-  banner: PropTypes.objectOf(
-    PropTypes.shape({
-      loop: PropTypes.bool,
-      src: PropTypes.string.isRequired,
-      type: PropTypes.string
-    })
-  )
+  // banner: PropTypes.objectOf(
+  //   PropTypes.shape({
+  //     loop: PropTypes.bool,
+  //     src: PropTypes.string.isRequired,
+  //     type: PropTypes.string
+  //   })
+  // )
 };
 
 export default Card;

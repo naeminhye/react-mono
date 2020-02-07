@@ -22,10 +22,13 @@
     }
   }
 
+  &--body {
+    padding: 24px 16px;
+  }
+
   &--footer {
     line-height: 1.6em;
     border-top: 1px solid #eceff2;
-    // padding-top: 24px;
-    // padding: 36px;
+    padding: 8px 16px;
   }
 }

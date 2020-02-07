@@ -264,7 +264,19 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
-        <Form.Item label="Card">
+        <div style={{display: "flex"}}>
+          <Card
+            width={300}
+            bordered={true}
+            footer={<div>Footer</div>}
+            bannerType="image"
+            banner={{
+              src:
+                "https://images.unsplash.com/photo-1581079288675-16bf8157bc10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1498&q=80"
+            }}
+          >
+            Hello
+          </Card>
           <Card
             width={300}
             bordered={true}
@@ -277,7 +289,7 @@ const Example = props => {
           >
             Hello
           </Card>
-        </Form.Item>
+        </div>
         <Form.Item label="Carousel">
           <Carousel
             heading="Example Slider"
