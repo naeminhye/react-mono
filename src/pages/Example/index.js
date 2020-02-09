@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Form,
   Button,
+  Card,
   Carousel,
   DatePicker,
   Icons,
@@ -263,6 +264,32 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
+        <div style={{display: "flex"}}>
+          <Card
+            width={300}
+            bordered={true}
+            footer={<div>Footer</div>}
+            bannerType="image"
+            banner={{
+              src:
+                "https://images.unsplash.com/photo-1581079288675-16bf8157bc10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1498&q=80"
+            }}
+          >
+            Hello
+          </Card>
+          <Card
+            width={300}
+            bordered={true}
+            footer={<div>Footer</div>}
+            bannerType="video"
+            banner={{
+              src:
+                "https://js.freefrontend.com/img/framers-logo-animation-javascript-0196.mp4"
+            }}
+          >
+            Hello
+          </Card>
+        </div>
         <Form.Item label="Carousel">
           <Carousel
             heading="Example Slider"

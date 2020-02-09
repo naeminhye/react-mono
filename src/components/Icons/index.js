@@ -516,6 +516,21 @@ const Download = props => (
   </svg>
 );
 
+const Video = props => (
+  <svg
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.size || 32}
+    height={props.size || 32}
+  >
+    <path
+      d="M0 167.4v689.1C0 949 75 1024 167.4 1024h689.1c92.5 0 167.4-75 167.4-167.4V167.4C1024 75 949 0 856.6 0H167.4C75 0 0 75 0 167.4z m683.1 395.4L399.5 726.5c-39.1 22.6-88-5.6-88-50.8V348.3c0-45.2 48.9-73.4 88-50.8l283.6 163.7c39.1 22.6 39.1 79 0 101.6z"
+      fill={props.fill || "#333333"}
+    />
+  </svg>
+);
+
 const Icons = {
   Male,
   Female,
@@ -544,7 +559,9 @@ const Icons = {
   WordFile,
   PowerPointFile,
   TextFile,
-  UnknownFile
+  UnknownFile,
+
+  Video
 };
 
 export default Icons;
