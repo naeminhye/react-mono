@@ -23,7 +23,17 @@
   }
 
   &--body {
-    padding: 24px 16px;
+    padding: 32px 16px;
+    position: relative;
+    .mono__card--source-wrapper {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      top: -24px;
+      background-size: cover;
+    }
   }
 
   &--footer {
