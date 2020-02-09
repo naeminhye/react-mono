@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Example } from "pages";
+import { Example, FabricExample } from "pages";
 import { configureDataStore } from "store/dataStore";
 import { useStore } from "store";
 // import 'styles/style.scss'

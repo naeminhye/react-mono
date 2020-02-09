@@ -8,6 +8,7 @@ import FlipCard from "./FlipCard";
 import DropDown from "./DropDown";
 import Icons from "./Icons";
 import Input from "./Input";
+import Fabric from "./Fabric";
 import Form from "./Form";
 import Pagination from "./Pagination";
 import RadioBox from "./RadioBox";
@@ -23,17 +24,18 @@ export {
   Carousel,
   CheckBox,
   CheckList,
-  FlipCard,
   DatePicker,
   DropDown,
   Input,
   Icons,
+  Fabric,
   Form,
+  FlipCard,
   Pagination,
   RadioBox,
   RadioList,
   Table,
   Tag,
   Tooltip,
-  Uploader,
+  Uploader
 };

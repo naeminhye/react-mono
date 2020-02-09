@@ -40,6 +40,7 @@ Button.propTypes = {
     "sm",
     "md",
     "lg",
+    "icon"
   ]),
 };
 

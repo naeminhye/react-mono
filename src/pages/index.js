@@ -1,9 +1,9 @@
 import LogInPage from './LogInPage'
 import Example from './Example'
-import LuckyNumberPage from './LuckyNumberPage'
+import FabricExample from './FabricExample'
 
 export {
     LogInPage,
     Example,
-    LuckyNumberPage
+    FabricExample,
 }
