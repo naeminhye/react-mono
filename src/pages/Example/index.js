@@ -264,18 +264,22 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
-        <div style={{display: "flex"}}>
+        {/* <div style={{display: "flex"}}>
           <Card
+            sourceImg={"https://storage.googleapis.com/proudcity/alpha/uploads/2016/10/techcrunch.jpg"}
             width={300}
             bordered={true}
             footer={<div>Footer</div>}
             bannerType="image"
             banner={{
               src:
-                "https://images.unsplash.com/photo-1581079288675-16bf8157bc10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1498&q=80"
+                "https://techcrunch.com/wp-content/uploads/2020/01/GettyImages-1155946045.jpg?w=450"
             }}
           >
-            Hello
+            <div>
+              <strong>TechCrunch</strong>
+              <div>‘A city where you can pilot almost anything and figure out if it’s going to work’</div>
+            </div>
           </Card>
           <Card
             width={300}
@@ -289,7 +293,7 @@ const Example = props => {
           >
             Hello
           </Card>
-        </div>
+        </div> */}
         <Form.Item label="Carousel">
           <Carousel
             heading="Example Slider"

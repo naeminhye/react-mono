@@ -14,6 +14,7 @@ const Card = props => {
     bannerType,
     width,
     height,
+    sourceImg,
     ...others
   } = props;
 
@@ -94,7 +95,11 @@ const Card = props => {
         )}
 
       </div>
-      <div className={styles["mono__card--body"]}>{children}</div>
+      <div className={styles["mono__card--body"]}>
+        {children}
+        {sourceImg && <div class={styles["mono__card--source-wrapper"]} style={{ backgroundImage: `url('${sourceImg}')` }}> 
+          </div>}
+      </div>
       {footer && <div className={styles["mono__card--footer"]}>{footer}</div>}
     </div>
   );
@@ -125,6 +130,7 @@ Card.propTypes = {
   //     type: PropTypes.string
   //   })
   // )
+  // source:
 };
 
 export default Card;
