@@ -10,6 +10,7 @@ import {
   CheckList,
   CheckBox,
   RadioBox,
+  Progress,
   RadioList,
   Uploader,
   Table,
@@ -264,6 +265,9 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
+        <Form.Item label="Progress">
+          <Progress percent={100} width={500} />
+        </Form.Item>
         {/* <div style={{display: "flex"}}>
           <Card
             sourceImg={"https://storage.googleapis.com/proudcity/alpha/uploads/2016/10/techcrunch.jpg"}

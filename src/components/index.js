@@ -11,6 +11,7 @@ import Input from "./Input";
 import Fabric from "./Fabric";
 import Form from "./Form";
 import Pagination from "./Pagination";
+import Progress from "./Progress";
 import RadioBox from "./RadioBox";
 import RadioList from "./RadioList";
 import Table from "./Table";
@@ -32,6 +33,7 @@ export {
   Form,
   FlipCard,
   Pagination,
+  Progress,
   RadioBox,
   RadioList,
   Table,
