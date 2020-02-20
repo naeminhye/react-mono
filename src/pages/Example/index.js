@@ -265,8 +265,11 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
-        <Form.Item label="Progress">
-          <Progress percent={100} width={500} />
+        <Form.Item label="Linear Progress">
+          <Progress percent={100} width={500} strokeWidth={12}/>
+        </Form.Item>
+        <Form.Item label="Circle Progress">
+          <Progress type="circle" percent={80} width={100} strokeWidth={12}/>
         </Form.Item>
         {/* <div style={{display: "flex"}}>
           <Card

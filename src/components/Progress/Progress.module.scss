@@ -1,27 +1,92 @@
 @import "../common/settings";
 
+@mixin circle($size) {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - #{$size/2});
+  top: calc(50% - #{$size/2});
+  width: $size;
+  height: $size;
+}
+
 .mono__progress {
   font-family: Inconsolata, Montserrat, Arial;
-  overflow: hidden;
-  width: 100%;
-  display: flex;
+// Line
   &.line {
-
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .mono__progress--bar {
+      background: $clr_whisper;
+      flex: 1;
+      height: fit-content;
+      .mono__progress--stroke {
+        &-round {
+          border-radius: 50%;
+        }
+        &-square {
+          border-radius: 0;
+        }
+      }
+    }
+    .mono__progress--info {
+      margin-left: 24px;
+    }
   }
 
-  &--bar {
-    background: $clr_whisper;
-    flex: 1;
-  }
-  &--stroke {
-    &-round {
+// Circle
+  &.circle {
+    .mono__progress--pie-chart {
+      --size: 200px;
+      --stroke-width: 10px;
+    
+      font-family: Inconsolata, Montserrat, Arial;
+      width: var(--size);
+      height: var(--size);
       border-radius: 50%;
+      background-color: #e5e5e5;
+      position: relative;
+      &.gt-50 {
+        background-color: #0a3961;
+        .ppc-progress {
+          clip: rect(0, calc(var(--size) / 2), var(--size), 0);
+          .ppc-progress-fill {
+            clip: rect(0, var(--size), var(--size), calc(var(--size) / 2));
+            background: #e5e5e5;
+          }
+        }
+      }
+    
+      .ppc-progress {
+        @include circle(var(--size));
+        clip: rect(0, var(--size), var(--size), calc(var(--size) / 2));
+        .ppc-progress-fill {
+          @include circle(var(--size));
+          clip: rect(0, calc(var(--size) / 2), var(--size), 0);
+          background: #0a3961;
+          transform: rotate(60deg);
+        }
+      }
+      .ppc-percents {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        left: var(--stroke-width);
+        top: var(--stroke-width);
+        width: calc(var(--size) - (var(--stroke-width) * 2));
+        height: calc(var(--size) - (var(--stroke-width) * 2));
+        background: #fff;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .pcc-percents-wrapper {
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
     }
-    &-square {
-      border-radius: 0;
-    }
-  }
-  &--info {
-    margin-left: 24px;
   }
 }
