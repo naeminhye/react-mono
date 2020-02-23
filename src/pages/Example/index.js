@@ -17,7 +17,8 @@ import {
   DropDown,
   FlipCard,
   Tooltip,
-  Tag
+  Tag,
+  Steps
 } from "components";
 
 const itemRender = data => {
@@ -265,11 +266,28 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
-        <Form.Item label="Linear Progress">
-          <Progress percent={100} width={500} strokeWidth={12}/>
-        </Form.Item>
-        <Form.Item label="Circle Progress">
-          <Progress type="circle" percent={80} width={100} strokeWidth={12}/>
+        <Form.Item label="Steps">
+          <Steps>
+            <Steps.Step
+              status="finish"
+              index={1}
+              title="ABC"
+              description="abc"
+            />
+            <Steps.Step
+              status="process"
+              index={2}
+              title="DEF"
+              description="def"
+            />
+            <Steps.Step
+              status="error"
+              index={3}
+              title="GHI"
+              description="ghi"
+            />
+            <Steps.Step status="wait" index={4} title="GHI" description="ghi" />
+          </Steps>
         </Form.Item>
         {/* <div style={{display: "flex"}}>
           <Card
@@ -301,6 +319,13 @@ const Example = props => {
             Hello
           </Card>
         </div> */}
+
+        <Form.Item label="Linear Progress">
+          <Progress percent={100} width={500} strokeWidth={12} />
+        </Form.Item>
+        <Form.Item label="Circle Progress">
+          <Progress type="circle" percent={80} width={100} strokeWidth={12} />
+        </Form.Item>
         <Form.Item label="Carousel">
           <Carousel
             heading="Example Slider"

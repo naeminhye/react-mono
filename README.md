@@ -47,6 +47,7 @@ const App = () => (
 - [x] Added **Carousel** component.
 - [x] Added **Tooltip** component.
 - [x] Added **Progress** component.
+- [x] Add **Steps** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] Fix **Card** component.
@@ -63,7 +64,6 @@ const App = () => (
 - [ ] Add **Select** component.
 - [ ] Add **Sidebar** component.
 - [ ] Add **Slider** component.
-- [ ] Add **Steps** component.
 - [ ] Add **TimePicker** component.
 - [ ] Add **Toast Notification** component.
 - [ ] Add **Sidebar** component.
