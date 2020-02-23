@@ -14,6 +14,7 @@ import Pagination from "./Pagination";
 import Progress from "./Progress";
 import RadioBox from "./RadioBox";
 import RadioList from "./RadioList";
+import Steps from "./Steps";
 import Table from "./Table";
 import Tag from "./Tag";
 import Tooltip from "./Tooltip";
@@ -36,6 +37,7 @@ export {
   Progress,
   RadioBox,
   RadioList,
+  Steps,
   Table,
   Tag,
   Tooltip,
