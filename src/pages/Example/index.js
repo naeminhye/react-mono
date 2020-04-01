@@ -271,20 +271,20 @@ const Example = props => {
             <Steps.Step
               status="finish"
               index={1}
-              title="ABC"
-              description="abc"
+              title="Step 1"
+              description="Description for Step 1"
             />
             <Steps.Step
               status="process"
               index={2}
-              title="DEF"
-              description="def"
+              title="Step 2"
+              description="Description for Step 2"
             />
             <Steps.Step
               status="error"
               index={3}
-              title="GHI"
-              description="ghi"
+              title="Step 3"
+              description="Description for Step 3"
             />
             <Steps.Step status="wait" index={4} title="GHI" description="ghi" />
           </Steps>
@@ -431,6 +431,17 @@ const Example = props => {
             <Tooltip placement="bottom" title="This is Bottom Tooltip">
               <Tag>Bottom</Tag>
             </Tooltip>
+          </div>
+        </Form.Item>
+
+        <Form.Item label="Buttons">
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button>Default</Button>
+            <Button type="primary">Primary</Button>
+            <Button type="success">Success</Button>
+            <Button type="info">Info</Button>
+            <Button type="warning">Warning</Button>
+            <Button type="danger">Danger</Button>
           </div>
         </Form.Item>
       </Form>
