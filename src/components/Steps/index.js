@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Steps.module.scss";
-import { Icons } from "../index";
 
 const Step = props => {
   const { className, active, index, title, description, status, disabled } = props;
