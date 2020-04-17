@@ -48,13 +48,13 @@ const App = () => (
 - [x] Added **Tooltip** component.
 - [x] Added **Progress** component.
 - [x] Added **Steps** component.
+- [x] Added **Avatar** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] Fix **Card** component.
 - [ ] Refactor **Icons** component.
 - [ ] Add **Affix** component.
 - [ ] Add **Grid** component for layout feature.
-- [ ] Add **Avatar** component.
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
 - [ ] Add **Drawer** component.

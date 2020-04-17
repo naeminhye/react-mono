@@ -1,3 +1,4 @@
+import Avatar from "./Avatar";
 import Button from "./Button";
 import Card from "./Card";
 import Carousel from "./Carousel";
@@ -21,6 +22,7 @@ import Tooltip from "./Tooltip";
 import Uploader from "./Uploader";
 
 export {
+  Avatar,
   Button,
   Card,
   Carousel,
