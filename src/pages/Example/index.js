@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Form,
+  Avatar,
   Button,
   Card,
   Carousel,
@@ -266,6 +267,7 @@ const Example = props => {
   return (
     <div>
       <Form title="Form Title" border>
+        <Avatar bordered borderStyle={{ border: '2px solid black' }} size={100} src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.0-9/57154265_371498816791175_502490940041068544_n.jpg?_nc_cat=109&_nc_sid=85a577&_nc_oc=AQkRqCuCLvlGN5IYJYCjq1iSRlnXNLGnoF99IrAKUOMnkrT5LNJs67uuzwdO8FTnkhE&_nc_ht=scontent.fsgn2-4.fna&oh=5e7186fe4a013f2075109dbf3d441d1e&oe=5EC0B145" />
         <Form.Item label="Steps">
           <Steps>
             <Steps.Step
