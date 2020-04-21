@@ -266,31 +266,10 @@ const dropdownOptions = [
 const Example = props => {
   return (
     <div>
+      <Button disabled>Disabled</Button>
       <Form title="Form Title" border>
         <Avatar bordered borderStyle={{ border: '2px solid black' }} size={100} src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.0-9/57154265_371498816791175_502490940041068544_n.jpg?_nc_cat=109&_nc_sid=85a577&_nc_oc=AQkRqCuCLvlGN5IYJYCjq1iSRlnXNLGnoF99IrAKUOMnkrT5LNJs67uuzwdO8FTnkhE&_nc_ht=scontent.fsgn2-4.fna&oh=5e7186fe4a013f2075109dbf3d441d1e&oe=5EC0B145" />
-        <Form.Item label="Steps">
-          <Steps>
-            <Steps.Step
-              status="finish"
-              index={1}
-              title="Step 1"
-              description="Description for Step 1"
-            />
-            <Steps.Step
-              status="process"
-              index={2}
-              title="Step 2"
-              description="Description for Step 2"
-            />
-            <Steps.Step
-              status="error"
-              index={3}
-              title="Step 3"
-              description="Description for Step 3"
-            />
-            <Steps.Step status="wait" index={4} title="GHI" description="ghi" />
-          </Steps>
-        </Form.Item>
+        
         {/* <div style={{display: "flex"}}>
           <Card
             sourceImg={"https://storage.googleapis.com/proudcity/alpha/uploads/2016/10/techcrunch.jpg"}
@@ -328,36 +307,6 @@ const Example = props => {
         <Form.Item label="Circle Progress">
           <Progress type="circle" percent={80} width={100} strokeWidth={12} />
         </Form.Item>
-        <Form.Item label="Carousel">
-          <Carousel
-            heading="Example Slider"
-            slides={slideData}
-            itemWidth={320}
-            itemHeight={400}
-            itemMargin={10}
-            itemRender={itemRender}
-            activeSlideAlignment="center"
-          />
-        </Form.Item>
-        <Form.Item label="Table">
-          <Table
-            selectable={true}
-            dataSource={dataSource}
-            columns={columns}
-            bordered={false}
-            striped={true}
-            hover={true}
-          />
-        </Form.Item>
-        <Form.Item label="Dropdown">
-          <DropDown
-            options={dropdownOptions}
-            value="option-2"
-            onChange={value => {
-              console.log("select", value);
-            }}
-          />
-        </Form.Item>
         <Form.Item label="Date">
           <DatePicker value="1/22/20" format="M/D/YY" bordered={true} />
         </Form.Item>
@@ -378,73 +327,6 @@ const Example = props => {
         </Form.Item>
         <Form.Item label="Upload File">
           <Uploader multiple={true} />
-        </Form.Item>
-        <Form.Item label="Flip Card">
-          <FlipCard
-            clickable={true}
-            front={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  WebkitTextFillColor: "white",
-                  WebkitTextStrokeWidth: "1px",
-                  WebkitTextStrokeColor: "black",
-                  fontFamily: "Montserrat, Arial",
-                  fontSize: "64px",
-                  fontWeight: 900
-                }}
-              >
-                Front
-              </div>
-            }
-            back={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  WebkitTextFillColor: "white",
-                  WebkitTextStrokeWidth: "1px",
-                  WebkitTextStrokeColor: "black",
-                  fontFamily: "Montserrat, Arial",
-                  fontSize: "64px",
-                  fontWeight: 900
-                }}
-              >
-                Back
-              </div>
-            }
-          />
-        </Form.Item>
-
-        <Form.Item label="Tooltip">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Tooltip title="This is Top Tooltip">
-              <Tag>Top</Tag>
-            </Tooltip>
-            <Tooltip placement="left" title="This is Left Tooltip">
-              <Tag>Left</Tag>
-            </Tooltip>
-            <Tooltip placement="right" title="This is Right Tooltip">
-              <Tag>Right</Tag>
-            </Tooltip>
-            <Tooltip placement="bottom" title="This is Bottom Tooltip">
-              <Tag>Bottom</Tag>
-            </Tooltip>
-          </div>
-        </Form.Item>
-
-        <Form.Item label="Buttons">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button>Default</Button>
-            <Button type="primary">Primary</Button>
-            <Button type="success">Success</Button>
-            <Button type="info">Info</Button>
-            <Button type="warning">Warning</Button>
-            <Button type="danger">Danger</Button>
-          </div>
         </Form.Item>
       </Form>
     </div>

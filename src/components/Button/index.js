@@ -1,27 +1,28 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from './Button.module.scss'; 
+import styles from "./styles.module.scss";
 
-const Button = props => {
-  const { children, className, size, icon, type, ...others } = props;
+const Button = (props) => {
+  const { children, className, size, disabled, icon, type, ...others } = props;
 
   const classes = classNames({
     [styles.mono__btn]: true,
-    [className]: className || "",
+    [className]: className,
     [styles[`mono__btn--${type}`]]: type && type !== "default",
-    [styles[`mono__btn--${size}`]]: size && size !== "md"
+    [styles[`mono__btn--${size}`]]: size && size !== "md",
+    [styles[`mono__btn--disabled`]]: disabled,
   });
 
   return (
-    <button className={classes} {...others}>
+    <button className={classes} disabled={disabled} {...others}>
       <div className={styles.mono__btn__content}>{children}</div>
     </button>
   );
 };
 
 Button.defaultProps = {
-  type: "default"
+  type: "default",
 };
 
 Button.propTypes = {
@@ -33,15 +34,9 @@ Button.propTypes = {
     "success",
     "info",
     "warning",
-    "danger"
+    "danger",
   ]),
-  size: PropTypes.oneOf([
-    "xs",
-    "sm",
-    "md",
-    "lg",
-    "icon"
-  ]),
+  size: PropTypes.oneOf(["xs", "sm", "md", "lg", "icon"]),
 };
 
 export default Button;

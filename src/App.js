@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Example, FabricExample } from "pages";
-import { configureDataStore } from "store/dataStore";
-import { useStore } from "store";
+// import { configureDataStore } from "store/dataStore";
+// import { useStore } from "store";
 // import 'styles/style.scss'
 
-configureDataStore();
+// configureDataStore();
 
 const App = () => {
-  const [state, dispatch] = useStore();
+  // const [state, dispatch] = useStore();
   // const [counter, setCounter] = useState(state.counter);
 
   return <Example />;
