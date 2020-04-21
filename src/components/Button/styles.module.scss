@@ -1,12 +1,12 @@
 @import "../common/settings";
 
 .mono__btn {
-  height: 48px;
-  min-width: 200px;
+  height: 42px;
+  min-width: 160px;
   max-width: 100%;
   border: none;
   border-radius: 0;
-  background-color: $clr_whisper;
+  background-color: $clr_dark_gray;
 
   // size
   &--xs {
@@ -24,8 +24,11 @@
       font-size: 16px;
     }
   }
+
   // size
   &--lg {
+    height: 48px;
+    min-width: 200px;
   }
 
   //size for icon only {
@@ -42,10 +45,10 @@
   }
 
   &:hover {
-    background-color: $clr_dark_gray;
+    background-color: $clr_shade_of_grey;
   }
   &:active {
-    background-color: $clr_dark_gray;
+    background-color: $clr_shade_of_grey;
   }
 
   &__icon {
@@ -95,6 +98,13 @@
   }
 
   &--disabled {
-    
+    cursor: not-allowed;
+    .mono__btn__content {
+      color: $clr_dark_gray;
+    }
+    background-color: $clr_whisper;
+    &:hover {
+      background-color: $clr_whisper;
+    }
   }
 }

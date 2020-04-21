@@ -1,20 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from 'prop-types'; 
-import styles from './Input.module.scss'; 
+import styles from './styles.module.scss'; 
 
 const Input = props => {
-  const { children, className, prefix, suffix, label, bordered, ...others } = props;
+  const { children, className, prefix, suffix, label, bordered, disabled, ...others } = props;
 
   const classes = classNames({
     [styles["mono__input"]]: true,
     [className]: className,
-    [styles["mono__input-bordered"]]: bordered
+    [styles["mono__input--bordered"]]: bordered,
+    [styles["mono__input--disabled"]]: disabled
   });
 
   return (
     <div className={styles["mono__input--wrapper"]}>
-      <input className={classes} {...others} style={suffix && {paddingRight: 40}, prefix && {paddingLeft: 40}} />
+      <input disabled={disabled} className={classes} {...others} style={suffix && {paddingRight: 40}, prefix && {paddingLeft: 40}} />
       {prefix && <div className={styles["mono__input--prefix"]}>
         {prefix}
       </div>}
