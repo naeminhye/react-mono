@@ -11,6 +11,7 @@ import Icons from "./Icons";
 import Input from "./Input";
 import Fabric from "./Fabric";
 import Form from "./Form";
+import Overlay from "./Overlay";
 import Pagination from "./Pagination";
 import Progress from "./Progress";
 import RadioBox from "./RadioBox";
@@ -32,6 +33,7 @@ export {
   DropDown,
   Input,
   Icons,
+  Overlay,
   Fabric,
   Form,
   FlipCard,

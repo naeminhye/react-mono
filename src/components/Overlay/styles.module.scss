@@ -1,0 +1,50 @@
+@import "../common/settings";
+
+.mono__overlay {
+  font-family: Inconsolata, Montserrat, Arial;
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  vertical-align: middle;
+  overflow: hidden;
+  -webkit-transform: translateZ(0);
+  margin: 0;
+
+  &--hoverable {
+    &:hover {
+      .mono__overlay--panel {
+        display: block;
+      }
+    }
+  }
+
+  &--panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5em;
+    color: #fff;
+    display: none;
+
+    &-visible {
+      display: block;
+    }
+
+    &-top {
+      bottom: auto;
+    }
+
+    &-bottom {
+      top: auto;
+    }
+    &-left {
+      right: auto;
+    }
+
+    &-right {
+      left: auto;
+    }
+  }
+}

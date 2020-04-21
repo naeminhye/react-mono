@@ -26,8 +26,7 @@ const App = () => (
 ```
 
 ## 🔗 Links
-- [Live Demo](https://naeminhye.github.io/react-mono/)
-- [Storybook Docs](https://naeminhye.github.io/react-mono-storybook/?path=/story/basic-components--button)
+- [Storybook Docs](https://naeminhye.github.io/react-mono-storybook/)
 
 ## 👨🏻‍💻 Authors
 
@@ -50,11 +49,13 @@ const App = () => (
 - [x] Added **Progress** component.
 - [x] Added **Steps** component.
 - [x] Added **Avatar** component.
+- [x] _Disable_ component.
+- [x] Add **Overlay** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] Fix **Card** component.
 - [ ] Refactor **Icons** component.
-- [ ] Add **Affix** component.
+- [ ] Add **Sticky** component.
 - [ ] Add **Grid** component for layout feature.
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
@@ -69,4 +70,4 @@ const App = () => (
 - [ ] Add **Toast Notification** component.
 - [ ] Add **Sidebar** component.
 - [ ] Add **Snackbar** component.
-- [ ] _Disable_ component.
+- [ ] Add **Lightbox** component.
