@@ -21,13 +21,19 @@
     &:focus {
       border: 1px solid $clr_light_blue;
     }
-    &-bordered {
+    &--bordered {
       border: 1px solid $clr_dark_gray;
       background-color: $clr_white;
 
       &:focus {
         border: 1px solid $clr_classic_blue;
       }
+    }
+
+    &--disabled {
+      background-color: $clr_whisper;
+      color: $clr_dark_gray;
+      cursor: not-allowed;
     }
   }
   .mono__input--prefix {

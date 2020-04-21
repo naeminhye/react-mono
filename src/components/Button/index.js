@@ -23,6 +23,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   type: "default",
+  disabled: false
 };
 
 Button.propTypes = {
@@ -37,6 +38,7 @@ Button.propTypes = {
     "danger",
   ]),
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "icon"]),
+  disabled: PropTypes.bool
 };
 
 export default Button;
