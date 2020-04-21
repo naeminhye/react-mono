@@ -53,9 +53,11 @@ const App = () => (
 - [x] Add **Overlay** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
+- [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
 - [ ] Fix **Card** component.
+- [ ] [Fix **Tooltip** component.](https://www.w3schools.com/howto/howto_css_tooltip.asp)
 - [ ] Refactor **Icons** component.
-- [ ] Add **Sticky** component.
+- [ ] [Add **Sticky** component.](https://www.w3schools.com/howto/howto_css_sticky_element.asp)
 - [ ] Add **Grid** component for layout feature.
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
@@ -70,4 +72,14 @@ const App = () => (
 - [ ] Add **Toast Notification** component.
 - [ ] Add **Sidebar** component.
 - [ ] Add **Snackbar** component.
+- [ ] Add **Loader** component.
 - [ ] Add **Lightbox** component.
+- [ ] Add **Tabs** component.
+- [ ] Add **Modal** component.
+- [ ] [Add **collapsible** component](https://www.w3schools.com/howto/howto_js_collapsible.asp).
+- [ ] Add **Questions** component.
+- [ ] Add **List** component.
+- [ ] Add **Typography** component.
+- [ ] [Add **ScrollIndicator** component.](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)
+- [ ] [Add **Timeline** component.](https://www.w3schools.com/howto/howto_css_timeline.asp)
+- [ ] Add **Message, Alert, Notification, Toast...** component.
