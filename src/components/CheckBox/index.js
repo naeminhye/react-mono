@@ -10,6 +10,7 @@ const CheckBox = (props) => {
     halfCheck,
     label,
     defaultChecked,
+    loading,
     ...others
   } = props;
 
@@ -21,7 +22,18 @@ const CheckBox = (props) => {
 
   return (
     <div className={classes}>
-      <input type="checkbox" {...others} />
+      {loading ? (
+        <div
+          style={{
+            backgroundImage:
+              "url('https://assets.hcaptcha.com/captcha/v1/501e148/static/images/pulse.svg')",
+            width: 18,
+            height: 18,
+          }}
+        ></div>
+      ) : (
+        <input type="checkbox" {...others} />
+      )}
       {label && (
         <span className={styles["mono__checkbox--label"]}>{label}</span>
       )}
