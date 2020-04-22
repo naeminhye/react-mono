@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./RadioList.module.scss";
+import styles from "./styles.module.scss";
 import { RadioBox } from "../index";
 
-const RadioListItem = props => {
+const RadioListItem = (props) => {
   const {
     children,
     className,
@@ -19,7 +19,7 @@ const RadioListItem = props => {
   const itemClasses = classNames({
     [styles[`mono__radiolist--item`]]: true,
     [className]: className,
-    [styles[`radiolist--checked`]]: checked
+    [styles[`radiolist--checked`]]: checked,
   });
 
   return (
@@ -42,7 +42,7 @@ const RadioListItem = props => {
   );
 };
 
-const RadioList = props => {
+const RadioList = (props) => {
   const {
     children,
     className,
@@ -59,7 +59,7 @@ const RadioList = props => {
   const classes = classNames({
     [styles[`mono__radiolist`]]: true,
     [className]: className,
-    [styles[`mono__radiolist--${type}`]]: type
+    [styles[`mono__radiolist--${type}`]]: type,
   });
 
   const handleChangeSelect = (checked, value) => {
@@ -78,7 +78,7 @@ const RadioList = props => {
               name={name}
               key={index}
               checked={selected === option.value}
-              onChange={checked => {
+              onChange={(checked) => {
                 handleChangeSelect(checked, option.value);
               }}
               {...option}
@@ -91,7 +91,7 @@ const RadioList = props => {
               label={option.label}
               value={option.value}
               checked={selected === option.value}
-              onChange={checked => {
+              onChange={(checked) => {
                 handleChangeSelect(checked, option.value);
               }}
             />
@@ -104,11 +104,11 @@ RadioList.propTypes = {
   className: PropTypes.string,
   // value: PropTypes.string,
   onChange: PropTypes.func,
-  type: PropTypes.oneOf(["list", "grid"])
+  type: PropTypes.oneOf(["list", "grid"]),
 };
 
 RadioList.defaultProps = {
-  type: 'list'
+  type: "list",
 };
 
 export default RadioList;

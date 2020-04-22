@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./DropDown.module.scss";
+import styles from "./styles.module.scss";
 
 const DropDown = (props) => {
   const { options, className, value, onChange, ...others } = props;

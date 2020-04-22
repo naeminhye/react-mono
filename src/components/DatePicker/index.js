@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
-import styles from "./DatePicker.module.scss";
+import styles from "./styles.module.scss";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Button, Icons, Input } from "../index";

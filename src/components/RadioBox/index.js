@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./RadioBox.module.scss";
+import styles from "./styles.module.scss";
 
 const RadioBox = (props) => {
   const {

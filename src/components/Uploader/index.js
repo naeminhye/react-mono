@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Button";
-import styles from "./Uploader.module.scss";
+import styles from "./styles.module.scss";
 import Icons from "../Icons";
 import moment from "moment";
 

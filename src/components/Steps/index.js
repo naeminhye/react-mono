@@ -2,7 +2,7 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./Steps.module.scss";
+import styles from "./styles.module.scss";
 
 const Step = (props) => {
   const {

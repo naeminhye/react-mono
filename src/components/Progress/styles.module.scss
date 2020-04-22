@@ -12,7 +12,7 @@
 
 .mono__progress {
   font-family: Inconsolata, Montserrat, Arial;
-// Line
+  // Line
   &.line {
     overflow: hidden;
     width: 100%;
@@ -36,12 +36,12 @@
     }
   }
 
-// Circle
+  // Circle
   &.circle {
     .mono__progress--pie-chart {
       --size: 200px;
       --stroke-width: 10px;
-    
+
       font-family: Inconsolata, Montserrat, Arial;
       width: var(--size);
       height: var(--size);
@@ -58,7 +58,7 @@
           }
         }
       }
-    
+
       .ppc-progress {
         @include circle(var(--size));
         clip: rect(0, var(--size), var(--size), calc(var(--size) / 2));
