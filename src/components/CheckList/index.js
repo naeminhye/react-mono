@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./CheckList.module.scss";
+import styles from "./styles.module.scss";
 import { CheckBox } from "../index";
 
-const IconCheckItem = props => {
+const IconCheckItem = (props) => {
   const {
     children,
     className,
@@ -22,7 +22,7 @@ const IconCheckItem = props => {
   const classes = classNames({
     [styles[`mono__checkbox--item`]]: true,
     [className]: className,
-    [styles[`checkbox--checked`]]: checked
+    [styles[`checkbox--checked`]]: checked,
   });
 
   return (
@@ -46,7 +46,7 @@ const IconCheckItem = props => {
   );
 };
 
-const CheckList = props => {
+const CheckList = (props) => {
   const {
     children,
     className,
@@ -69,7 +69,7 @@ const CheckList = props => {
     }
     setSelected(_selected);
     onChange && onChange(_selected);
-    console.log("sleected list", _selected)
+    console.log("sleected list", _selected);
   };
   const classes = classNames({
     [styles["mono__checkbox"]]: true,
@@ -85,7 +85,7 @@ const CheckList = props => {
               name={name}
               key={index}
               checked={selected.indexOf(option.value) !== -1}
-              onChange={checked => {
+              onChange={(checked) => {
                 handleChangeSelect(checked, option);
               }}
               {...option}
@@ -95,8 +95,8 @@ const CheckList = props => {
             <CheckBox
               label={option.label}
               name={name}
-              defaultChecked={selected.indexOf(option.value) !== -1} 
-              onChange={e => {
+              defaultChecked={selected.indexOf(option.value) !== -1}
+              onChange={(e) => {
                 let checked = e.target.checked;
                 handleChangeSelect(checked, option);
               }}
@@ -110,11 +110,11 @@ CheckList.propTypes = {
   className: PropTypes.string,
   // value: PropTypes.string,
   onChange: PropTypes.func,
-  type: PropTypes.oneOf(["list", "grid"])
+  type: PropTypes.oneOf(["list", "grid"]),
 };
 
 CheckList.defaultProps = {
-  type: "list"
+  type: "list",
 };
 
 export default CheckList;

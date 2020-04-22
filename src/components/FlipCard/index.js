@@ -2,16 +2,27 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Button } from "../index";
-import styles from './FlipCard.module.scss'; 
+import styles from "./styles.module.scss";
 
-const FlipCard = props => {
-  const { className, style, width, height, front, back, clickable, frontButton, backButton, ...others } = props;
+const FlipCard = (props) => {
+  const {
+    className,
+    style,
+    width,
+    height,
+    front,
+    back,
+    clickable,
+    frontButton,
+    backButton,
+    ...others
+  } = props;
 
   const [flipped, setFlipped] = useState(false);
 
   const classes = classNames({
     [styles["mono__flip-card"]]: true,
-    [className]: className
+    [className]: className,
   });
 
   return (
@@ -38,25 +49,29 @@ const FlipCard = props => {
         <div className={styles["front"]}>
           <div className={styles["inner"]}>
             {front}
-            {!clickable && frontButton && <Button
-              onClick={() => {
-                setFlipped(true);
-              }}
-            >
-              {frontButton}
-            </Button>}
+            {!clickable && frontButton && (
+              <Button
+                onClick={() => {
+                  setFlipped(true);
+                }}
+              >
+                {frontButton}
+              </Button>
+            )}
           </div>
         </div>
         <div className={styles["back"]}>
           <div className={styles["inner"]}>
             {back}
-            {!clickable && backButton && <Button
-              onClick={() => {
-                setFlipped(false);
-              }}
-            >
-              {backButton}
-            </Button>}
+            {!clickable && backButton && (
+              <Button
+                onClick={() => {
+                  setFlipped(false);
+                }}
+              >
+                {backButton}
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -65,11 +80,11 @@ const FlipCard = props => {
 };
 
 FlipCard.defaultProps = {
-    clickable: false,
-    frontButton: "Details",
-    backButton: "Back",
-    width: "360px",
-    height: "240px"
+  clickable: false,
+  frontButton: "Details",
+  backButton: "Back",
+  width: "360px",
+  height: "240px",
 };
 
 FlipCard.propTypes = {
@@ -78,7 +93,7 @@ FlipCard.propTypes = {
   back: PropTypes.node,
   clickable: PropTypes.bool,
   frontButton: PropTypes.string,
-  backButton: PropTypes.string
+  backButton: PropTypes.string,
 };
 
 export default FlipCard;

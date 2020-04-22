@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./Carousel.module.scss";
+import styles from "./styles.module.scss";
 
 // =========================
 // Slide

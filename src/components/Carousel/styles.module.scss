@@ -127,7 +127,8 @@
     position: relative;
     text-align: center;
     // transition: all .2s ease-in-out;
-    transition: opacity calc(var(--base-duration) / 2) var(--base-ease), transform calc(var(--base-duration) / 2) var(--base-ease);
+    transition: opacity calc(var(--base-duration) / 2) var(--base-ease),
+      transform calc(var(--base-duration) / 2) var(--base-ease);
     width: var(--item-width);
     z-index: 1;
 
@@ -135,7 +136,7 @@
       width: 100%;
       height: 100%;
     }
-    
+
     &:not(.mono__carousel--item-current) {
       transform: scale(var(--item-scale));
       &:hover {

@@ -2,9 +2,9 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import Button from "../Button";
-import styles from './Form.module.scss'; 
+import styles from "./styles.module.scss";
 
-const Item = props => {
+const Item = (props) => {
   const {
     children,
     className,
@@ -17,13 +17,13 @@ const Item = props => {
 
   const classes = classNames({
     [styles["mono__form--item"]]: true,
-    [className]: className
+    [className]: className,
   });
 
   const labelClasses = classNames({
     [styles["mono__form--item-label"]]: true,
     labelClassName: labelClassName,
-    [styles["required"]]: isRequired
+    [styles["required"]]: isRequired,
   });
 
   return (
@@ -34,15 +34,15 @@ const Item = props => {
   );
 };
 
-const Form = props => {
+const Form = (props) => {
   const { children, className, title, actions, border, ...others } = props;
 
   const classes = classNames({
     [styles["mono__form"]]: true,
     [styles["border"]]: border,
-    [className]: className
+    [className]: className,
   });
-  
+
   return (
     <div className={classes} {...others}>
       <div className={styles["mono__form--title"]}>{title}</div>
@@ -50,10 +50,7 @@ const Form = props => {
       {actions && (
         <div className={styles["mono__form--action-group"]}>
           {actions.map((action, index) => (
-            <div
-              key={index}
-              className={styles["mono__form--action"]}
-            >
+            <div key={index} className={styles["mono__form--action"]}>
               {action}
             </div>
           ))}
@@ -79,14 +76,14 @@ Form.defaultProps = {
       }}
     >
       OK
-    </Button>
-  ]
+    </Button>,
+  ],
 };
 
 Form.propTypes = {
   className: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.node),
-  actions: PropTypes.arrayOf(PropTypes.node)
+  actions: PropTypes.arrayOf(PropTypes.node),
 };
 
 Form.Item = Item;

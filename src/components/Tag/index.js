@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import styles from "./Tag.module.scss";
+import styles from "./styles.module.scss";
 import { Icons } from "../index";
 
 const Tag = (props) => {
