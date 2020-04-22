@@ -1,0 +1,11 @@
+{
+  "git.ignoreLimitWarning": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "files.eol": "\n",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "prettier.singleQuote": true
+}
