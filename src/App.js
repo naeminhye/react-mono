@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { Example, FabricExample } from "pages";
-// import { configureDataStore } from "store/dataStore";
-// import { useStore } from "store";
-// import 'styles/style.scss'
-
-// configureDataStore();
+import React from "react";
+import { Tag } from "components";
 
 const App = () => {
-  // const [state, dispatch] = useStore();
-  // const [counter, setCounter] = useState(state.counter);
-
-  return <Example />;
+  return (
+    <div>
+      <Tag shape="round" closable>
+        Hello
+      </Tag>
+    </div>
+  );
 };
 
 export default App;

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./RadioBox.module.scss";
 
-const RadioBox = props => {
+const RadioBox = (props) => {
   const {
     children,
     className,
@@ -15,7 +15,7 @@ const RadioBox = props => {
 
   const classes = classNames({
     [styles[`mono__radio`]]: true,
-    [className]: className
+    [className]: className,
   });
 
   return (
@@ -37,7 +37,7 @@ RadioBox.propTypes = {
 
 RadioBox.defaultProps = {
   halfCheck: false,
-  defaultChecked: false
+  defaultChecked: false,
 };
 
 export default RadioBox;

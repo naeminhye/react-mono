@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
@@ -7,7 +8,7 @@ import styles from "./Carousel.module.scss";
 // Slide
 // =========================
 
-const CarouselItem = props => {
+const CarouselItem = (props) => {
   const {
     className,
     itemRender,
@@ -16,7 +17,7 @@ const CarouselItem = props => {
     inactiveSlideScale,
     inactiveSlideOpacity,
     current,
-    index
+    index,
   } = props;
   const carouselRef = useRef();
 
@@ -24,10 +25,13 @@ const CarouselItem = props => {
     carouselRef.current.style.setProperty("--item-width", itemWidth + "px");
     carouselRef.current.style.setProperty("--item-margin", itemMargin + "px");
     carouselRef.current.style.setProperty("--item-scale", inactiveSlideScale);
-    carouselRef.current.style.setProperty("--item-opacity", inactiveSlideOpacity);
+    carouselRef.current.style.setProperty(
+      "--item-opacity",
+      inactiveSlideOpacity
+    );
   });
 
-  const handleSlideClick = event => {
+  const handleSlideClick = (event) => {
     props.handleSlideClick(index);
   };
 
@@ -36,7 +40,7 @@ const CarouselItem = props => {
     [className]: className,
     [styles["mono__carousel--item-current"]]: current === index,
     [styles["mono__carousel--item-previous"]]: current - 1 === index,
-    [styles["mono__carousel--item-next"]]: current + 1 === index
+    [styles["mono__carousel--item-next"]]: current + 1 === index,
   });
 
   return (
@@ -56,29 +60,42 @@ const CarouselControl = ({ type, handleClick }) => {
   );
 };
 
-const CarouselIndicators = props => {
+const CarouselIndicators = (props) => {
   const { total, indicatorItem, onNavigate, activeIndex } = props;
   // activeIndex
 
-  return(
+  return (
     <div className={styles["mono__carousel--indicators"]}>
-      {[...Array(total)].map((e, index) =>  (
-        indicatorItem ? <div onClick={() => {onNavigate(index)}}>{indicatorItem}</div> : <div onClick={() => {
-          onNavigate(index)
-        }} className={classNames({
-          [styles["mono__carousel--indicators-item"]]: true,
-          [styles["active"]]: activeIndex === index
-        })}></div>
-      ))}
+      {[...Array(total)].map((e, index) =>
+        indicatorItem ? (
+          <div
+            onClick={() => {
+              onNavigate(index);
+            }}
+          >
+            {indicatorItem}
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              onNavigate(index);
+            }}
+            className={classNames({
+              [styles["mono__carousel--indicators-item"]]: true,
+              [styles["active"]]: activeIndex === index,
+            })}
+          ></div>
+        )
+      )}
     </div>
-  )
-}
+  );
+};
 
 // =========================
 // Carousel
 // =========================
 
-const Carousel = props => {
+const Carousel = (props) => {
   const {
     slides,
     heading,
@@ -110,7 +127,7 @@ const Carousel = props => {
     setCurrent(next === slides.length ? 0 : next);
   };
 
-  const handleSlideClick = index => {
+  const handleSlideClick = (index) => {
     if (current !== index) {
       setCurrent(index);
     }
@@ -123,21 +140,27 @@ const Carousel = props => {
     //     : 0
   };
   useEffect(() => {
-    const marginLeft = (activeSlideAlignment === "center"
-    ? (carouselRef.current.offsetWidth - (itemWidth + itemMargin * 2)) / 2
-    : 0) + "px";
+    const marginLeft =
+      (activeSlideAlignment === "center"
+        ? (carouselRef.current.offsetWidth - (itemWidth + itemMargin * 2)) / 2
+        : 0) + "px";
     carouselRef.current.style.setProperty("--carousel-margin-left", marginLeft);
     // carouselRef.current.style.setProperty("height", '1000px');
-    containerRef.current.style.setProperty("--carousel-height", itemHeight + "px");
+    containerRef.current.style.setProperty(
+      "--carousel-height",
+      itemHeight + "px"
+    );
     listRef.current.style.setProperty("--item-margin", itemMargin + "px");
-    
-    
-  })
+  });
 
   return (
     <div ref={carouselRef} className={styles["mono__carousel"]}>
       <div ref={containerRef} className={styles["mono__carousel--container"]}>
-        <ul ref={listRef} className={styles["mono__carousel--list"]} style={wrapperTransform}>
+        <ul
+          ref={listRef}
+          className={styles["mono__carousel--list"]}
+          style={wrapperTransform}
+        >
           {slides.map((slide, index) => {
             return (
               <CarouselItem
@@ -159,25 +182,18 @@ const Carousel = props => {
         </ul>
       </div>
       <div className={styles["mono__carousel--controls"]}>
-        <CarouselControl
-          type="previous"
-          handleClick={handlePreviousClick}
-        />
+        <CarouselControl type="previous" handleClick={handlePreviousClick} />
 
-        <CarouselControl
-          type="next"
-          handleClick={handleNextClick}
-        />
+        <CarouselControl type="next" handleClick={handleNextClick} />
       </div>
       <CarouselIndicators
         activeIndex={current}
-        total={slides.length} 
+        total={slides.length}
         onNavigate={(index) => {
-          if(current !== index)
-            handleSlideClick(index);
+          if (current !== index) handleSlideClick(index);
         }}
         indicatorItem={indicatorItem}
-        />
+      />
     </div>
   );
 };
@@ -187,10 +203,13 @@ Carousel.propTypes = {
   direction: PropTypes.oneOf(["horizontal", "vertical"]),
   sliderWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sliderHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  itemWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  itemHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  itemWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    .isRequired,
+  itemHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    .isRequired,
   itemRender: PropTypes.func.isRequired,
-  itemMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  itemMargin: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    .isRequired,
   inactiveSlideScale: PropTypes.number,
   inactiveSlideOpacity: PropTypes.number,
   activeSlideAlignment: PropTypes.oneOf(["start", "center"]),

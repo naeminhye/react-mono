@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
-import styles from './DatePicker.module.scss'; 
+import styles from "./DatePicker.module.scss";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Button, Icons, Input } from "../index";
@@ -18,7 +18,7 @@ const MONTHS = [
   "September",
   "October",
   "November",
-  "December"
+  "December",
 ];
 const SHORT_MONTHS = [
   "Jan",
@@ -32,18 +32,17 @@ const SHORT_MONTHS = [
   "Sept",
   "Oct",
   "Nov",
-  "Dec"
+  "Dec",
 ];
 
-const getMonthIndex = month => MONTHS.indexOf(month);
+const getMonthIndex = (month) => MONTHS.indexOf(month);
 
-const DaySlot = props => {
-
+const DaySlot = (props) => {
   // style classes for DaySlot
   const daySlotClasses = classNames({
     [styles[`slot`]]: true,
     [styles[`selected`]]: props.selected === props.value,
-    [styles[`today`]]: props.today === props.value
+    [styles[`today`]]: props.today === props.value,
   });
 
   return (
@@ -59,7 +58,7 @@ const DaySlot = props => {
   );
 };
 
-const CalendarTable = props => {
+const CalendarTable = (props) => {
   const { targetMonth, targetYear } = props;
 
   const getToday = () => {
@@ -119,7 +118,7 @@ const CalendarTable = props => {
                 today={getToday()}
                 value={dayCount}
                 selected={getSelectedDay()}
-                onSelectDay={day => {
+                onSelectDay={(day) => {
                   props.onSelectDayOfMonth(day);
                 }}
               />
@@ -147,7 +146,7 @@ const CalendarTable = props => {
   );
 };
 
-const MonthSelector = props => {
+const MonthSelector = (props) => {
   return (
     <div className={styles["mono__calendar--content-by-months"]}>
       {SHORT_MONTHS.map((month, index) => {
@@ -165,30 +164,32 @@ const MonthSelector = props => {
   );
 };
 
-const YearSelector = props => {
+const YearSelector = (props) => {
   let years = [];
   for (let index = 0; index < 12; index++) {
-    years.push(<div key={index} className={styles["item"]} onClick={() => props.onSelectYear(props.startYear + index)}>
-    {props.startYear + index}
-  </div>)
+    years.push(
+      <div
+        key={index}
+        className={styles["item"]}
+        onClick={() => props.onSelectYear(props.startYear + index)}
+      >
+        {props.startYear + index}
+      </div>
+    );
   }
   return (
-    <div className={styles["mono__calendar--content-by-months"]}>
-      {years}
-    </div>
-  )
-}
+    <div className={styles["mono__calendar--content-by-months"]}>{years}</div>
+  );
+};
 
-const DatePicker = props => {
+const DatePicker = (props) => {
   // props
   const { className, format, value, bordered } = props;
 
   // states
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
-    moment(value, format).isValid()
-      ? moment(value, format)
-      : moment()
+    moment(value, format).isValid() ? moment(value, format) : moment()
   );
   const datePickerRef = useRef(null);
 
@@ -216,11 +217,9 @@ const DatePicker = props => {
       } else {
         setMonth(month + 1);
       }
-    }
-    else if (display === "BY_MONTHS") {
+    } else if (display === "BY_MONTHS") {
       setYear(parseInt(year) + 1);
-    }
-    else {
+    } else {
       setStartYear(startYear + 12);
     }
   };
@@ -233,11 +232,9 @@ const DatePicker = props => {
       } else {
         setMonth(month - 1);
       }
-    }
-    else if (display === "BY_MONTHS") {
+    } else if (display === "BY_MONTHS") {
       setYear(parseInt(year) - 1);
-    }
-    else {
+    } else {
       setStartYear(startYear - 12);
     }
   };
@@ -246,26 +243,24 @@ const DatePicker = props => {
     setSelectedDate(moment());
     setMonth(getMonthIndex(selectedDate.format("MMMM")));
     setYear(selectedDate.format("YYYY"));
-    setStartYear(Math.floor(year / 12) * 12)
+    setStartYear(Math.floor(year / 12) * 12);
     setDisplay("BY_DAYS");
     setOpen(false);
   };
 
   const handleCancel = () => {
     setSelectedDate(
-      moment(value, format).isValid()
-        ? moment(value, format)
-        : moment()
+      moment(value, format).isValid() ? moment(value, format) : moment()
     );
     setMonth(moment().format("M") - 1);
     setYear(moment().format("YYYY"));
-    setStartYear(Math.floor(year / 12) * 12)
+    setStartYear(Math.floor(year / 12) * 12);
     setDisplay("BY_DAYS");
     setOpen(false);
-  }
+  };
 
   useEffect(() => {
-    const handleClickOutside = event => {
+    const handleClickOutside = (event) => {
       if (datePickerRef && !datePickerRef.current.contains(event.target)) {
         handleCancel();
       }
@@ -275,6 +270,7 @@ const DatePicker = props => {
 
     // clean up
     return () => window.removeEventListener("mousedown", handleClickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // empty array => run only once
 
   // open
@@ -294,7 +290,10 @@ const DatePicker = props => {
       />
       <div className={styles["mono__calendar"]}>
         <div className={styles["mono__calendar--months"]}>
-          <div className={styles["mono__calendar--months-prev-month"]} onClick={goPrev}>
+          <div
+            className={styles["mono__calendar--months-prev-month"]}
+            onClick={goPrev}
+          >
             <Icons.ArrowLeft size={16} />
           </div>
           <div
@@ -309,7 +308,9 @@ const DatePicker = props => {
           >
             {display === "BY_DAYS" && (
               <>
-                <span className={styles["mono__calendar--months-current-month"]}>
+                <span
+                  className={styles["mono__calendar--months-current-month"]}
+                >
                   {MONTHS[month]}
                 </span>
                 <span className={styles["mono__calendar--months-current-year"]}>
@@ -328,7 +329,10 @@ const DatePicker = props => {
               </span>
             )}
           </div>
-          <div className={styles["mono__calendar--months-next-month"]} onClick={goNext}>
+          <div
+            className={styles["mono__calendar--months-next-month"]}
+            onClick={goNext}
+          >
             <Icons.ArrowRight size={16} />
           </div>
         </div>
@@ -339,7 +343,7 @@ const DatePicker = props => {
               targetMonth={month + 1}
               targetYear={year}
               selectedDate={selectedDate}
-              onSelectDayOfMonth={day => {
+              onSelectDayOfMonth={(day) => {
                 setSelectedDate(
                   moment(year + "-" + (month + 1) + "-" + day, "YYYY-M-D")
                 );
@@ -349,26 +353,33 @@ const DatePicker = props => {
           )}
           {display === "BY_MONTHS" && (
             <MonthSelector
-              onSelectMonth={monthIndex => {
+              onSelectMonth={(monthIndex) => {
                 setMonth(monthIndex);
                 setDisplay("BY_DAYS");
               }}
             />
           )}
           {display === "BY_YEARS" && (
-            <YearSelector startYear={startYear} 
-              onSelectYear={year => {
+            <YearSelector
+              startYear={startYear}
+              onSelectYear={(year) => {
                 setYear(year);
                 setDisplay("BY_MONTHS");
-              }}/>
+              }}
+            />
           )}
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <Button size="xs" style={{width: "50%"}} onClick={handleCancel}>
+          <Button size="xs" style={{ width: "50%" }} onClick={handleCancel}>
             Cancel
           </Button>
-          <Button type="primary" size="xs" style={{width: "50%"}} onClick={goToToday}>
+          <Button
+            type="primary"
+            size="xs"
+            style={{ width: "50%" }}
+            onClick={goToToday}
+          >
             Today
           </Button>
         </div>
@@ -389,15 +400,15 @@ DatePicker.propTypes = {
     "MM/DD/YY",
     "MM/DD/YYYY",
     "YY/MM/DD",
-    "DD-MMM-YY"
+    "DD-MMM-YY",
   ]),
-  bordered: PropTypes.bool
+  bordered: PropTypes.bool,
 };
 
 DatePicker.defaultProps = {
   value: moment().format("YYYY-MM-DD"),
   format: "YYYY-MM-DD",
-  bordered: false
+  bordered: false,
 };
 
 export default DatePicker;

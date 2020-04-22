@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 
 const fabric = window.fabric;
 
-const Circle = props => {
+const Circle = (props) => {
   const { canvas, ...others } = props;
 
   useEffect(() => {
@@ -26,6 +26,6 @@ Circle.defaultProps = {
   top: 0,
   left: 0,
   radius: 5,
-  fill: 'red',
+  fill: "red",
 };
 export default Circle;

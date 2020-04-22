@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Progress.module.scss";
-const Progress = props => {
+const Progress = (props) => {
   const {
-    children,
     className,
     percent,
     strokeLinecap,
@@ -13,7 +12,6 @@ const Progress = props => {
     showInfo,
     type,
     width,
-    ...others
   } = props;
   const containerRef = useRef(null);
 
@@ -30,19 +28,19 @@ const Progress = props => {
   const classes = classNames({
     [styles["mono__progress"]]: true,
     [className]: className,
-    [styles[type]]: type
+    [styles[type]]: type,
   });
 
   const strokeStyle = {
     padding: strokeWidth / 2 + "px",
     background: strokeColor || "#0a3961",
     width: percent + "%",
-    borderRadius: strokeLinecap === "round" ? "50%" : "0"
+    borderRadius: strokeLinecap === "round" ? "50%" : "0",
   };
 
   const pieClasses = classNames({
     [styles["mono__progress--pie-chart"]]: true,
-    [styles["gt-50"]]: percent > 50
+    [styles["gt-50"]]: percent > 50,
   });
 
   return type === "line" ? (
@@ -84,7 +82,7 @@ Progress.propTypes = {
   strokeWidth: PropTypes.number,
   strokeLinecap: PropTypes.oneOf(["round", "square"]),
   strokeColor: PropTypes.string,
-  showInfo: PropTypes.bool
+  showInfo: PropTypes.bool,
 };
 
 Progress.defaultProps = {
@@ -92,7 +90,7 @@ Progress.defaultProps = {
   percent: 0,
   strokeLinecap: "square",
   strokeWidth: 10,
-  showInfo: true
+  showInfo: true,
 };
 
 export default Progress;

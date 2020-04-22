@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 
 const fabric = window.fabric;
 
-const Rect = props => {
+const Rect = (props) => {
   const { canvas, ...others } = props;
 
   useEffect(() => {
@@ -20,7 +20,7 @@ Rect.propTypes = {
   left: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  fill: PropTypes.string.isRequired
+  fill: PropTypes.string.isRequired,
 };
 
 Rect.defaultProps = {
@@ -28,6 +28,6 @@ Rect.defaultProps = {
   left: 0,
   width: 50,
   height: 50,
-  fill: "red"
+  fill: "red",
 };
 export default Rect;

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Icons } from "../index";
 import styles from "./Card.module.scss";
 
-const Card = props => {
+const Card = (props) => {
   const {
     children,
     className,
@@ -26,7 +26,7 @@ const Card = props => {
 
   const wrapperStyle = {
     width: width ? width + "px" : "inherit",
-    height: height ? height + "px" : "fit-content"
+    height: height ? height + "px" : "fit-content",
   };
 
   const [hoverTip, hideHoverTip] = useState(false);
@@ -34,13 +34,13 @@ const Card = props => {
   const videoRef = useRef(null);
 
   const handleMouseOver = () => {
-    if(videoRef.current) {
+    if (videoRef.current) {
       videoRef.current.play();
       hideHoverTip(true);
     }
   };
   const handleMouseOut = () => {
-    if(videoRef.current) {
+    if (videoRef.current) {
       videoRef.current.pause();
       hideHoverTip(false);
     }
@@ -60,6 +60,7 @@ const Card = props => {
         };
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [videoRef.current] // Recall only if ref changes
   );
 
@@ -89,16 +90,21 @@ const Card = props => {
         )}
 
         {bannerType === "image" && (
-          <img 
-          className={styles["mono__card--banner-image"]}
-          src={banner.src} />
+          <img
+            alt=""
+            className={styles["mono__card--banner-image"]}
+            src={banner.src}
+          />
         )}
-
       </div>
       <div className={styles["mono__card--body"]}>
         {children}
-        {sourceImg && <div class={styles["mono__card--source-wrapper"]} style={{ backgroundImage: `url('${sourceImg}')` }}> 
-          </div>}
+        {sourceImg && (
+          <div
+            class={styles["mono__card--source-wrapper"]}
+            style={{ backgroundImage: `url('${sourceImg}')` }}
+          ></div>
+        )}
       </div>
       {footer && <div className={styles["mono__card--footer"]}>{footer}</div>}
     </div>
@@ -111,8 +117,8 @@ Card.defaultProps = {
   bannerType: "image",
   banner: {
     // loop: true,
-    type: "video/mp4"
-  }
+    type: "video/mp4",
+  },
 };
 
 Card.propTypes = {

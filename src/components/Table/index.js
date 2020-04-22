@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "./Table.module.scss";
 import { CheckBox, Pagination, Icons } from "../index";
 
-const Table = props => {
+const Table = (props) => {
   const {
     className,
     selectable,
@@ -29,7 +29,7 @@ const Table = props => {
     [styles["mono__table"]]: true,
     [className]: className,
     [styles.bordered]: bordered,
-    [styles.striped]: striped
+    [styles.striped]: striped,
   });
 
   const sortTable = (isAsc, colIndex) => {
@@ -100,7 +100,7 @@ const Table = props => {
     }
   };
 
-  const handleSort = colIndex => {
+  const handleSort = (colIndex) => {
     // ascending === true
     // descending === false
     let sortDirection = true;
@@ -109,7 +109,7 @@ const Table = props => {
     }
     setSortingRule({
       colIndex: colIndex,
-      sortDirection: sortDirection
+      sortDirection: sortDirection,
     });
     sortTable(sortDirection, colIndex);
   };
@@ -129,7 +129,7 @@ const Table = props => {
                       selectedRows.length > 0
                     }
                     checked={dataSource.length === selectedRows.length}
-                    onChange={event => {
+                    onChange={(event) => {
                       let checkedAll = event.target.checked;
                       let _selectedRows = [];
                       if (checkedAll) {
@@ -138,6 +138,7 @@ const Table = props => {
                           if (_selectedRows.indexOf(key) === -1) {
                             _selectedRows.push(key);
                           }
+                          return null;
                         });
                       }
                       setSelectedRows(_selectedRows);
@@ -179,7 +180,7 @@ const Table = props => {
             {dataSource.map((data, rowIndex) => {
               let keys = Object.keys(data);
               let row = [];
-              columns.map(col => {
+              columns.map((col) => {
                 if (keys.indexOf(col.dataIndex) !== -1) {
                   if (!col.render) {
                     row.push(
@@ -195,6 +196,7 @@ const Table = props => {
                 } else {
                   row.push(<td key={col.dataIndex}></td>);
                 }
+                return null;
               });
 
               return (
@@ -211,7 +213,7 @@ const Table = props => {
                             ? selectedRows.indexOf(data.key) !== -1
                             : selectedRows.indexOf(rowIndex) !== -1
                         }
-                        onChange={event => {
+                        onChange={(event) => {
                           let checked = event.target.checked;
                           let key = data.key || rowIndex;
                           let _selectedRows = [...selectedRows];
@@ -258,7 +260,7 @@ Table.propTypes = {
       title: PropTypes.string.isRequired,
       key: PropTypes.string,
       render: PropTypes.func,
-      sortable: PropTypes.bool
+      sortable: PropTypes.bool,
     })
   ).isRequired,
   dataSource: PropTypes.array.isRequired,
@@ -271,7 +273,7 @@ Table.propTypes = {
   sorting: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
-      sortDirection: PropTypes.oneOf(["ascending", "descending"])
+      sortDirection: PropTypes.oneOf(["ascending", "descending"]),
     })
   ),
   pagination: PropTypes.objectOf({
@@ -280,8 +282,8 @@ Table.propTypes = {
     pageSizeOptions: PropTypes.array,
     total: PropTypes.number,
     onChange: PropTypes.func,
-    onShowSizeChange: PropTypes.func
-  })
+    onShowSizeChange: PropTypes.func,
+  }),
 };
 
 export default Table;

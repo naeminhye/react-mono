@@ -33,7 +33,7 @@
       .left-content {
         display: flex;
         flex-direction: column;
-    
+
         .file-name {
           font-weight: 600;
         }
@@ -43,7 +43,7 @@
           color: $clr_dark_gray;
           div:first-child {
             &::after {
-              content: '●';
+              content: "●";
               margin: 0 8px;
             }
           }
@@ -58,7 +58,6 @@
       }
     }
     .mono__uploader--file-type {
-
       margin-right: 16px;
       path {
         fill: $clr_dark_gray;

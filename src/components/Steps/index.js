@@ -1,14 +1,23 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./Steps.module.scss";
 
-const Step = props => {
-  const { className, active, index, title, description, status, disabled } = props;
+const Step = (props) => {
+  const {
+    className,
+    active,
+    index,
+    title,
+    description,
+    status,
+    disabled,
+  } = props;
   const _classes = classNames({
     [styles["mono__steps--item"]]: true,
     [styles[status]]: status,
-    [className]: className
+    [className]: className,
   });
 
   return (
@@ -26,22 +35,22 @@ const Step = props => {
 
 Step.defaultProps = {
   status: "process",
-  disabled: false
+  disabled: false,
 };
 
 Step.propTypes = {
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   status: PropTypes.oneOf(["wait", "process", "finish", "error"]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
-const Steps = props => {
+const Steps = (props) => {
   const { className, children, current, onChange, ...others } = props;
 
   const classes = classNames({
     [styles["mono__steps"]]: true,
-    [className]: className
+    [className]: className,
   });
 
   return (
@@ -64,8 +73,8 @@ Steps.defaultProps = {
   initial: 0,
   current: 0,
   direction: "horizontal",
-  labelPlacement: "horizontal", 
-  steps: []
+  labelPlacement: "horizontal",
+  steps: [],
 };
 
 Steps.propTypes = {
@@ -81,6 +90,7 @@ Steps.propTypes = {
     PropTypes.shape({
       title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
       content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  }))
+    })
+  ),
 };
 export default Steps;

@@ -3,13 +3,13 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./DropDown.module.scss";
 
-const DropDown = props => {
+const DropDown = (props) => {
   const { options, className, value, onChange, ...others } = props;
   const [selectedValue, setSelectedValue] = useState(value);
 
   const classes = classNames({
     [styles["mono__dropdown"]]: true,
-    [className]: className || ""
+    [className]: className || "",
   });
 
   return (
@@ -25,7 +25,7 @@ const DropDown = props => {
             defaultChecked="checked"
           />
           <div className={styles["mono__dropdown--input-text"]}>
-            {options.find(option => option.value === selectedValue).label}
+            {options.find((option) => option.value === selectedValue).label}
           </div>
         </div>
         <img
@@ -47,6 +47,7 @@ const DropDown = props => {
             <label
               className={styles["mono__dropdown--option"]}
               htmlFor={option.value}
+              // eslint-disable-next-line jsx-a11y/aria-proptypes
               aria-hidden="aria-hidden"
             >
               {option.label}
@@ -61,7 +62,7 @@ const DropDown = props => {
 DropDown.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 DropDown.defaultProps = {};
