@@ -1,12 +1,17 @@
 import React from "react";
-import { Tag } from "components";
-
+import { Input } from "components";
+const { TextArea } = Input;
 const App = () => {
   return (
     <div>
-      <Tag shape="round" closable>
-        Hello
-      </Tag>
+      <TextArea
+        placeholder="text me"
+        resize="horizontal"
+        allowClear={true}
+        onResize={() => {
+          console.log("changing");
+        }}
+      />
     </div>
   );
 };
