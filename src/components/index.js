@@ -1,4 +1,5 @@
 import Avatar from "./Avatar";
+import Breadcrumb from "./Breadcrumb";
 import Button from "./Button";
 import Card from "./Card";
 import Carousel from "./Carousel";
@@ -24,6 +25,7 @@ import Uploader from "./Uploader";
 
 export {
   Avatar,
+  Breadcrumb,
   Button,
   Card,
   Carousel,
@@ -45,5 +47,5 @@ export {
   Table,
   Tag,
   Tooltip,
-  Uploader
+  Uploader,
 };

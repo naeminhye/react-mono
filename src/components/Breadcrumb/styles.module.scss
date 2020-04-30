@@ -1,0 +1,35 @@
+@import "../common/settings";
+
+.mono__breadcrumb {
+  font-family: Inconsolata, Montserrat, Arial;
+  border: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  &--container {
+    margin: 0 0;
+    padding: 0 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    list-style: none;
+    overflow: hidden;
+  }
+
+  &--root-item {
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    &-link {
+      margin-right: 8px;
+    }
+  }
+}
