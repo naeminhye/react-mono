@@ -7,9 +7,10 @@
   border: none;
   border-radius: 0;
   background-color: $clr_dark_gray;
+  @include shadow();
 
   // size
-  &--xs {
+  &--size-xs {
     height: 32px;
     min-width: 140px;
     .mono__btn__content {
@@ -17,7 +18,7 @@
     }
   }
   // size
-  &--sm {
+  &--size-sm {
     height: 36px;
     min-width: 140px;
     .mono__btn__content {
@@ -26,15 +27,9 @@
   }
 
   // size
-  &--lg {
+  &--size-lg {
     height: 48px;
     min-width: 200px;
-  }
-
-  //size for icon only {
-  &--icon {
-    width: 48px;
-    min-width: 48px;
   }
 
   cursor: pointer;
@@ -49,6 +44,7 @@
   }
   &:active {
     background-color: $clr_shade_of_grey;
+    @include scale(0.95);
   }
 
   &__icon {
@@ -70,7 +66,8 @@
     text-transform: uppercase;
   }
 
-  &--primary {
+  // type
+  &--type-primary {
     .mono__btn__content {
       color: #fff;
     }
@@ -83,7 +80,7 @@
       background-color: $clr_dark_blue;
     }
   }
-  &--danger {
+  &--type-danger {
     .mono__btn__content {
       color: #fff;
     }
@@ -97,6 +94,10 @@
     }
   }
 
+  &--shape-round {
+    border-radius: 50px;
+  }
+
   &--disabled {
     cursor: not-allowed;
     .mono__btn__content {
@@ -106,5 +107,21 @@
     &:hover {
       background-color: $clr_whisper;
     }
+  }
+}
+
+// Icon Button
+.mono__icon-btn {
+  min-width: unset;
+  height: 42px;
+  width: 42px;
+  padding: 0;
+
+  &--shape-circle {
+    border-radius: 21px;
+  }
+
+  &--shape-round {
+    border-radius: $border-radius-base;
   }
 }
