@@ -1,6 +1,16 @@
 import React from "react";
 
-const Male = props => (
+import Collapse from "./Collapse";
+import Expand from "./Expand";
+import Pause from "./Pause";
+import Picture from "./Picture";
+import Play from "./Play";
+import Slash from "./Slash";
+import Stop from "./Stop";
+import Suffle from "./Suffle";
+import Sync from "./Sync";
+
+const Male = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -19,7 +29,7 @@ const Male = props => (
   </svg>
 );
 
-const Female = props => (
+const Female = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -38,7 +48,7 @@ const Female = props => (
   </svg>
 );
 
-const Ship = props => (
+const Ship = (props) => (
   <svg
     t={1579619368191}
     className="icon"
@@ -55,7 +65,7 @@ const Ship = props => (
   </svg>
 );
 
-const Plane = props => (
+const Plane = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -74,7 +84,7 @@ const Plane = props => (
   </svg>
 );
 
-const Taxi = props => (
+const Taxi = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -97,7 +107,7 @@ const Taxi = props => (
   </svg>
 );
 
-const Bus = props => (
+const Bus = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -124,7 +134,7 @@ const Bus = props => (
   </svg>
 );
 
-const Train = props => (
+const Train = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -151,7 +161,7 @@ const Train = props => (
   </svg>
 );
 
-const Calendar = props => (
+const Calendar = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -178,7 +188,7 @@ const Calendar = props => (
   </svg>
 );
 
-const ArrowDown = props => (
+const ArrowDown = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -196,7 +206,7 @@ const ArrowDown = props => (
     />
   </svg>
 );
-const ArrowUp = props => (
+const ArrowUp = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -215,7 +225,7 @@ const ArrowUp = props => (
   </svg>
 );
 
-const ArrowRight = props => (
+const ArrowRight = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -234,7 +244,7 @@ const ArrowRight = props => (
   </svg>
 );
 
-const ArrowLeft = props => (
+const ArrowLeft = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -253,7 +263,7 @@ const ArrowLeft = props => (
   </svg>
 );
 
-const Close = props => (
+const Close = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -272,7 +282,7 @@ const Close = props => (
   </svg>
 );
 
-const Sort = props => (
+const Sort = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -287,7 +297,7 @@ const Sort = props => (
   </svg>
 );
 
-const SortUp = props => (
+const SortUp = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -302,7 +312,7 @@ const SortUp = props => (
   </svg>
 );
 
-const SortDown = props => (
+const SortDown = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -317,7 +327,7 @@ const SortDown = props => (
   </svg>
 );
 
-const Upload = props => (
+const Upload = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -350,7 +360,7 @@ const Upload = props => (
 
 // file type
 
-const ImageFile = props => (
+const ImageFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -365,7 +375,7 @@ const ImageFile = props => (
   </svg>
 );
 
-const PdfFile = props => (
+const PdfFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -380,7 +390,7 @@ const PdfFile = props => (
   </svg>
 );
 
-const ZipFile = props => (
+const ZipFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -395,7 +405,7 @@ const ZipFile = props => (
   </svg>
 );
 
-const ExcelFile = props => (
+const ExcelFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -410,7 +420,7 @@ const ExcelFile = props => (
   </svg>
 );
 
-const WordFile = props => (
+const WordFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -425,7 +435,7 @@ const WordFile = props => (
   </svg>
 );
 
-const PowerPointFile = props => (
+const PowerPointFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -440,7 +450,7 @@ const PowerPointFile = props => (
   </svg>
 );
 
-const TextFile = props => (
+const TextFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -455,7 +465,7 @@ const TextFile = props => (
   </svg>
 );
 
-const UnknownFile = props => (
+const UnknownFile = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -470,7 +480,7 @@ const UnknownFile = props => (
   </svg>
 );
 
-const TrashBin = props => (
+const TrashBin = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -497,7 +507,7 @@ const TrashBin = props => (
   </svg>
 );
 
-const Download = props => (
+const Download = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -516,7 +526,7 @@ const Download = props => (
   </svg>
 );
 
-const Video = props => (
+const Video = (props) => (
   <svg
     viewBox="0 0 1024 1024"
     version="1.1"
@@ -561,7 +571,17 @@ const Icons = {
   TextFile,
   UnknownFile,
 
-  Video
+  Video,
+  // imported icons
+  Collapse,
+  Expand,
+  Pause,
+  Picture,
+  Play,
+  Slash,
+  Stop,
+  Suffle,
+  Sync,
 };
 
 export default Icons;
