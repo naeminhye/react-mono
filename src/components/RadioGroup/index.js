@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 import { RadioBox } from "../index";
 
-const RadioListItem = (props) => {
+const RadioGroupItem = (props) => {
   const {
     children,
     className,
@@ -17,7 +17,7 @@ const RadioListItem = (props) => {
   } = props;
 
   const itemClasses = classNames({
-    [styles[`mono__radiolist--item`]]: true,
+    [styles[`mono__radio-group--item`]]: true,
     [className]: className,
     [styles[`radiolist--checked`]]: checked,
   });
@@ -31,18 +31,18 @@ const RadioListItem = (props) => {
       }}
     >
       {/* <input checked={checked} type="radiolist" name={name} /> */}
-      <div className={styles["mono__radiolist--item-content"]}>
+      <div className={styles["mono__radio-group--item-content"]}>
         {icon}
-        <div className={styles["mono__radiolist--item-content__label"]}>
+        <div className={styles["mono__radio-group--item-content__label"]}>
           {label}
         </div>
       </div>
-      <div className={styles["mono__radiolist--item-icon"]}></div>
+      <div className={styles["mono__radio-group--item-icon"]}></div>
     </div>
   );
 };
 
-const RadioList = (props) => {
+const RadioGroup = (props) => {
   const {
     children,
     className,
@@ -57,9 +57,9 @@ const RadioList = (props) => {
   const [selected, setSelected] = useState("");
 
   const classes = classNames({
-    [styles[`mono__radiolist`]]: true,
+    [styles[`mono__radio-group`]]: true,
     [className]: className,
-    [styles[`mono__radiolist--${type}`]]: type,
+    [styles[`mono__radio-group--${type}`]]: type,
   });
 
   const handleChangeSelect = (checked, value) => {
@@ -74,7 +74,7 @@ const RadioList = (props) => {
     <div className={classes} {...others}>
       {type === "grid"
         ? options.map((option, index) => (
-            <RadioListItem
+            <RadioGroupItem
               name={name}
               key={index}
               checked={selected === option.value}
@@ -100,15 +100,15 @@ const RadioList = (props) => {
   );
 };
 
-RadioList.propTypes = {
+RadioGroup.propTypes = {
   className: PropTypes.string,
   // value: PropTypes.string,
   onChange: PropTypes.func,
   type: PropTypes.oneOf(["list", "grid"]),
 };
 
-RadioList.defaultProps = {
+RadioGroup.defaultProps = {
   type: "list",
 };
 
-export default RadioList;
+export default RadioGroup;

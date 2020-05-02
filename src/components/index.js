@@ -3,7 +3,7 @@ import Button from "./Button";
 import Card from "./Card";
 import Carousel from "./Carousel";
 import CheckBox from "./CheckBox";
-import CheckList from "./CheckList";
+import CheckGroup from "./CheckGroup";
 import DatePicker from "./DatePicker";
 import FlipCard from "./FlipCard";
 import DropDown from "./DropDown";
@@ -15,7 +15,7 @@ import Overlay from "./Overlay";
 import Pagination from "./Pagination";
 import Progress from "./Progress";
 import RadioBox from "./RadioBox";
-import RadioList from "./RadioList";
+import RadioGroup from "./RadioGroup";
 import Steps from "./Steps";
 import Table from "./Table";
 import Tag from "./Tag";
@@ -29,7 +29,7 @@ export {
   Card,
   Carousel,
   CheckBox,
-  CheckList,
+  CheckGroup,
   DatePicker,
   DropDown,
   Input,
@@ -41,7 +41,7 @@ export {
   Pagination,
   Progress,
   RadioBox,
-  RadioList,
+  RadioGroup,
   Steps,
   Table,
   Tag,
