@@ -1,0 +1,22 @@
+@import "../../components/common/settings";
+.wrapper {
+  .display-area {
+    display: none;
+    position: relative;
+
+    .content {
+      position: absolute;
+      left: 1px;
+      top: 8px;
+      min-width: 200px;
+      min-height: 200px;
+      background: #ffffff;
+      border-radius: 6px;
+      @include shadow();
+    }
+
+    &.visible {
+      display: block;
+    }
+  }
+}

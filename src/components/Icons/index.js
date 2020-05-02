@@ -2,6 +2,7 @@ import React from "react";
 
 import Collapse from "./Collapse";
 import Expand from "./Expand";
+import NotificationFilled from "./NotificationFilled";
 import Pause from "./Pause";
 import Picture from "./Picture";
 import Play from "./Play";
@@ -575,6 +576,7 @@ const Icons = {
   // imported icons
   Collapse,
   Expand,
+  NotificationFilled,
   Pause,
   Picture,
   Play,

@@ -1,10 +1,11 @@
 import React from "react";
 import { Button } from "components";
+import { NotificationCenter } from "example";
 
 const App = () => {
   return (
     <div>
-      <Button.IconButton shape="circle"></Button.IconButton>
+      <NotificationCenter />
     </div>
   );
 };

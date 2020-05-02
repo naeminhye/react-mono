@@ -117,8 +117,13 @@
   width: 42px;
   padding: 0;
 
+  &--size-lg {
+    height: 52px;
+    width: 52px;
+  }
+
   &--shape-circle {
-    border-radius: 21px;
+    border-radius: 50%;
   }
 
   &--shape-round {

@@ -39,7 +39,6 @@ Button.defaultProps = {
 
 Button.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.string,
   shape: PropTypes.oneOf(["default", "round"]),
   type: PropTypes.oneOf([
     "default",
