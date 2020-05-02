@@ -19,6 +19,7 @@ import RadioList from "./RadioList";
 import Steps from "./Steps";
 import Table from "./Table";
 import Tag from "./Tag";
+import ToggleSwitch from "./ToggleSwitch";
 import Tooltip from "./Tooltip";
 import Uploader from "./Uploader";
 
@@ -44,6 +45,7 @@ export {
   Steps,
   Table,
   Tag,
+  ToggleSwitch,
   Tooltip,
-  Uploader
+  Uploader,
 };

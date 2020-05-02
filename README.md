@@ -26,6 +26,7 @@ const App = () => (
 ```
 
 ## 🔗 Links
+
 - [Storybook Docs](https://naeminhye.github.io/react-mono-storybook/)
 
 ## 👨🏻‍💻 Authors
@@ -50,7 +51,8 @@ const App = () => (
 - [x] Added **Steps** component.
 - [x] Added **Avatar** component.
 - [x] _Disable_ component.
-- [x] Add **Overlay** component.
+- [x] Added **Overlay** component.
+- [x] Added **ToggleSwitch** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
