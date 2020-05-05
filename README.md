@@ -15,7 +15,7 @@ npm install --save react-mono
 ## 🔨 Usage
 
 ```js
-import { Button, DatePicker } from "react-mono";
+import { Button, DatePicker } from 'react-mono';
 
 const App = () => (
   <>
@@ -64,7 +64,6 @@ const App = () => (
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
 - [ ] Add **Drawer** component.
-- [ ] Add **Loading** component.
 - [ ] Add **Menu** component.
 - [ ] Add **Rate** component.
 - [ ] Add **Select** component.
@@ -74,7 +73,7 @@ const App = () => (
 - [ ] Add **Toast Notification** component.
 - [ ] Add **Sidebar** component.
 - [ ] Add **Snackbar** component.
-- [ ] Add **Loader** component.
+- [ ] Add **Loader** component (Spinning Loader, Skeleton Loader).
 - [ ] Add **Lightbox** component.
 - [ ] Add **Tabs** component.
 - [ ] Add **Modal** component.
