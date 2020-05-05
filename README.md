@@ -84,3 +84,4 @@ const App = () => (
 - [ ] [Add **ScrollIndicator** component.](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)
 - [ ] [Add **Timeline** component.](https://www.w3schools.com/howto/howto_css_timeline.asp)
 - [ ] Add **Message, Alert, Notification, Toast...** component.
+- [ ] Theme
