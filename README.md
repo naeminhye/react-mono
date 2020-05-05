@@ -53,6 +53,7 @@ const App = () => (
 - [x] _Disable_ component.
 - [x] Added **Overlay** component.
 - [x] Added **ToggleSwitch** component.
+- [x] Added **List** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
@@ -79,7 +80,6 @@ const App = () => (
 - [ ] Add **Modal** component.
 - [ ] [Add **collapsible** component](https://www.w3schools.com/howto/howto_js_collapsible.asp).
 - [ ] Add **Questions** component.
-- [ ] Add **List** component.
 - [ ] Add **Typography** component.
 - [ ] [Add **ScrollIndicator** component.](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)
 - [ ] [Add **Timeline** component.](https://www.w3schools.com/howto/howto_css_timeline.asp)

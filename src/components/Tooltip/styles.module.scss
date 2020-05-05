@@ -1,192 +1,263 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__tooltip {
+  //   font-family: Inconsolata, Montserrat, Arial;
+  //   position: relative;
+  //   z-index: 10;
+  //   width: fit-content;
+  //   height: fit-content;
+
+  //   &:before,
+  //   &:after {
+  //     position: absolute;
+  //     visibility: hidden;
+  //     opacity: 0;
+  //     left: 50%;
+  //     bottom: calc(100% + 5px);
+  //     pointer-events: none;
+  //     transition: 0.2s;
+  //     will-change: transform;
+  //   }
+
+  //   &:before {
+  //     content: attr(title);
+  //     padding: 10px 18px;
+  //     min-width: 50px;
+  //     max-width: 300px;
+  //     width: max-content;
+  //     width: -moz-max-content;
+  //     border-radius: 6px;
+  //     font-size: 14px;
+
+  //     /*   font-size: 0.73rem; */
+  //     background-color: rgba(0, 0, 0, 0.75); //rgba(59, 72, 80, 0.9);
+  //     // background-image: linear-gradient(
+  //     //   30deg,
+  //     //   rgba(59, 72, 80, 0.44),
+  //     //   rgba(59, 68, 75, 0.44),
+  //     //   rgba(60, 82, 88, 0.44)
+  //     // );
+  //     // box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+  //     color: #fff;
+  //     text-align: center;
+  //     white-space: pre-wrap;
+  //     transform: translate(-50%, -5px) scale(0.5);
+  //   }
+
+  //   &:after {
+  //     content: "";
+  //     border-style: solid;
+  //     border-width: 5px 5px 0px 5px;
+  //     border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+  //     transition-duration: 0s;
+
+  //     /* If the mouse leaves the element,
+  //          the transition effects for the
+  //          tooltip arrow are "turned off" */
+  //     transform-origin: top;
+
+  //     /* Orientation setting for the
+  //          slide-down effect */
+  //     transform: translateX(-50%) scaleY(0);
+  //   }
+
+  //   &:hover {
+  //     &:before,
+  //     &:after {
+  //       visibility: visible;
+  //       opacity: 1;
+  //     }
+
+  //     &:before {
+  //       transition-delay: 0.3s;
+  //       transform: translate(-50%, -5px) scale(1);
+  //     }
+
+  //     &:after {
+  //       transition-delay: 0.5s;
+
+  //       /* Starting after the grow effect */
+  //       transition-duration: 0.2s;
+  //       transform: translateX(-50%) scaleY(1);
+  //     }
+  //   }
+
+  //   /* Positioning and visibility settings of the tooltip */
+
+  //   /* The actual tooltip with a dynamic width */
+
+  //   /* Tooltip arrow */
+
+  //   /* Tooltip becomes visible at hover */
+
+  //   /* Scales from 0.5 to 1 -> grow effect */
+
+  //   /* Slide down effect only on mouseenter (NOT on mouseleave) */
+
+  //   /*
+  //     That's it.
+  //   */
+
+  //   /*
+  //     If you want some adjustability
+  //     here are some orientation settings you can use:
+  //   */
+
+  //   /* LEFT */
+  //   /* Tooltip + arrow */
+
+  //   &--left {
+  //     &:before,
+  //     &:after {
+  //       left: auto;
+  //       right: calc(100% + 5px);
+  //       bottom: 50%;
+  //     }
+
+  //     &:before {
+  //       transform: translate(-5px, 50%) scale(0.5);
+  //     }
+
+  //     &:hover:before {
+  //       transform: translate(-5px, 50%) scale(1);
+  //     }
+
+  //     &:after {
+  //       border-width: 5px 0px 5px 5px;
+  //       border-color: transparent transparent transparent rgba(55, 64, 70, 0.9);
+  //       transform-origin: left;
+  //       transform: translateY(50%) scaleX(0);
+  //     }
+
+  //     &:hover:after {
+  //       transform: translateY(50%) scaleX(1);
+  //     }
+  //   }
+
+  //   /* Tooltip */
+
+  //   /* Arrow */
+
+  //   /* RIGHT */
+
+  //   &--right {
+  //     &:before,
+  //     &:after {
+  //       left: calc(100% + 5px);
+  //       bottom: 50%;
+  //     }
+
+  //     &:before {
+  //       transform: translate(5px, 50%) scale(0.5);
+  //     }
+
+  //     &:hover:before {
+  //       transform: translate(5px, 50%) scale(1);
+  //     }
+
+  //     &:after {
+  //       border-width: 5px 5px 5px 0px;
+  //       border-color: transparent rgba(55, 64, 70, 0.9) transparent transparent;
+  //       transform-origin: right;
+  //       transform: translateY(50%) scaleX(0);
+  //     }
+
+  //     &:hover:after {
+  //       transform: translateY(50%) scaleX(1);
+  //     }
+  //   }
+
+  //   /* BOTTOM */
+  //   &--bottom {
+  //     &:before,
+  //     &:after {
+  //       top: calc(100% + 5px);
+  //       bottom: auto;
+  //     }
+
+  //     &:before {
+  //       transform: translate(-50%, 5px) scale(0.5);
+  //     }
+
+  //     &:hover:before {
+  //       transform: translate(-50%, 5px) scale(1);
+  //     }
+
+  //     &:after {
+  //       border-width: 0px 5px 5px 5px;
+  //       border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
+  //       transform-origin: bottom;
+  //     }
+  //   }
+
   font-family: Inconsolata, Montserrat, Arial;
   position: relative;
-  z-index: 10;
+  display: inline-block;
   width: fit-content;
   height: fit-content;
 
-  &:before,
-  &:after {
-    position: absolute;
+  &--title {
     visibility: hidden;
-    opacity: 0;
-    left: 50%;
-    bottom: calc(100% + 5px);
-    pointer-events: none;
-    transition: 0.2s;
-    will-change: transform;
-  }
-
-  &:before {
-    content: attr(title);
-    padding: 10px 18px;
-    min-width: 50px;
-    max-width: 300px;
-    width: max-content;
-    width: -moz-max-content;
-    border-radius: 6px;
-    font-size: 14px;
-
-    /*   font-size: 0.73rem; */
-    background-color: rgba(0, 0, 0, 0.75); //rgba(59, 72, 80, 0.9);
-    // background-image: linear-gradient(
-    //   30deg,
-    //   rgba(59, 72, 80, 0.44),
-    //   rgba(59, 68, 75, 0.44),
-    //   rgba(60, 82, 88, 0.44)
-    // );
-    // box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+    width: 120px;
+    background-color: #555;
     color: #fff;
     text-align: center;
-    white-space: pre-wrap;
-    transform: translate(-50%, -5px) scale(0.5);
-  }
+    padding: 5px 0;
+    border-radius: 6px;
 
-  &:after {
-    content: "";
-    border-style: solid;
-    border-width: 5px 5px 0px 5px;
-    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
-    transition-duration: 0s;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
 
-    /* If the mouse leaves the element, 
-         the transition effects for the 
-         tooltip arrow are "turned off" */
-    transform-origin: top;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
 
-    /* Orientation setting for the
-         slide-down effect */
-    transform: translateX(-50%) scaleY(0);
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    visibility: visible;
+    opacity: 1;
   }
 
   &:hover {
-    &:before,
-    &:after {
+    .mono__tooltip--title {
       visibility: visible;
       opacity: 1;
     }
-
-    &:before {
-      transition-delay: 0.3s;
-      transform: translate(-50%, -5px) scale(1);
-    }
-
-    &:after {
-      transition-delay: 0.5s;
-
-      /* Starting after the grow effect */
-      transition-duration: 0.2s;
-      transform: translateX(-50%) scaleY(1);
-    }
   }
 
-  /* Positioning and visibility settings of the tooltip */
-
-  /* The actual tooltip with a dynamic width */
-
-  /* Tooltip arrow */
-
-  /* Tooltip becomes visible at hover */
-
-  /* Scales from 0.5 to 1 -> grow effect */
-
-  /* Slide down effect only on mouseenter (NOT on mouseleave) */
-
-  /*
-    That's it.
-  */
-
-  /*
-    If you want some adjustability
-    here are some orientation settings you can use:
-  */
-
-  /* LEFT */
-  /* Tooltip + arrow */
-
-  &--left {
-    &:before,
-    &:after {
-      left: auto;
-      right: calc(100% + 5px);
-      bottom: 50%;
-    }
-
-    &:before {
-      transform: translate(-5px, 50%) scale(0.5);
-    }
-
-    &:hover:before {
-      transform: translate(-5px, 50%) scale(1);
-    }
-
-    &:after {
-      border-width: 5px 0px 5px 5px;
-      border-color: transparent transparent transparent rgba(55, 64, 70, 0.9);
-      transform-origin: left;
-      transform: translateY(50%) scaleX(0);
-    }
-
-    &:hover:after {
-      transform: translateY(50%) scaleX(1);
+  &--bottom {
+    .mono__tooltip--title {
+      bottom: unset;
+      top: 125%;
+      &::after {
+        top: unset;
+        bottom: 100%;
+        border-color: transparent transparent #555 transparent;
+      }
     }
   }
-
-  /* Tooltip */
-
-  /* Arrow */
-
-  /* RIGHT */
 
   &--right {
-    &:before,
-    &:after {
-      left: calc(100% + 5px);
-      bottom: 50%;
-    }
-
-    &:before {
-      transform: translate(5px, 50%) scale(0.5);
-    }
-
-    &:hover:before {
-      transform: translate(5px, 50%) scale(1);
-    }
-
-    &:after {
-      border-width: 5px 5px 5px 0px;
-      border-color: transparent rgba(55, 64, 70, 0.9) transparent transparent;
-      transform-origin: right;
-      transform: translateY(50%) scaleX(0);
-    }
-
-    &:hover:after {
-      transform: translateY(50%) scaleX(1);
-    }
-  }
-
-  /* BOTTOM */
-  &--bottom {
-    &:before,
-    &:after {
-      top: calc(100% + 5px);
-      bottom: auto;
-    }
-
-    &:before {
-      transform: translate(-50%, 5px) scale(0.5);
-    }
-
-    &:hover:before {
-      transform: translate(-50%, 5px) scale(1);
-    }
-
-    &:after {
-      border-width: 0px 5px 5px 5px;
-      border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
-      transform-origin: bottom;
+    .mono__tooltip--title {
+      &::after {
+        top: 50%;
+        right: 100%;
+        left: unset;
+        border-color: transparent #555 transparent transparent;
+      }
     }
   }
 }
