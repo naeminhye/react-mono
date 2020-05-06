@@ -54,3 +54,7 @@ button:focus {
   -ms-transform: scale($value);
   transform: scale($value);
 }
+
+@mixin border() {
+  border: 1px solid $clr_dark_gray;
+}
