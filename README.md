@@ -15,7 +15,7 @@ npm install --save react-mono
 ## 🔨 Usage
 
 ```js
-import { Button, DatePicker } from 'react-mono';
+import { Button, DatePicker } from "react-mono";
 
 const App = () => (
   <>
@@ -54,6 +54,7 @@ const App = () => (
 - [x] Added **Overlay** component.
 - [x] Added **ToggleSwitch** component.
 - [x] Added **List** component.
+- [x] Added **Collapse** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
@@ -78,10 +79,9 @@ const App = () => (
 - [ ] Add **Lightbox** component.
 - [ ] Add **Tabs** component.
 - [ ] Add **Modal** component.
-- [ ] [Add **collapsible** component](https://www.w3schools.com/howto/howto_js_collapsible.asp).
 - [ ] Add **Questions** component.
 - [ ] Add **Typography** component.
 - [ ] [Add **ScrollIndicator** component.](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)
 - [ ] [Add **Timeline** component.](https://www.w3schools.com/howto/howto_css_timeline.asp)
 - [ ] Add **Message, Alert, Notification, Toast...** component.
-- [ ] Theme
+- [ ] ThemeProvider
