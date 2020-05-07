@@ -83,4 +83,20 @@
       }
     }
   }
+
+  &--hover {
+    &:hover {
+      .mono__flip-card--content {
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  &--button {
+    .front {
+      &:after {
+        content: unset;
+      }
+    }
+  }
 }

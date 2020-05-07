@@ -4,15 +4,22 @@ import PropTypes from "prop-types";
 import { Button } from "../index";
 import styles from "./styles.module.scss";
 
+const TRIGGER_TYPES = {
+  BUTTON: "button",
+  CLICK: "click",
+  HOVER: "hover",
+};
+
 const FlipCard = (props) => {
   const {
+    onFlip,
     className,
     style,
     width,
     height,
     front,
     back,
-    clickable,
+    trigger,
     frontButton,
     backButton,
     ...others
@@ -23,6 +30,8 @@ const FlipCard = (props) => {
   const classes = classNames({
     [styles["mono__flip-card"]]: true,
     [className]: className,
+    [styles["mono__flip-card--button"]]: trigger === TRIGGER_TYPES.BUTTON,
+    [styles["mono__flip-card--hover"]]: trigger === TRIGGER_TYPES.HOVER,
   });
 
   return (
@@ -30,7 +39,7 @@ const FlipCard = (props) => {
       className={classes}
       {...others}
       onClick={() => {
-        if (clickable) {
+        if (trigger === TRIGGER_TYPES.CLICK) {
           setFlipped(!flipped);
         }
       }}
@@ -42,17 +51,17 @@ const FlipCard = (props) => {
         aria-hidden="true"
         checked={flipped}
         onChange={() => {
-          console.log("on flip");
+          if (onFlip) onFlip();
         }}
       />
       <div className={styles["mono__flip-card--content"]}>
         <div className={styles["front"]}>
           <div className={styles["inner"]}>
             {front}
-            {!clickable && frontButton && (
+            {trigger === TRIGGER_TYPES.BUTTON && frontButton && (
               <Button
                 onClick={() => {
-                  setFlipped(true);
+                  setFlipped(!flipped);
                 }}
               >
                 {frontButton}
@@ -63,10 +72,10 @@ const FlipCard = (props) => {
         <div className={styles["back"]}>
           <div className={styles["inner"]}>
             {back}
-            {!clickable && backButton && (
+            {trigger === TRIGGER_TYPES.BUTTON && backButton && (
               <Button
                 onClick={() => {
-                  setFlipped(false);
+                  setFlipped(!flipped);
                 }}
               >
                 {backButton}
@@ -80,11 +89,11 @@ const FlipCard = (props) => {
 };
 
 FlipCard.defaultProps = {
-  clickable: false,
   frontButton: "Details",
   backButton: "Back",
   width: "360px",
   height: "240px",
+  trigger: TRIGGER_TYPES.CLICK,
 };
 
 FlipCard.propTypes = {
@@ -94,6 +103,12 @@ FlipCard.propTypes = {
   clickable: PropTypes.bool,
   frontButton: PropTypes.string,
   backButton: PropTypes.string,
+  trigger: PropTypes.oneOf([
+    TRIGGER_TYPES.CLICK,
+    TRIGGER_TYPES.HOVER,
+    TRIGGER_TYPES.BUTTON,
+  ]),
+  onFlip: PropTypes.func,
 };
 
 export default FlipCard;
