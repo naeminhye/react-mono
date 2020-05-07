@@ -1,4 +1,4 @@
-@import '../common/settings';
+@import "../common/settings";
 
 .mono__tooltip {
   //   font-family: Inconsolata, Montserrat, Arial;
@@ -219,7 +219,7 @@
     transition: opacity 0.3s;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 100%;
       left: 50%;
@@ -228,9 +228,6 @@
       border-style: solid;
       border-color: #555 transparent transparent transparent;
     }
-
-    visibility: visible;
-    opacity: 1;
   }
 
   &:hover {
