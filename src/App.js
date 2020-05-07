@@ -1,15 +1,42 @@
 import React from "react";
-import { Collapse } from "components";
+import { Table } from "components";
+
+import data from "./mock/userData";
+
+const columns = [
+  {
+    title: "Name",
+    key: "name",
+    dataIndex: "name",
+  },
+  {
+    title: "Gender",
+    key: "gender",
+    dataIndex: "gender",
+  },
+  {
+    title: "Phone",
+    key: "phone",
+    dataIndex: "phone",
+  },
+  {
+    title: "Address",
+    key: "add",
+    dataIndex: "add",
+    sortable: true,
+  },
+  {
+    title: "Email",
+    key: "email",
+    dataIndex: "email",
+    sortable: true,
+  },
+];
 
 const App = () => {
   return (
     <div>
-      <Collapse bordered header="Lorem ipsum dolor sit amet">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </Collapse>
+      <Table columns={columns} dataSource={data.user} bordered />
     </div>
   );
 };
