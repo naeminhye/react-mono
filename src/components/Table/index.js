@@ -150,7 +150,7 @@ const Table = (props) => {
                 let sortIcon = null;
                 if (col.sortable) {
                   sortIcon = <Icons.Sort size={16} fill="gray" />;
-                  if (sortingRule && sortingRule.colIndex === colIndex + 1) {
+                  if (sortingRule && sortingRule.colIndex === colIndex) {
                     if (sortingRule.sortDirection) {
                       //=== "ascending"
                       sortIcon = <Icons.SortDown size={16} fill="gray" />;
@@ -165,7 +165,7 @@ const Table = (props) => {
                     {col.title}
                     {sortIcon && (
                       <div
-                        onClick={() => handleSort(colIndex + 1)}
+                        onClick={() => handleSort(colIndex)}
                         className={styles["mono__table--sort-icon"]}
                       >
                         {sortIcon}

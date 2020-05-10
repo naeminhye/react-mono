@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import styles from "../styles.module.scss";
-import Icons from "components/Icons";
+import Icons from "../../Icons";
 import Button from "../index";
 
 const IconButton = (props) => {

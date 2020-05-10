@@ -16,6 +16,9 @@ $clr_ivory: #f8efe1;
 $clr_mordant_red: #b40800;
 $clr_blood: #8f0700;
 
+$clr_sea_green: #008a60;
+$clr_spanish_viridian: #007d57;
+
 $clr_white: #ffffff;
 
 // value
@@ -50,4 +53,15 @@ button:focus {
   -webkit-transform: scale($value);
   -ms-transform: scale($value);
   transform: scale($value);
+}
+
+@mixin border() {
+  border: 1px solid $clr_dark_gray;
+}
+
+@mixin fit-content() {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }

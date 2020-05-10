@@ -1,5 +1,5 @@
 .mono__checkbox {
-    display: flex;
+  display: flex;
   &--item {
     &.left-space {
       margin-left: 5px;
@@ -7,10 +7,8 @@
     background-color: #fff;
     display: block;
     position: relative;
-
     border: 1px solid $clr_dark_gray;
-    width: fit-content;
-    height: fit-content;
+    @include fit-content();
     min-height: 80px;
     min-width: 120px;
     padding: 24px 36px;
@@ -20,13 +18,13 @@
       &__label {
       }
     }
-    
-    &-icon { 
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
+
+    &-icon {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
       display: block;
       text-align: left;
       color: #3c454c;

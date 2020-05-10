@@ -14,10 +14,7 @@
     .mono__calendar {
       display: block;
       border: 1px solid #aeaeae;
-      width: -moz-fit-content;
-      width: fit-content;
-      height: -moz-fit-content;
-      height: fit-content;
+      @include fit-content();
       &--months {
         display: flex;
         justify-content: space-between;

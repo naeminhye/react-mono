@@ -26,6 +26,7 @@ const App = () => (
 ```
 
 ## 🔗 Links
+
 - [Storybook Docs](https://naeminhye.github.io/react-mono-storybook/)
 
 ## 👨🏻‍💻 Authors
@@ -50,7 +51,10 @@ const App = () => (
 - [x] Added **Steps** component.
 - [x] Added **Avatar** component.
 - [x] _Disable_ component.
-- [x] Add **Overlay** component.
+- [x] Added **Overlay** component.
+- [x] Added **ToggleSwitch** component.
+- [x] Added **List** component.
+- [x] Added **Collapse** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
@@ -62,7 +66,6 @@ const App = () => (
 - [ ] Add **Badge** component.
 - [ ] Add **Breadcrumb** component.
 - [ ] Add **Drawer** component.
-- [ ] Add **Loading** component.
 - [ ] Add **Menu** component.
 - [ ] Add **Rate** component.
 - [ ] Add **Select** component.
@@ -72,14 +75,13 @@ const App = () => (
 - [ ] Add **Toast Notification** component.
 - [ ] Add **Sidebar** component.
 - [ ] Add **Snackbar** component.
-- [ ] Add **Loader** component.
+- [ ] Add **Loader** component (Spinning Loader, Skeleton Loader).
 - [ ] Add **Lightbox** component.
 - [ ] Add **Tabs** component.
 - [ ] Add **Modal** component.
-- [ ] [Add **collapsible** component](https://www.w3schools.com/howto/howto_js_collapsible.asp).
 - [ ] Add **Questions** component.
-- [ ] Add **List** component.
 - [ ] Add **Typography** component.
 - [ ] [Add **ScrollIndicator** component.](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)
 - [ ] [Add **Timeline** component.](https://www.w3schools.com/howto/howto_css_timeline.asp)
 - [ ] Add **Message, Alert, Notification, Toast...** component.
+- [ ] ThemeProvider

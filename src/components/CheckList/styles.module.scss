@@ -13,14 +13,13 @@
     &:not(:last-child) {
       margin-right: 5px;
     }
-    
+
     background-color: #fff;
     display: block;
     position: relative;
 
     border: 1px solid $clr_dark_gray;
-    width: fit-content;
-    height: fit-content;
+    @include fit-content();
     min-height: 80px;
     min-width: 120px;
     padding: 24px 36px;

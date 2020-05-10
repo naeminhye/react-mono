@@ -7,6 +7,7 @@
   border: none;
   border-radius: 0;
   background-color: $clr_dark_gray;
+  transition: 0.3s;
   @include shadow();
 
   // size
