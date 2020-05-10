@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__breadcrumb {
   font-family: Inconsolata, Montserrat, Arial;
@@ -9,7 +9,7 @@
   flex-direction: row;
   li {
     margin: 0;
-    padding: 0;
+    padding: 0 4px;
     list-style: none;
   }
   &--container {
@@ -31,5 +31,14 @@
     &-link {
       margin-right: 8px;
     }
+  }
+
+  &--arrow {
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
   }
 }

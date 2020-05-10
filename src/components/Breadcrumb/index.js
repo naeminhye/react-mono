@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
-import Icons from "components/Icons";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
 
 const Breadcrumb = (props) => {
   const { className } = props;
@@ -20,9 +19,7 @@ const Breadcrumb = (props) => {
           <a href="#" className={styles[`mono__breadcrumb--root-item-link`]}>
             <span>Home</span>
           </a>
-          <span className={styles[`mono__breadcrumb--delimiter`]}>
-            <Icons.ArrowRight size={14} />
-          </span>
+          <i className={styles[`mono__breadcrumb--arrow`]} />
         </li>
       </ol>
     </div>
