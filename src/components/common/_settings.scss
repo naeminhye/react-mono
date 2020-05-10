@@ -58,3 +58,10 @@ button:focus {
 @mixin border() {
   border: 1px solid $clr_dark_gray;
 }
+
+@mixin fit-content() {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}

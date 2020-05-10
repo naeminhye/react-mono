@@ -1,4 +1,5 @@
+@import "../../common/settings";
+
 .mono__canvas {
-    width: fit-content;
-    height: fit-content;
+  @include fit-content();
 }

@@ -193,8 +193,7 @@
   font-family: Inconsolata, Montserrat, Arial;
   position: relative;
   display: inline-block;
-  width: fit-content;
-  height: fit-content;
+  @include fit-content();
 
   &--title {
     visibility: hidden;

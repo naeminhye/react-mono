@@ -18,6 +18,7 @@ const TextArea = (props) => {
     resize,
     style,
     allowClear,
+    onClear,
     ...others
   } = props;
 
@@ -31,13 +32,17 @@ const TextArea = (props) => {
     resize,
   };
 
+  const onDefaultClear = () => {
+    onClear && onClear();
+  };
+
   return (
     <div className={[styles[`mono__textarea--wrapper`]]}>
       <textarea
         className={classes}
         disabled={disabled}
         onChange={(e) => {
-          onChange(e);
+          onChange && onChange(e);
         }}
         {...others}
         style={{ ..._style, ...style }}
@@ -45,7 +50,10 @@ const TextArea = (props) => {
         {value}
       </textarea>
       {allowClear && value !== "" && (
-        <div className={[styles[`mono__input--clear-icon`]]}>
+        <div
+          className={[styles[`mono__input--clear-icon`]]}
+          onClick={onDefaultClear}
+        >
           <Icons.Close size={12} />
         </div>
       )}

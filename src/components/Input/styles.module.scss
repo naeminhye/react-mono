@@ -48,9 +48,11 @@
   }
 }
 .mono__textarea--wrapper {
+  font-family: Inconsolata, Montserrat, Arial;
   position: relative;
+  @include fit-content();
   .mono__textarea {
-    font-family: Inconsolata, Montserrat, Arial;
+    font-family: inherit;
     // TODO: style guide
     padding: 15px;
     font-size: 18px;
