@@ -1,9 +1,7 @@
 import React from "react";
-import { Table, Input } from "components";
+import { Table, Breadcrumb } from "components";
 
 import data from "./mock/userData";
-
-const TextArea = Input.TextArea;
 
 const columns = [
   {
@@ -38,14 +36,7 @@ const columns = [
 const App = () => {
   return (
     <div>
-      <TextArea
-        placeholder="text me"
-        // resize="horizontal"
-        allowClear={true}
-        onResize={() => {
-          console.log("changing");
-        }}
-      />
+      <Breadcrumb></Breadcrumb>
       <Table columns={columns} dataSource={data.user} bordered />
     </div>
   );
