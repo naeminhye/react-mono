@@ -4,6 +4,7 @@ import Card from "./Card";
 import Carousel from "./Carousel";
 import CheckBox from "./CheckBox";
 import CheckList from "./CheckList";
+import Collapse from "./Collapse";
 import DatePicker from "./DatePicker";
 import FlipCard from "./FlipCard";
 import DropDown from "./DropDown";
@@ -11,6 +12,7 @@ import Icons from "./Icons";
 import Input from "./Input";
 import Fabric from "./Fabric";
 import Form from "./Form";
+import List from "./List";
 import Overlay from "./Overlay";
 import Pagination from "./Pagination";
 import Progress from "./Progress";
@@ -19,6 +21,7 @@ import RadioList from "./RadioList";
 import Steps from "./Steps";
 import Table from "./Table";
 import Tag from "./Tag";
+import ToggleSwitch from "./ToggleSwitch";
 import Tooltip from "./Tooltip";
 import Uploader from "./Uploader";
 
@@ -29,10 +32,12 @@ export {
   Carousel,
   CheckBox,
   CheckList,
+  Collapse,
   DatePicker,
   DropDown,
   Input,
   Icons,
+  List,
   Overlay,
   Fabric,
   Form,
@@ -44,6 +49,7 @@ export {
   Steps,
   Table,
   Tag,
+  ToggleSwitch,
   Tooltip,
-  Uploader
+  Uploader,
 };

@@ -13,10 +13,16 @@ $clr_light_blue: #9fb7cd;
 $clr_beige: #e8a188;
 $clr_ivory: #f8efe1;
 
-$clr_mordant_red: #B40800;
-$clr_blood: #8F0700;
+$clr_mordant_red: #b40800;
+$clr_blood: #8f0700;
+
+$clr_sea_green: #008a60;
+$clr_spanish_viridian: #007d57;
 
 $clr_white: #ffffff;
+
+// value
+$border-radius-base: 4px;
 
 input:focus,
 select:focus,
@@ -36,4 +42,19 @@ button:focus {
   -webkit-text-fill-color: $bgColor;
   -webkit-text-stroke-width: $strokeWidth;
   -webkit-text-stroke-color: $strokeColor;
+}
+
+@mixin shadow() {
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+@mixin scale($value) {
+  -webkit-transform: scale($value);
+  -ms-transform: scale($value);
+  transform: scale($value);
+}
+
+@mixin border() {
+  border: 1px solid $clr_dark_gray;
 }

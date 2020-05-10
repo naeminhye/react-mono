@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Icons } from "../index";
-import styles from "./Card.module.scss";
+import styles from "./styles.module.scss";
 
 const Card = (props) => {
   const {
