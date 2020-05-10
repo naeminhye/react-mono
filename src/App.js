@@ -1,7 +1,9 @@
 import React from "react";
-import { Table } from "components";
+import { Table, Input } from "components";
 
 import data from "./mock/userData";
+
+const TextArea = Input.TextArea;
 
 const columns = [
   {
@@ -36,6 +38,14 @@ const columns = [
 const App = () => {
   return (
     <div>
+      <TextArea
+        placeholder="text me"
+        // resize="horizontal"
+        allowClear={true}
+        onResize={() => {
+          console.log("changing");
+        }}
+      />
       <Table columns={columns} dataSource={data.user} bordered />
     </div>
   );

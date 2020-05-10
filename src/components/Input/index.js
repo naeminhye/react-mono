@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
+import TextArea from "./TextArea";
 
 const Input = (props) => {
   const {
@@ -41,10 +42,16 @@ Input.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   bordered: PropTypes.bool,
+  //TODO: add allowClear prop
+  allowClear: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
   bordered: false,
+  disabled: false,
 };
+
+Input.TextArea = TextArea;
 
 export default Input;
