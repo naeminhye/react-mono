@@ -1,4 +1,4 @@
-@import '../common/settings';
+@import "../common/settings";
 
 .mono__breadcrumb {
   font-family: Inconsolata, Montserrat, Arial;
@@ -7,6 +7,7 @@
   display: flex;
   -ms-flex-direction: row;
   flex-direction: row;
+  margin: 8px;
   li {
     margin: 0;
     padding: 0 4px;

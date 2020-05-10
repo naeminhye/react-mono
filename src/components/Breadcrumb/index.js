@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import styles from './styles.module.scss';
+import React from "react";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import styles from "./styles.module.scss";
 
 const Breadcrumb = (props) => {
   const { className } = props;
