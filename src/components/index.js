@@ -21,6 +21,7 @@ import RadioBox from "./RadioBox";
 import RadioList from "./RadioList";
 import Steps from "./Steps";
 import Table from "./Table";
+import Tabs from "./Tabs";
 import Tag from "./Tag";
 import ToggleSwitch from "./ToggleSwitch";
 import Tooltip from "./Tooltip";
@@ -50,6 +51,7 @@ export {
   RadioList,
   Steps,
   Table,
+  Tabs,
   Tag,
   ToggleSwitch,
   Tooltip,

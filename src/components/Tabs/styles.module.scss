@@ -1,0 +1,114 @@
+@import "../common/settings";
+
+.mono__tabs {
+  font-family: Inconsolata, Montserrat, Arial;
+  padding: 10px;
+
+  &--heading {
+    overflow: hidden;
+    background-color: #f1f1f1;
+
+    &-tab {
+      cursor: pointer;
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px;
+      transition: 0.3s;
+      font-size: 17px;
+
+      &:hover {
+        background-color: #ccc;
+      }
+
+      &.active {
+        background-color: #ccc;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        color: #d8d2d2;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  &--contents {
+    // color: #444;
+    cursor: pointer;
+    padding: 16px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    display: block;
+  }
+
+  // vertical direction
+  &--vertical {
+    display: flex;
+
+    .mono__tabs--heading {
+      background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+
+      &-tab {
+        display: block;
+        background-color: inherit;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 17px;
+
+        &:hover {
+          background-color: #ccc;
+        }
+
+        &.active {
+          background-color: #ccc;
+        }
+
+        &.disabled {
+          cursor: not-allowed;
+          color: #d8d2d2;
+
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .mono__tabs--contents {
+      padding: 14px;
+      flex: 1;
+    }
+  }
+
+  // bordered
+  &--bordered {
+    .mono__tabs--heading,
+    .mono__tabs--contents {
+      @include border();
+    }
+    &:not(.mono__tabs--vertical) {
+      .mono__tabs--contents {
+        border-top: none;
+      }
+    }
+    &.mono__tabs--vertical {
+      .mono__tabs--contents {
+        border-left: none;
+      }
+    }
+  }
+}
