@@ -55,6 +55,7 @@ const App = () => (
 - [x] Added **ToggleSwitch** component.
 - [x] Added **List** component.
 - [x] Added **Collapse** component.
+- [x] Added **Tabs** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
@@ -77,7 +78,6 @@ const App = () => (
 - [ ] Add **Snackbar** component.
 - [ ] Add **Loader** component (Spinning Loader, Skeleton Loader).
 - [ ] Add **Lightbox** component.
-- [ ] Add **Tabs** component.
 - [ ] Add **Modal** component.
 - [ ] Add **Questions** component.
 - [ ] Add **Typography** component.
