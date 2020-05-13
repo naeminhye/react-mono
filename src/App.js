@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Breadcrumb, Tabs } from "components";
+import { Table, Breadcrumb, Tabs, Editor } from "components";
 
 import data from "./mock/userData";
 
@@ -103,6 +103,7 @@ const App = () => {
   return (
     <div>
       <Breadcrumb></Breadcrumb>
+      <Editor placeholder="Edit" textAlignment="center" />
       <Tabs
         // direction="vertical"
         bordered

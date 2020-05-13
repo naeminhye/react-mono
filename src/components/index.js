@@ -11,6 +11,7 @@ import FlipCard from "./FlipCard";
 import DropDown from "./DropDown";
 import Icons from "./Icons";
 import Input from "./Input";
+import Editor from "./Editor";
 import Fabric from "./Fabric";
 import Form from "./Form";
 import List from "./List";
@@ -42,6 +43,7 @@ export {
   Icons,
   List,
   Overlay,
+  Editor,
   Fabric,
   Form,
   FlipCard,
