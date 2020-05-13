@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 import { Editor as DraftEditor, EditorState, RichUtils } from "draft-js";
-import Control from "./Control";
+import Controls from "./Controls";
 
 import styles from "./styles.module.scss";
 
@@ -13,58 +13,19 @@ const BLOCK_TYPES = [
   { label: "H4", style: "header-four" },
   { label: "H5", style: "header-five" },
   { label: "H6", style: "header-six" },
-  { label: "Q", style: "blockquote" },
+  { label: " “ ” ", style: "blockquote" },
   { label: "UL", style: "unordered-list-item" },
   { label: "OL", style: "ordered-list-item" },
-  { label: "Code", style: "code-block" },
+  { label: "{ }", style: "code-block" },
 ];
 
-const BlockStyleControls = (props) => {
-  const { editorState } = props;
-  const selection = editorState.getSelection();
-  const blockType = editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getType();
-
-  return (
-    <div className={styles["mono__editor--controls"]}>
-      {BLOCK_TYPES.map((type) => (
-        <Control
-          key={type.label}
-          active={type.style === blockType}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      ))}
-    </div>
-  );
-};
-
-var INLINE_STYLES = [
+const INLINE_STYLES = [
   { label: "B", style: "BOLD" },
   { label: "I", style: "ITALIC" },
   { label: "U", style: "UNDERLINE" },
   { label: "m", style: "CODE" },
+  { label: "S", style: "STRIKETHROUGH" },
 ];
-
-const InlineStyleControls = (props) => {
-  var currentStyle = props.editorState.getCurrentInlineStyle();
-  return (
-    <div className={styles["mono__editor--controls"]}>
-      {INLINE_STYLES.map((type) => (
-        <Control
-          key={type.label}
-          active={currentStyle.has(type.style)}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      ))}
-    </div>
-  );
-};
 
 // Custom overrides for "code" style.
 const styleMap = {
@@ -72,7 +33,10 @@ const styleMap = {
     backgroundColor: "rgba(0, 0, 0, 0.05)",
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
-    padding: 2,
+    padding: "4px 8px",
+  },
+  STRIKETHROUGH: {
+    textDecoration: "line-through",
   },
 };
 
@@ -131,11 +95,13 @@ const Editor = (props) => {
   return (
     <div className={styles["mono__editor--wrapper"]}>
       <div className={styles["mono__editor--controls"]}>
-        <BlockStyleControls
+        <Controls
+          types={BLOCK_TYPES}
           editorState={editorState}
           onToggle={toggleBlockType}
         />
-        <InlineStyleControls
+        <Controls
+          types={INLINE_STYLES}
           editorState={editorState}
           onToggle={toggleInlineStyle}
         />
@@ -147,7 +113,6 @@ const Editor = (props) => {
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
           onTab={onTab}
-          // blockRenderMap={blockRenderMap}
           blockStyleFn={getBlockStyle}
           customStyleMap={styleMap}
           spellCheck={true}
