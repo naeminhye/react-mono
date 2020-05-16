@@ -15,7 +15,7 @@ npm install --save react-mono
 ## 🔨 Usage
 
 ```js
-import { Button, DatePicker } from "react-mono";
+import { Button, DatePicker } from 'react-mono';
 
 const App = () => (
   <>
@@ -56,6 +56,7 @@ const App = () => (
 - [x] Added **List** component.
 - [x] Added **Collapse** component.
 - [x] Added **Tabs** component.
+- [x] Added **Editor** component.
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)
