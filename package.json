@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "clean": "rm -rf node_modules && rm -rf package-lock.json && rm -rf build && rm -rf dist",
+    "clean": "rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf build && rm -rf dist",
     "prepublish": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "deploy": "rm -rf build && npm run build && gh-pages -d build",
     "generate": "node ./tools/generate.js"
