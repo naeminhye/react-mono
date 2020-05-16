@@ -57,6 +57,8 @@ const App = () => (
 - [x] Added **Collapse** component.
 - [x] Added **Tabs** component.
 - [x] Added **Modal** component.
+- [x] Added **Editor** component.
+- [ ] Update **Editor**: [Add Image/Media](https://codesandbox.io/embed/n0ozyqr9z4), [Data to server](https://medium.com/@siobhanpmahoney/building-a-rich-text-editor-with-react-and-draft-js-part-3-persisting-rich-text-data-to-server-b298540ba8d8)
 - [ ] Update more feature in **Input** component.
 - [ ] Update more feature in **Table** component.
 - [ ] [Update more features in **FlipCard** component.](https://www.w3schools.com/howto/howto_css_flip_card.asp)

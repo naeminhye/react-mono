@@ -1,48 +1,60 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import { Editor as DraftEditor, EditorState, RichUtils } from "draft-js";
-import Controls from "./Controls";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import {
+  Editor as DraftEditor,
+  EditorState,
+  RichUtils,
+  getDefaultKeyBinding,
+} from 'draft-js';
+import Controls from './Controls';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 const BLOCK_TYPES = [
-  { label: "H1", style: "header-one" },
-  { label: "H2", style: "header-two" },
-  { label: "H3", style: "header-three" },
-  { label: "H4", style: "header-four" },
-  { label: "H5", style: "header-five" },
-  { label: "H6", style: "header-six" },
-  { label: " “ ” ", style: "blockquote" },
-  { label: "UL", style: "unordered-list-item" },
-  { label: "OL", style: "ordered-list-item" },
-  { label: "{ }", style: "code-block" },
+  { label: 'H1', style: 'header-one' },
+  { label: 'H2', style: 'header-two' },
+  { label: 'H3', style: 'header-three' },
+  { label: 'H4', style: 'header-four' },
+  { label: 'H5', style: 'header-five' },
+  { label: 'H6', style: 'header-six' },
+  { label: ' “ ” ', style: 'blockquote' },
+  { label: 'UL', style: 'unordered-list-item' },
+  { label: 'OL', style: 'ordered-list-item' },
+  { label: 'A', style: 'atomic' },
+  { label: '{ }', style: 'code-block' },
 ];
 
 const INLINE_STYLES = [
-  { label: "B", style: "BOLD" },
-  { label: "I", style: "ITALIC" },
-  { label: "U", style: "UNDERLINE" },
-  { label: "m", style: "CODE" },
-  { label: "S", style: "STRIKETHROUGH" },
+  { label: 'B', style: 'BOLD' },
+  { label: 'I', style: 'ITALIC' },
+  { label: 'U', style: 'UNDERLINE' },
+  { label: 'm', style: 'CODE' },
+  { label: 'S', style: 'STRIKETHROUGH' },
 ];
 
 // Custom overrides for "code" style.
 const styleMap = {
   CODE: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
-    padding: "4px 8px",
+    padding: '4px 8px',
   },
   STRIKETHROUGH: {
-    textDecoration: "line-through",
+    textDecoration: 'line-through',
   },
 };
 
+function keyBindingFunction(event) {
+  // customize keyboard shortcut
+
+  return getDefaultKeyBinding(event);
+}
+
 function getBlockStyle(block) {
   switch (block.getType()) {
-    case "blockquote":
+    case 'blockquote':
       return [styles.blockquote];
     default:
       return null;
@@ -65,9 +77,9 @@ const Editor = (props) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       setEditorState(newState);
-      return true;
+      return 'handled';
     }
-    return false;
+    return 'not-handled';
   };
 
   const onTab = (e) => {
@@ -88,13 +100,13 @@ const Editor = (props) => {
     [styles.hidePlaceholder]:
       !editorState.getCurrentContent().hasText() &&
       editorState.getCurrentContent().getBlockMap().first().getType() !==
-        "unstyled",
+        'unstyled',
     [className]: className,
   });
 
   return (
-    <div className={styles["mono__editor--wrapper"]}>
-      <div className={styles["mono__editor--controls"]}>
+    <div className={styles['mono__editor--wrapper']}>
+      <div className={styles['mono__editor--controls']}>
         <Controls
           types={BLOCK_TYPES}
           editorState={editorState}
@@ -117,6 +129,7 @@ const Editor = (props) => {
           customStyleMap={styleMap}
           spellCheck={true}
           placeholder={placeholder}
+          keyBindingFn={keyBindingFunction}
           {...others}
         />
       </div>
