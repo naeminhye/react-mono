@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__btn {
   height: 42px;
@@ -7,6 +7,7 @@
   border: none;
   border-radius: 0;
   background-color: $clr_dark_gray;
+  transition: 0.3s;
   @include shadow();
 
   // size
@@ -123,5 +124,28 @@
 
   &--shape-round {
     border-radius: $border-radius-base;
+  }
+
+  // size
+  &--size-xs {
+    width: 32px;
+    height: 32px;
+    .mono__btn__content {
+      font-size: 14px;
+    }
+  }
+  // size
+  &--size-sm {
+    width: 36px;
+    height: 36px;
+    .mono__btn__content {
+      font-size: 16px;
+    }
+  }
+
+  // size
+  &--size-lg {
+    width: 48px;
+    height: 48px;
   }
 }

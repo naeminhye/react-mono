@@ -1,0 +1,74 @@
+@import '../common/settings';
+
+.mono__modal {
+  font-family: Inconsolata, Montserrat, Arial;
+
+  position: relative;
+  top: 100px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+  width: 600px;
+
+  &.roundCornered {
+    border-radius: $border-radius-base;
+    .mono__modal--title {
+      border-radius: $border-radius-base $border-radius-base 0 0;
+    }
+  }
+
+  &.bordered {
+    @include defaultBorder();
+    .mono__modal--title {
+      border-bottom: $border-width-base $border-style-base $border-color-base;
+    }
+  }
+
+  &--backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    overflow-y: auto;
+  }
+
+  .mono__modal--title,
+  .mono__modal--close-button {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  &--close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 54px;
+    height: 54px;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  &--title {
+    padding: 0 24px;
+    background-color: $clr_cultured;
+    height: 50px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  &--body {
+    padding: 24px;
+  }
+}

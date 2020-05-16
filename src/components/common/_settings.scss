@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat:300,400,700,900&display=swap&subset=vietnamese");
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat:300,400,700,900&display=swap&subset=vietnamese');
 
 // DEFAULT PALETTE
 $clr_whisper: #e5e5e5;
@@ -20,8 +20,12 @@ $clr_sea_green: #008a60;
 $clr_spanish_viridian: #007d57;
 
 $clr_white: #ffffff;
+$clr_cultured: #f1f1f1; // light gray
 
 // value
+$border-color-base: $clr_dark_gray;
+$border-width-base: 1px;
+$border-style-base: solid;
 $border-radius-base: 4px;
 
 input:focus,
@@ -53,4 +57,18 @@ button:focus {
   -webkit-transform: scale($value);
   -ms-transform: scale($value);
   transform: scale($value);
+}
+
+@mixin defaultBorder() {
+  border: $border-width-base $border-style-base $border-color-base;
+}
+@mixin borderByColor($color) {
+  border: $border-width-base $border-style-base $color;
+}
+
+@mixin fit-content() {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }

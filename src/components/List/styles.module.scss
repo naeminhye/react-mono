@@ -1,0 +1,20 @@
+@import '../common/settings';
+
+.mono__list {
+  font-family: Inconsolata, Montserrat, Arial;
+
+  &--header {
+  }
+
+  &--footer {
+  }
+
+  &--items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    .mono__list--item {
+      // item
+    }
+  }
+}

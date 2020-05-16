@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__avatar {
   -webkit-box-sizing: border-box;
@@ -10,8 +10,8 @@
   font-variant: tabular-nums;
   line-height: 1.5715;
   list-style: none;
-  -webkit-font-feature-settings: "tnum";
-  font-feature-settings: "tnum";
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum';
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -26,8 +26,8 @@
   height: 40px;
   line-height: 40px;
 
-  &--bordered {
-    border: 1px solid gray;
+  &.bordered {
+    @include defaultBorder();
   }
 
   // size

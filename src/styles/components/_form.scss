@@ -1,44 +1,41 @@
 .mono__form {
-    margin: 24px;    
-    padding: 32px;
-    &.border {
-        border: 1px solid $clr_dark_gray;
-    }
+  margin: 24px;
+  padding: 32px;
+  &.border {
+    @include defaultBorder();
+  }
 
-    .mono__form--title {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 16px;
-        @include highlight($clr_beige);
-    }
+  .mono__form--title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    @include highlight($clr_beige);
+  }
 
-    &--item {
-        margin: 5px 0;
-        &-label {
-            font-family: Inconsolata, Montserrat, Arial;
-            color: $clr_eclipse;
-            padding-bottom: 5px;
-            font-weight: 600;
+  &--item {
+    margin: 5px 0;
+    &-label {
+      font-family: Inconsolata, Montserrat, Arial;
+      color: $clr_eclipse;
+      padding-bottom: 5px;
+      font-weight: 600;
 
-            &.required {
-
-                &:after {
-                    content: '*';
-                    color: red;
-                    margin-left: 2px;
-                }
-
-            }
+      &.required {
+        &:after {
+          content: '*';
+          color: red;
+          margin-left: 2px;
         }
-
+      }
     }
-    &--action-group {   
-        display: flex;
-        margin-top: 16px;
-        .mono__form--action {
-            &.left-space {
-                margin-left: 5px;
-            }
-        }
+  }
+  &--action-group {
+    display: flex;
+    margin-top: 16px;
+    .mono__form--action {
+      &.left-space {
+        margin-left: 5px;
+      }
     }
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-mono",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "private": false,
   "description": "A React Component UI Kit",
   "main": "dist/index.js",
@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "clean": "rm -rf node_modules && rm -rf package-lock.json && rm -rf build && rm -rf dist",
+    "clean": "rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf build && rm -rf dist",
     "prepublish": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "deploy": "rm -rf build && npm run build && gh-pages -d build",
     "generate": "node ./tools/generate.js"
@@ -35,6 +35,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
+    "draft-js": "^0.11.5",
     "fabric-webpack": "^1.6.0-rc.1",
     "generate-template-files": "^2.3.1",
     "moment": "^2.24.0",

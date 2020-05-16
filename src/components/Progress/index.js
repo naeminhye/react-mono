@@ -35,7 +35,7 @@ const Progress = (props) => {
     padding: strokeWidth / 2 + "px",
     background: strokeColor || "#0a3961",
     width: percent + "%",
-    borderRadius: strokeLinecap === "round" ? "50%" : "0",
+    borderRadius: strokeLinecap === "round" ? strokeWidth / 2 + "px" : "0",
   };
 
   const pieClasses = classNames({

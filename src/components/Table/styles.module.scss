@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__table--container {
   overflow-x: auto;
@@ -19,11 +19,11 @@
       }
     }
     &.bordered {
-      border: 1px solid $clr_dark_gray;
+      @include defaultBorder();
       border-collapse: collapse;
       td,
       th {
-        border: 1px solid $clr_dark_gray;
+        @include defaultBorder();
       }
     }
     &.striped {

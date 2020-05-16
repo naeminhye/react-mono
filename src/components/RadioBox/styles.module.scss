@@ -1,8 +1,8 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__radio {
   display: flex;
-  input[type="radio"] {
+  input[type='radio'] {
     position: relative;
     appearance: none;
     font-size: inherit;
@@ -12,13 +12,13 @@
     outline: none;
 
     &::after {
-      content: "";
+      content: '';
       display: inline-block;
       text-align: center;
       width: 16px;
       height: 16px;
-      content: "";
-      border: 1px solid $clr_dark_gray;
+      content: '';
+      @include defaultBorder();
       background-color: #fff;
 
       // check
@@ -33,13 +33,13 @@
       font-weight: 900;
     }
   }
-  input[type="radio"]:checked::after {
+  input[type='radio']:checked::after {
     background-color: $clr_classic_blue;
     border-color: $clr_classic_blue;
   }
-  
+
   &.notall {
-    input[type="radio"] {
+    input[type='radio'] {
       &::after {
         // minus
         background-color: $clr_classic_blue;
