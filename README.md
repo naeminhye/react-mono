@@ -56,6 +56,7 @@ const App = () => (
 - [x] Added **List** component.
 - [x] Added **Collapse** component.
 - [x] Added **Tabs** component.
+- [x] Added **Modal** component.
 - [x] Added **Editor** component.
 - [ ] Update **Editor**: [Add Image/Media](https://codesandbox.io/embed/n0ozyqr9z4), [Data to server](https://medium.com/@siobhanpmahoney/building-a-rich-text-editor-with-react-and-draft-js-part-3-persisting-rich-text-data-to-server-b298540ba8d8)
 - [ ] Update more feature in **Input** component.
@@ -80,7 +81,6 @@ const App = () => (
 - [ ] Add **Snackbar** component.
 - [ ] Add **Loader** component (Spinning Loader, Skeleton Loader).
 - [ ] Add **Lightbox** component.
-- [ ] Add **Modal** component.
 - [ ] Add **Questions** component.
 - [ ] Add **Typography** component.
 - [ ] [Add **ScrollIndicator** component.](https://www.w3schools.com/howto/howto_js_scroll_indicator.asp)

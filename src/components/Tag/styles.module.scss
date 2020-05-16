@@ -1,10 +1,10 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__tag {
   font-family: Inconsolata, Montserrat, Arial;
   background-color: lightgray;
   padding: 4px 12px;
-  border-radius: 4px;
+  border-radius: $border-radius-base;
   border: none;
   width: fit-content;
   cursor: pointer;
