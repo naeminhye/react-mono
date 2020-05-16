@@ -1,41 +1,41 @@
-import React, { useState } from "react";
-import { Table, Breadcrumb, Tabs, Editor } from "components";
+import React, { useState } from 'react';
+import { Table, Breadcrumb, Tabs, Editor, Modal, Button } from 'components';
 
-import data from "./mock/userData";
+import data from './mock/userData';
 
 const columns = [
   {
-    title: "Name",
-    key: "name",
-    dataIndex: "name",
+    title: 'Name',
+    key: 'name',
+    dataIndex: 'name',
   },
   {
-    title: "Gender",
-    key: "gender",
-    dataIndex: "gender",
+    title: 'Gender',
+    key: 'gender',
+    dataIndex: 'gender',
   },
   {
-    title: "Phone",
-    key: "phone",
-    dataIndex: "phone",
+    title: 'Phone',
+    key: 'phone',
+    dataIndex: 'phone',
   },
   {
-    title: "Address",
-    key: "add",
-    dataIndex: "add",
+    title: 'Address',
+    key: 'add',
+    dataIndex: 'add',
     sortable: true,
   },
   {
-    title: "Email",
-    key: "email",
-    dataIndex: "email",
+    title: 'Email',
+    key: 'email',
+    dataIndex: 'email',
     sortable: true,
   },
 ];
 
 const tabs = [
   {
-    label: "Tab 1",
+    label: 'Tab 1',
     content: (
       <div>
         Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -66,7 +66,7 @@ const tabs = [
     disabled: false,
   },
   {
-    label: "Tab 2",
+    label: 'Tab 2',
     content: (
       <div>
         It is a long established fact that a reader will be distracted by the
@@ -99,9 +99,27 @@ const tabs = [
 
 const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   return (
     <div>
+      <Button
+        size="xs"
+        onClick={() => {
+          setVisible(true);
+        }}
+      >
+        Open Modal
+      </Button>
+      <Modal
+        title="Modal Example"
+        visible={visible}
+        onClose={() => {
+          setVisible(false);
+        }}
+      >
+        Hello
+      </Modal>
       <Breadcrumb></Breadcrumb>
       <Editor placeholder="Edit" textAlignment="center" />
       <Tabs
