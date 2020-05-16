@@ -5,10 +5,21 @@ import styles from './styles.module.scss';
 import Button from '../Button';
 
 const Modal = (props) => {
-  const { className, title, visible, children, width, onClose } = props;
+  const {
+    className,
+    title,
+    visible,
+    children,
+    width,
+    onClose,
+    roundCornered,
+    bordered,
+  } = props;
 
   const classes = classNames({
     [styles[`mono__modal`]]: true,
+    [styles.roundCornered]: roundCornered,
+    [styles.bordered]: bordered,
     [className]: className,
   });
 
@@ -38,7 +49,7 @@ const Modal = (props) => {
             </svg>
           </Button.IconButton>
         </div>
-        <div className={styles['mono__modal--title']}>{title}</div>
+        {title && <div className={styles['mono__modal--title']}>{title}</div>}
         <div className={styles['mono__modal--body']}>{children}</div>
       </div>
     </div>
@@ -47,6 +58,16 @@ const Modal = (props) => {
 
 Modal.propTypes = {
   className: PropTypes.string,
+  title: PropTypes.string,
+  visible: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  onClose: PropTypes.func,
+  roundCornered: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  roundCornered: false,
 };
 
 export default Modal;

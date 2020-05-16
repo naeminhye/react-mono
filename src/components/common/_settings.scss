@@ -20,6 +20,7 @@ $clr_sea_green: #008a60;
 $clr_spanish_viridian: #007d57;
 
 $clr_white: #ffffff;
+$clr_cultured: #f1f1f1; // light gray
 
 // value
 $border-color-base: $clr_dark_gray;
@@ -58,8 +59,11 @@ button:focus {
   transform: scale($value);
 }
 
-@mixin border() {
+@mixin defaultBorder() {
   border: $border-width-base $border-style-base $border-color-base;
+}
+@mixin borderByColor($color) {
+  border: $border-width-base $border-style-base $color;
 }
 
 @mixin fit-content() {

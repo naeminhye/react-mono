@@ -1,9 +1,17 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__editor--wrapper {
-  @include border();
+  @include defaultBorder();
+
+  &.roundCornered {
+    border-radius: $border-radius-base;
+    .mono__editor--controls {
+      border-radius: $border-radius-base $border-radius-base 0 0;
+    }
+  }
+
   .mono__editor--controls {
-    background-color: #f1f1f1;
+    background-color: $clr_cultured;
     cursor: pointer;
     .control {
       color: #333;
@@ -44,7 +52,7 @@
 .blockquote {
   border-left: 5px solid #eee;
   color: #666;
-  font-family: "Hoefler Text", "Georgia", serif;
+  font-family: 'Hoefler Text', 'Georgia', serif;
   font-style: italic;
   margin: 16px 0;
   padding: 10px 20px;

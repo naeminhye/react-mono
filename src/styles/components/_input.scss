@@ -9,7 +9,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 1px solid $clr_dark_gray;
+    @include defaultBorder();
     background-color: #ffffff;
     font-family: Inconsolata, Montserrat, Arial;
 

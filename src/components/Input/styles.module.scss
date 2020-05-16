@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__input--wrapper {
   position: relative;
@@ -21,8 +21,8 @@
     &:focus {
       border: 1px solid $clr_light_blue;
     }
-    &--bordered {
-      border: 1px solid $clr_dark_gray;
+    &.bordered {
+      @include defaultBorder();
       background-color: $clr_white;
 
       &:focus {
@@ -68,8 +68,8 @@
     &:focus {
       border: 1px solid $clr_light_blue;
     }
-    &--bordered {
-      border: 1px solid $clr_dark_gray;
+    &.bordered {
+      @include defaultBorder();
       background-color: $clr_white;
 
       &:focus {

@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
+import React, { useState, useRef } from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
 
 const Collapse = (props) => {
   const { className, children, panelClassName, bordered, header } = props;
@@ -13,7 +13,7 @@ const Collapse = (props) => {
   const classes = classNames({
     [styles[`mono__collapse`]]: true,
     [styles[`mono__collapse--active`]]: active,
-    [styles[`mono__collapse--bordered`]]: bordered,
+    [styles.bordered]: bordered,
     [className]: className,
   });
 
@@ -28,7 +28,6 @@ const Collapse = (props) => {
 
   const onToggle = () => {
     setActive(!active);
-    console.log("panelEl.current.offsetHeight", panelEl.current.offsetHeight);
     // if (panelEl.current) {
     //   panelEl.current.style.height = panelEl.current.clientHeight;
     // }

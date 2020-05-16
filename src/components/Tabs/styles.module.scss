@@ -1,12 +1,32 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__tabs {
   font-family: Inconsolata, Montserrat, Arial;
-  padding: 10px;
+  margin: 24px 0;
+
+  &.roundCornered {
+    border-radius: $border-radius-base;
+    .mono__tabs--heading {
+      border-radius: $border-radius-base $border-radius-base 0 0;
+    }
+    .mono__tabs--contents {
+      border-radius: 0 0 $border-radius-base $border-radius-base;
+    }
+
+    // vertical direction
+    &.mono__tabs--vertical {
+      .mono__tabs--heading {
+        border-radius: $border-radius-base 0 0 $border-radius-base;
+      }
+      .mono__tabs--contents {
+        border-radius: 0 $border-radius-base $border-radius-base 0;
+      }
+    }
+  }
 
   &--heading {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: $clr_cultured;
 
     &-tab {
       cursor: pointer;
@@ -55,7 +75,7 @@
     display: flex;
 
     .mono__tabs--heading {
-      background-color: #f1f1f1;
+      background-color: $clr_cultured;
       display: flex;
       flex-direction: column;
 
@@ -95,10 +115,10 @@
   }
 
   // bordered
-  &--bordered {
+  &.bordered {
     .mono__tabs--heading,
     .mono__tabs--contents {
-      @include border();
+      @include defaultBorder();
     }
     &:not(.mono__tabs--vertical) {
       .mono__tabs--contents {

@@ -9,7 +9,20 @@
   -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
   width: 600px;
-  border-radius: $border-radius-base;
+
+  &.roundCornered {
+    border-radius: $border-radius-base;
+    .mono__modal--title {
+      border-radius: $border-radius-base $border-radius-base 0 0;
+    }
+  }
+
+  &.bordered {
+    @include defaultBorder();
+    .mono__modal--title {
+      border-bottom: $border-width-base $border-style-base $border-color-base;
+    }
+  }
 
   &--backdrop {
     position: fixed;
@@ -48,8 +61,7 @@
 
   &--title {
     padding: 0 24px;
-    background-color: #fafafa;
-    border-radius: $border-radius-base $border-radius-base 0 0;
+    background-color: $clr_cultured;
     height: 50px;
     font-size: 14px;
     text-transform: uppercase;

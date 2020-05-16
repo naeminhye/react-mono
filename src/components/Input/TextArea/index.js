@@ -1,8 +1,8 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "../styles.module.scss";
-import Icons from "components/Icons";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from '../styles.module.scss';
+import Icons from 'components/Icons';
 
 const TextArea = (props) => {
   const {
@@ -24,7 +24,7 @@ const TextArea = (props) => {
 
   const classes = classNames({
     [styles[`mono__textarea`]]: true,
-    [styles[`mono__textarea--bordered`]]: bordered,
+    [styles.bordered]: bordered,
     [styles[`mono__textarea--disabled`]]: disabled,
   });
 
@@ -49,7 +49,7 @@ const TextArea = (props) => {
       >
         {value}
       </textarea>
-      {allowClear && value !== "" && (
+      {allowClear && value !== '' && (
         <div
           className={[styles[`mono__input--clear-icon`]]}
           onClick={onDefaultClear}
@@ -72,14 +72,14 @@ TextArea.propTypes = {
   rows: PropTypes.number,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
-  resize: PropTypes.oneOf(["none", "vertical", "horizontal", "auto", "both"]),
+  resize: PropTypes.oneOf(['none', 'vertical', 'horizontal', 'auto', 'both']),
   allowClear: PropTypes.bool,
 };
 
 TextArea.defaultProps = {
   bordered: false,
   disabled: false,
-  resize: "auto",
+  resize: 'auto',
 };
 
 export default TextArea;

@@ -62,7 +62,7 @@ function getBlockStyle(block) {
 }
 
 const Editor = (props) => {
-  const { className, placeholder, ...others } = props;
+  const { className, placeholder, roundCornered, ...others } = props;
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
@@ -101,6 +101,7 @@ const Editor = (props) => {
       !editorState.getCurrentContent().hasText() &&
       editorState.getCurrentContent().getBlockMap().first().getType() !==
         'unstyled',
+    [styles.roundCornered]: roundCornered,
     [className]: className,
   });
 
@@ -140,6 +141,7 @@ const Editor = (props) => {
 Editor.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
+  roundCornered: PropTypes.bool,
 };
 
 export default Editor;

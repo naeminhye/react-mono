@@ -1,7 +1,7 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import styles from "../styles.module.scss";
+import styles from '../styles.module.scss';
 
 const Control = (props) => {
   const onToggle = (e) => {
@@ -28,7 +28,7 @@ const Controls = (props) => {
     .getType();
 
   return (
-    <div className={styles["mono__editor--controls"]}>
+    <div>
       {types.map((type) => (
         <Control
           key={type.label}

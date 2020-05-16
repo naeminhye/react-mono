@@ -99,11 +99,12 @@ const tabs = [
 
 const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   return (
     <div>
       <Button
+        shape="round"
         size="xs"
         onClick={() => {
           setVisible(true);
@@ -112,6 +113,7 @@ const App = () => {
         Open Modal
       </Button>
       <Modal
+        roundCornered
         title="Modal Example"
         visible={visible}
         onClose={() => {
@@ -123,7 +125,8 @@ const App = () => {
       <Breadcrumb></Breadcrumb>
       <Editor placeholder="Edit" textAlignment="center" />
       <Tabs
-        // direction="vertical"
+        direction="vertical"
+        roundCornered
         bordered
         activeIndex={activeIndex}
         onChange={(activeIndex) => {

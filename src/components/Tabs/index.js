@@ -1,15 +1,24 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
 
 const Tabs = (props) => {
-  const { className, direction, activeIndex, tabs, onChange, bordered } = props;
+  const {
+    className,
+    direction,
+    activeIndex,
+    tabs,
+    onChange,
+    bordered,
+    roundCornered,
+  } = props;
 
   const classes = classNames({
     [styles[`mono__tabs`]]: true,
-    [styles[`mono__tabs--${direction}`]]: direction !== "horizontal",
-    [styles[`mono__tabs--bordered`]]: bordered,
+    [styles[`mono__tabs--${direction}`]]: direction !== 'horizontal',
+    [styles.bordered]: bordered,
+    [styles.roundCornered]: roundCornered,
     [className]: className,
   });
 
@@ -40,7 +49,7 @@ const Tabs = (props) => {
         <div
           key={e.label}
           onClick={() => onClick(i)}
-          className={classNames(styles["mono__tabs--heading-tab"], {
+          className={classNames(styles['mono__tabs--heading-tab'], {
             [styles.active]: activeIndex === i && !isDisabled,
             [styles.disabled]: disabled.includes(e.label),
           })}
@@ -65,10 +74,10 @@ const Tabs = (props) => {
 
   return (
     <div className={classes}>
-      <div className={styles["mono__tabs--heading"]}>
+      <div className={styles['mono__tabs--heading']}>
         {generateTabsHeading()}
       </div>
-      <div className={styles["mono__tabs--contents"]}>{getActiveTab()}</div>
+      <div className={styles['mono__tabs--contents']}>{getActiveTab()}</div>
     </div>
   );
 };
@@ -84,13 +93,13 @@ Tabs.propTypes = {
     })
   ).isRequired,
   onChange: PropTypes.func.isRequired,
-  direction: PropTypes.oneOf(["vertical", "horizontal"]),
+  direction: PropTypes.oneOf(['vertical', 'horizontal']),
   bordered: PropTypes.bool,
 };
 
 Tabs.defaultProps = {
   activeIndex: 0,
-  direction: "horizontal",
+  direction: 'horizontal',
   bordered: false,
 };
 

@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__collapse {
   font-family: Inconsolata, Montserrat, Arial;
@@ -18,7 +18,7 @@
     }
 
     &:after {
-      content: "\002B";
+      content: '\002B';
       color: #777;
       font-weight: bold;
       float: right;
@@ -30,7 +30,7 @@
     background-color: #ccc;
     .mono__collapse--header {
       &:after {
-        content: "\2212";
+        content: '\2212';
       }
     }
   }
@@ -46,11 +46,11 @@
     }
   }
 
-  &--bordered {
-    @include border();
+  &.bordered {
+    @include defaultBorder();
     &.mono__collapse--active {
       .mono__collapse--panel {
-        border-top: 1px solid $clr_dark_gray;
+        @include defaultBorder();
       }
     }
   }

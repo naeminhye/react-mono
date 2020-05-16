@@ -9,8 +9,8 @@
   width: fit-content;
   cursor: pointer;
 
-  &--bordered {
-    border: 1px solid gray;
+  &.bordered {
+    @include defaultBorder();
   }
 
   &--round {

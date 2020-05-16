@@ -1,29 +1,39 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
 
 const Avatar = (props) => {
-  const { className, size, src, shape, alt, style, bordered, borderStyle } = props;
+  const {
+    className,
+    size,
+    src,
+    shape,
+    alt,
+    style,
+    bordered,
+    borderStyle,
+  } = props;
 
   const classes = classNames({
     [styles.mono__avatar]: true,
-    [className]: className || "",
-    [styles[`mono__avatar--${size}`]]: size && (typeof size === 'string') && size !== "md",
-    [styles[`mono__avatar--${shape}`]]: shape && shape !== "circle",
-    [styles[`mono__avatar--bordered`]]: bordered
+    [className]: className || '',
+    [styles[`mono__avatar--${size}`]]:
+      size && typeof size === 'string' && size !== 'md',
+    [styles[`mono__avatar--${shape}`]]: shape && shape !== 'circle',
+    [styles.bordered]: bordered,
   });
 
   let imageStyles = {
-    width: (typeof size === 'number') && (size + "px"),
-    height: (typeof size === 'number') && (size + "px"),
-    lineHeight: (typeof size === 'number') && (size + "px"),
+    width: typeof size === 'number' && size + 'px',
+    height: typeof size === 'number' && size + 'px',
+    lineHeight: typeof size === 'number' && size + 'px',
 
     ...style,
   };
 
-  if(bordered && borderStyle) {
-    Object.assign(imageStyles, {...borderStyle})
+  if (bordered && borderStyle) {
+    Object.assign(imageStyles, { ...borderStyle });
   }
 
   return (
@@ -36,23 +46,33 @@ const Avatar = (props) => {
 };
 
 Avatar.defaultProps = {
-  shape: "circle",
-  size: "md"
+  shape: 'circle',
+  size: 'md',
 };
 
 Avatar.propTypes = {
   className: PropTypes.string,
   children: PropTypes.string,
-  shape: PropTypes.oneOf([
-    "circle", "square"
+  shape: PropTypes.oneOf(['circle', 'square']),
+  size: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
   ]),
-  size: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(["xs", "sm", "md", "lg"])]),
   bordered: PropTypes.bool,
   borderStyle: PropTypes.shape({
-      border: PropTypes.string,
-      borderStyle: PropTypes.oneOf(["dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]),
-      borderWidth: PropTypes.string,
-      borderColor: PropTypes.string,
+    border: PropTypes.string,
+    borderStyle: PropTypes.oneOf([
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ]),
+    borderWidth: PropTypes.string,
+    borderColor: PropTypes.string,
   }),
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
-import TextArea from "./TextArea";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
+import TextArea from './TextArea';
 
 const Input = (props) => {
   const {
@@ -17,22 +17,22 @@ const Input = (props) => {
   } = props;
 
   const classes = classNames({
-    [styles["mono__input"]]: true,
+    [styles['mono__input']]: true,
     [className]: className,
-    [styles["mono__input--bordered"]]: bordered,
-    [styles["mono__input--disabled"]]: disabled,
+    [styles.bordered]: bordered,
+    [styles['mono__input--disabled']]: disabled,
   });
 
   return (
-    <div className={styles["mono__input--wrapper"]}>
+    <div className={styles['mono__input--wrapper']}>
       <input
         disabled={disabled}
         className={classes}
         {...others}
         style={(suffix && { paddingRight: 40 }, prefix && { paddingLeft: 40 })}
       />
-      {prefix && <div className={styles["mono__input--prefix"]}>{prefix}</div>}
-      {suffix && <div className={styles["mono__input--suffix"]}>{suffix}</div>}
+      {prefix && <div className={styles['mono__input--prefix']}>{prefix}</div>}
+      {suffix && <div className={styles['mono__input--suffix']}>{suffix}</div>}
     </div>
   );
 };

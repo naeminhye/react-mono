@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__radiolist {
   font-family: Inconsolata, Montserrat, Arial;
@@ -18,7 +18,7 @@
     display: block;
     position: relative;
 
-    border: 1px solid $clr_dark_gray;
+    @include defaultBorder();
     @include fit-content();
     min-height: 80px;
     min-width: 120px;
@@ -47,8 +47,8 @@
       &:after {
         width: 24px;
         height: 24px;
-        content: "";
-        border: 1px solid $clr_dark_gray;
+        content: '';
+        @include defaultBorder();
         background-color: #fff;
         // background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M512 520.064m-414.464 0a3.238 3.238 0 1 0 828.928 0 3.238 3.238 0 1 0-828.928 0Z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
         // background-position: 4px 4px;

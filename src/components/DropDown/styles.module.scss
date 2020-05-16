@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__dropdown {
   font-family: Inconsolata, Montserrat, Arial;
@@ -24,14 +24,15 @@
   &--current {
     position: relative;
     // box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
-    border: 1px solid $clr_dark_gray;
+    @include defaultBorder();
     cursor: pointer;
     outline: none;
     width: 100%;
     display: flex;
 
     &:focus {
-      border: 1px solid $clr_classic_blue;
+      // border: 1px solid $clr_classic_blue;
+      @include borderByColor($clr_classic_blue);
       & + .mono__dropdown__list {
         opacity: 1;
 
@@ -81,7 +82,7 @@
   }
 
   &__list {
-    border: 1px solid $clr_dark_gray;
+    @include defaultBorder();
     position: absolute;
     top: 48px;
     // width: 100%;
@@ -92,7 +93,7 @@
     display: flex;
     flex-direction: column;
     z-index: 3;
-    width: 99.60%;
+    width: 99.6%;
     overflow-y: auto;
     max-height: 244px;
 

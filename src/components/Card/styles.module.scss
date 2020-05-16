@@ -1,9 +1,9 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__card {
   font-family: Inconsolata, Montserrat, Arial;
   &.bordered {
-    border: 1px solid #aeaeae;
+    @include defaultBorder();
   }
   &--banner {
     width: 100%;
@@ -13,8 +13,8 @@
       height: auto;
     }
     &-image {
-        width: 100%;
-        height: auto;
+      width: 100%;
+      height: auto;
     }
 
     &-tip {
