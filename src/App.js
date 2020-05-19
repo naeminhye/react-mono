@@ -134,7 +134,22 @@ const App = () => {
         }}
         tabs={tabs}
       />
-      <Table columns={columns} dataSource={data.user} bordered />
+      <Table
+        columns={columns}
+        dataSource={data.user}
+        bordered
+        rowSelection={{
+          onChange: (selectedRowKeys) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`);
+          },
+          onSelect: (record, selected, selectedRows) => {
+            console.log('onSelect', record, selected, selectedRows);
+          },
+          onSelectAll: (selected, selectedRows) => {
+            console.log('onSelectAll', selected, selectedRows);
+          },
+        }}
+      />
     </div>
   );
 };

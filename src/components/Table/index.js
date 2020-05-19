@@ -1,13 +1,13 @@
-import React, { useState, useRef } from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
-import { CheckBox, Pagination, Icons } from "../index";
+import React, { useState, useRef } from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
+import { CheckBox, Pagination, Icons } from '../index';
 
 const Table = (props) => {
   const {
     className,
-    selectable,
+    rowSelection,
     pagination,
     hover,
     title,
@@ -26,7 +26,7 @@ const Table = (props) => {
   const tableRef = useRef(null);
 
   const classes = classNames({
-    [styles["mono__table"]]: true,
+    [styles['mono__table']]: true,
     [className]: className,
     [styles.bordered]: bordered,
     [styles.striped]: striped,
@@ -57,8 +57,8 @@ const Table = (props) => {
         shouldSwitch = false;
         /*Get the two elements you want to compare,
           one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[colIndex];
-        y = rows[i + 1].getElementsByTagName("TD")[colIndex];
+        x = rows[i].getElementsByTagName('TD')[colIndex];
+        y = rows[i + 1].getElementsByTagName('TD')[colIndex];
         /*check if the two rows should switch place,
           based on the direction, asc or desc:*/
         if (isAsc) {
@@ -116,14 +116,14 @@ const Table = (props) => {
 
   return (
     <div>
-      <div className={styles["mono__table--container"]}>
+      <div className={styles['mono__table--container']}>
         <table className={classes} {...others} ref={tableRef}>
-          <thead className={styles["mono__table--head"]}>
+          <thead className={styles['mono__table--head']}>
             <tr>
-              {selectable && (
-                <th className={styles["checkbox"]}>
+              {rowSelection && (
+                <th className={styles['checkbox']}>
+                  {/* Select/Deselect All Checkbox */}
                   <CheckBox
-                    type="checkbox"
                     halfCheck={
                       dataSource.length > selectedRows.length &&
                       selectedRows.length > 0
@@ -131,17 +131,23 @@ const Table = (props) => {
                     checked={dataSource.length === selectedRows.length}
                     onChange={(event) => {
                       let checkedAll = event.target.checked;
-                      let _selectedRows = [];
+                      let selectedRowKeys = [];
                       if (checkedAll) {
                         dataSource.map((data, rowIndex) => {
                           let key = data.key || rowIndex;
-                          if (_selectedRows.indexOf(key) === -1) {
-                            _selectedRows.push(key);
+                          if (selectedRowKeys.indexOf(key) === -1) {
+                            selectedRowKeys.push(key);
                           }
                           return null;
                         });
                       }
-                      setSelectedRows(_selectedRows);
+                      setSelectedRows(selectedRowKeys);
+                      if (rowSelection) {
+                        // Callback executed when select/deselect all rows
+                        if (rowSelection.onSelectAll) {
+                          rowSelection.onSelectAll(checkedAll, selectedRowKeys);
+                        }
+                      }
                     }}
                   />
                 </th>
@@ -166,7 +172,7 @@ const Table = (props) => {
                     {sortIcon && (
                       <div
                         onClick={() => handleSort(colIndex)}
-                        className={styles["mono__table--sort-icon"]}
+                        className={styles['mono__table--sort-icon']}
                       >
                         {sortIcon}
                       </div>
@@ -176,7 +182,7 @@ const Table = (props) => {
               })}
             </tr>
           </thead>
-          <tbody className={styles["mono__table--body"]}>
+          <tbody className={styles['mono__table--body']}>
             {dataSource.map((data, rowIndex) => {
               let keys = Object.keys(data);
               let row = [];
@@ -201,13 +207,12 @@ const Table = (props) => {
 
               return (
                 <tr key={`row--${data.key || rowIndex}`}>
-                  {selectable && (
+                  {rowSelection && (
                     <td
                       key={`row--${data.key || rowIndex}--checkbox`}
-                      className={styles["checkbox"]}
+                      className={styles['checkbox']}
                     >
                       <CheckBox
-                        type="checkbox"
                         checked={
                           data.key
                             ? selectedRows.indexOf(data.key) !== -1
@@ -216,18 +221,37 @@ const Table = (props) => {
                         onChange={(event) => {
                           let checked = event.target.checked;
                           let key = data.key || rowIndex;
-                          let _selectedRows = [...selectedRows];
+                          let selectedRowKeys = [...selectedRows];
 
-                          if (checked && _selectedRows.indexOf(key) === -1) {
-                            _selectedRows.push(key);
+                          if (checked && selectedRowKeys.indexOf(key) === -1) {
+                            selectedRowKeys.push(key);
                           } else if (
                             !checked &&
-                            _selectedRows.indexOf(key) !== -1
+                            selectedRowKeys.indexOf(key) !== -1
                           ) {
-                            _selectedRows.splice(_selectedRows.indexOf(key), 1);
+                            selectedRowKeys.splice(
+                              selectedRowKeys.indexOf(key),
+                              1
+                            );
                           }
 
-                          setSelectedRows(_selectedRows);
+                          setSelectedRows(selectedRowKeys);
+
+                          if (rowSelection) {
+                            // Callback executed when select/deselect one row
+                            if (rowSelection.onSelect) {
+                              rowSelection.onSelect(
+                                data, // record of row data
+                                checked, // true or false
+                                selectedRowKeys,
+                                event // nativeEvent
+                              );
+                            }
+                            // Callback executed when selected rows change
+                            if (rowSelection.onChange) {
+                              rowSelection.onChange(selectedRowKeys);
+                            }
+                          }
                         }}
                       />
                     </td>
@@ -237,7 +261,7 @@ const Table = (props) => {
               );
             })}
           </tbody>
-          <tfoot className={styles["mono__table--foot"]}></tfoot>
+          <tfoot className={styles['mono__table--foot']}></tfoot>
         </table>
       </div>
       <Pagination {...pagination} total={dataSource.length} />
@@ -250,6 +274,7 @@ Table.defaultProps = {
   bordered: false,
   striped: false,
   hover: false,
+  rowSelection: null,
 };
 
 Table.propTypes = {
@@ -264,7 +289,22 @@ Table.propTypes = {
     })
   ).isRequired,
   dataSource: PropTypes.array.isRequired,
-  selectable: PropTypes.bool,
+  rowSelection: PropTypes.object,
+  /**
+   * columnWidth
+   * columnTitle
+   * fixed
+   * getCheckboxProps
+   * hideDefaultSelections
+   * renderCell
+   * selectedRowKeys
+   * selections
+   * type: checkbox | radio
+   * onChange
+   * onSelect: Callback executed when select/deselect one row
+   * onSelectAll
+   * onSelectInvert
+   */
   bordered: PropTypes.bool,
   striped: PropTypes.bool,
   hover: PropTypes.bool,
@@ -273,7 +313,7 @@ Table.propTypes = {
   sorting: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
-      sortDirection: PropTypes.oneOf(["ascending", "descending"]),
+      sortDirection: PropTypes.oneOf(['ascending', 'descending']),
     })
   ),
   pagination: PropTypes.objectOf({
