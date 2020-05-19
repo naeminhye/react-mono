@@ -20,9 +20,9 @@ const IconCheckItem = (props) => {
   const [checked, setChecked] = useState(defaultChecked || false);
 
   const classes = classNames({
-    [styles[`mono__checkbox--item`]]: true,
+    [styles[`mono__check-group--item`]]: true,
     [className]: className,
-    [styles[`checkbox--checked`]]: checked,
+    [styles[`check-group--checked`]]: checked,
   });
 
   return (
@@ -35,18 +35,18 @@ const IconCheckItem = (props) => {
       }}
     >
       {/* <input checked={checked} type="checkbox" name={name} /> */}
-      <div className={styles["mono__checkbox--item-content"]}>
+      <div className={styles["mono__check-group--item-content"]}>
         {icon}
-        <div className={styles["mono__checkbox--item-content__label"]}>
+        <div className={styles["mono__check-group--item-content__label"]}>
           {label}
         </div>
       </div>
-      <div className={styles["mono__checkbox--item-icon"]}></div>
+      <div className={styles["mono__check-group--item-icon"]}></div>
     </div>
   );
 };
 
-const CheckList = (props) => {
+const CheckGroup = (props) => {
   const {
     children,
     className,
@@ -72,9 +72,9 @@ const CheckList = (props) => {
     console.log("sleected list", _selected);
   };
   const classes = classNames({
-    [styles["mono__checkbox"]]: true,
+    [styles["mono__check-group"]]: true,
     [className]: className,
-    [styles[`mono__checkbox--${type}`]]: type,
+    [styles[`mono__check-group--${type}`]]: type,
   });
 
   return (
@@ -106,15 +106,15 @@ const CheckList = (props) => {
   );
 };
 
-CheckList.propTypes = {
+CheckGroup.propTypes = {
   className: PropTypes.string,
   // value: PropTypes.string,
   onChange: PropTypes.func,
   type: PropTypes.oneOf(["list", "grid"]),
 };
 
-CheckList.defaultProps = {
+CheckGroup.defaultProps = {
   type: "list",
 };
 
-export default CheckList;
+export default CheckGroup;

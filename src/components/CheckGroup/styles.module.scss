@@ -1,6 +1,6 @@
 @import '../common/settings';
 
-.mono__radiolist {
+.mono__check-group {
   font-family: Inconsolata, Montserrat, Arial;
   display: flex;
   flex-wrap: wrap;
@@ -50,12 +50,9 @@
         content: '';
         @include defaultBorder();
         background-color: #fff;
-        // background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M512 520.064m-414.464 0a3.238 3.238 0 1 0 828.928 0 3.238 3.238 0 1 0-828.928 0Z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
-        // background-position: 4px 4px;
-
         background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
-        background-position: 3px 4px;
         background-repeat: no-repeat;
+        background-position: 3px 4px;
         border-radius: 50%;
         z-index: 2;
         position: absolute;
@@ -66,9 +63,10 @@
       }
     }
 
-    &.radiolist--checked {
-      border: 1px solid $clr_classic_blue;
-      .mono__radiolist--item-icon {
+    &.checkbox--checked {
+      @include borderByColor($clr_classic_blue);
+      // border: 1px solid $clr_classic_blue;
+      .mono__check-group--item-icon {
         &:after {
           background-color: $clr_classic_blue;
           border-color: $clr_classic_blue;
