@@ -2,7 +2,13 @@ import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
-import { CheckBox, Pagination, Icons } from '../index';
+import CheckBox from '../CheckBox';
+import Pagination from '../Pagination';
+import Icons from '../Icons';
+import LoadingRows from '../LoadingRows';
+import NoData from '../NoData';
+
+const renderDefaultNoData = () => <NoData />;
 
 const Table = (props) => {
   const {
@@ -18,6 +24,8 @@ const Table = (props) => {
     striped,
     width,
     sorting,
+    loading,
+    renderNoData,
     ...others
   } = props;
 
@@ -115,7 +123,7 @@ const Table = (props) => {
   };
 
   return (
-    <div>
+    <>
       <div className={styles['mono__table--container']}>
         <table className={classes} {...others} ref={tableRef}>
           <thead className={styles['mono__table--head']}>
@@ -182,90 +190,118 @@ const Table = (props) => {
               })}
             </tr>
           </thead>
+          {/* Check Loading Status */}
           <tbody className={styles['mono__table--body']}>
-            {dataSource.map((data, rowIndex) => {
-              let keys = Object.keys(data);
-              let row = [];
-              columns.map((col) => {
-                if (keys.indexOf(col.dataIndex) !== -1) {
-                  if (!col.render) {
-                    row.push(
-                      <td key={col.dataIndex}>{data[col.dataIndex]}</td>
-                    );
+            {loading ? (
+              <tr>
+                <td
+                  colSpan={rowSelection ? columns.length + 1 : columns.length}
+                  className={styles['table-cell-loader']}
+                >
+                  <LoadingRows rows={5} loading={loading} />
+                </td>
+              </tr>
+            ) : dataSource.length > 0 ? (
+              dataSource.map((data, rowIndex) => {
+                let keys = Object.keys(data);
+                let row = [];
+                columns.map((col) => {
+                  if (keys.indexOf(col.dataIndex) !== -1) {
+                    if (!col.render) {
+                      row.push(
+                        <td key={col.dataIndex}>{data[col.dataIndex]}</td>
+                      );
+                    } else {
+                      row.push(
+                        <td key={col.dataIndex}>
+                          {col.render(data[col.dataIndex], data)}
+                        </td>
+                      );
+                    }
                   } else {
-                    row.push(
-                      <td key={col.dataIndex}>
-                        {col.render(data[col.dataIndex], data)}
-                      </td>
-                    );
+                    if (!col.render) {
+                      row.push(<td key={col.key}></td>);
+                    } else {
+                      row.push(<td key={col.key}>{col.render(null, data)}</td>);
+                    }
                   }
-                } else {
-                  row.push(<td key={col.dataIndex}></td>);
-                }
-                return null;
-              });
+                  return null;
+                });
 
-              return (
-                <tr key={`row--${data.key || rowIndex}`}>
-                  {rowSelection && (
-                    <td
-                      key={`row--${data.key || rowIndex}--checkbox`}
-                      className={styles['checkbox']}
-                    >
-                      <CheckBox
-                        checked={
-                          data.key
-                            ? selectedRows.indexOf(data.key) !== -1
-                            : selectedRows.indexOf(rowIndex) !== -1
-                        }
-                        onChange={(event) => {
-                          let checked = event.target.checked;
-                          let key = data.key || rowIndex;
-                          let selectedRowKeys = [...selectedRows];
-
-                          if (checked && selectedRowKeys.indexOf(key) === -1) {
-                            selectedRowKeys.push(key);
-                          } else if (
-                            !checked &&
-                            selectedRowKeys.indexOf(key) !== -1
-                          ) {
-                            selectedRowKeys.splice(
-                              selectedRowKeys.indexOf(key),
-                              1
-                            );
+                return (
+                  <tr key={`row--${data.key || rowIndex}`}>
+                    {rowSelection && (
+                      <td
+                        key={`row--${data.key || rowIndex}--checkbox`}
+                        className={styles['checkbox']}
+                      >
+                        <CheckBox
+                          checked={
+                            data.key
+                              ? selectedRows.indexOf(data.key) !== -1
+                              : selectedRows.indexOf(rowIndex) !== -1
                           }
+                          onChange={(event) => {
+                            let checked = event.target.checked;
+                            let key = data.key || rowIndex;
+                            let selectedRowKeys = [...selectedRows];
 
-                          setSelectedRows(selectedRowKeys);
-
-                          if (rowSelection) {
-                            // Callback executed when select/deselect one row
-                            if (rowSelection.onSelect) {
-                              rowSelection.onSelect(
-                                data, // record of row data
-                                checked, // true or false
-                                selectedRowKeys,
-                                event // nativeEvent
+                            if (
+                              checked &&
+                              selectedRowKeys.indexOf(key) === -1
+                            ) {
+                              selectedRowKeys.push(key);
+                            } else if (
+                              !checked &&
+                              selectedRowKeys.indexOf(key) !== -1
+                            ) {
+                              selectedRowKeys.splice(
+                                selectedRowKeys.indexOf(key),
+                                1
                               );
                             }
-                            // Callback executed when selected rows change
-                            if (rowSelection.onChange) {
-                              rowSelection.onChange(selectedRowKeys);
+
+                            setSelectedRows(selectedRowKeys);
+
+                            if (rowSelection) {
+                              // Callback executed when select/deselect one row
+                              if (rowSelection.onSelect) {
+                                rowSelection.onSelect(
+                                  data, // record of row data
+                                  checked, // true or false
+                                  selectedRowKeys,
+                                  event // nativeEvent
+                                );
+                              }
+                              // Callback executed when selected rows change
+                              if (rowSelection.onChange) {
+                                rowSelection.onChange(selectedRowKeys);
+                              }
                             }
-                          }
-                        }}
-                      />
-                    </td>
-                  )}
-                  {row}
-                </tr>
-              );
-            })}
+                          }}
+                        />
+                      </td>
+                    )}
+                    {row}
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td
+                  colSpan={rowSelection ? columns.length + 1 : columns.length}
+                  className={styles['table-cell-loader']}
+                >
+                  {renderNoData()}
+                </td>
+              </tr>
+            )}
           </tbody>
           <tfoot className={styles['mono__table--foot']}></tfoot>
         </table>
       </div>
-      <Pagination {...pagination} total={dataSource.length} />
-    </div>
+      {pagination && <Pagination {...pagination} total={dataSource.length} />}
+    </>
   );
 };
 
@@ -275,6 +311,9 @@ Table.defaultProps = {
   striped: false,
   hover: false,
   rowSelection: null,
+  pagination: null,
+  loading: false,
+  renderNoData: renderDefaultNoData,
 };
 
 Table.propTypes = {
@@ -324,6 +363,8 @@ Table.propTypes = {
     onChange: PropTypes.func,
     onShowSizeChange: PropTypes.func,
   }),
+  loading: PropTypes.bool,
+  renderNoData: PropTypes.func,
 };
 
 export default Table;

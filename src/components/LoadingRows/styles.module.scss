@@ -1,0 +1,46 @@
+@import '../common/settings';
+
+@keyframes placeHolderShimmer {
+  0% {
+    background: #ececec;
+  }
+
+  30% {
+    background: #f7f7f7;
+  }
+
+  50% {
+    background: #ececec;
+  }
+
+  80% {
+    background: #f7f7f7;
+  }
+
+  100% {
+    background: #ececec;
+  }
+}
+
+.loading-animation {
+  animation: placeHolderShimmer 3s infinite;
+}
+
+.u-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.u-flex__cell {
+  flex: 1;
+}
+.u-pd--sm {
+  padding: 10px;
+}
+
+.u-mg--sm {
+  margin: 10px;
+}

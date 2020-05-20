@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import { Table, Breadcrumb, Tabs, Editor, Modal, Button } from 'components';
+import React, { useState, useEffect } from 'react';
+import { Table, Tag, Button } from 'components';
 
-import data from './mock/userData';
+// import data from './mock/userData';
 
 const columns = [
   {
     title: 'Name',
     key: 'name',
     dataIndex: 'name',
+    sortable: true,
   },
   {
     title: 'Gender',
     key: 'gender',
     dataIndex: 'gender',
+    render: (value) => (value ? <Tag>Male</Tag> : <Tag>Female</Tag>),
   },
   {
     title: 'Phone',
@@ -21,15 +23,33 @@ const columns = [
   },
   {
     title: 'Address',
-    key: 'add',
-    dataIndex: 'add',
-    sortable: true,
+    key: 'address',
+    dataIndex: 'address',
   },
   {
     title: 'Email',
     key: 'email',
     dataIndex: 'email',
-    sortable: true,
+  },
+  {
+    title: 'Actions',
+    key: 'actions',
+    render: () => {
+      return (
+        <div>
+          <Button
+            size="xs"
+            style={{ minWidth: 80, marginRight: 16 }}
+            type="primary"
+          >
+            Edit
+          </Button>
+          <Button size="xs" style={{ minWidth: 80 }} type="danger">
+            Delete
+          </Button>
+        </div>
+      );
+    },
   },
 ];
 
@@ -100,10 +120,34 @@ const tabs = [
 const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dataSource, setDataSource] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://5ebf941f00eabe0016fa3bfc.mockapi.io/api/v1/users')
+      .then(function (response) {
+        if (response.status !== 200) {
+          console.log(
+            'Looks like there was a problem. Status Code: ' + response.status
+          );
+          return;
+        }
+
+        // Examine the text in the response
+        response.json().then(function (data) {
+          setDataSource(data);
+          setLoading(false);
+        });
+      })
+      .catch(function (err) {
+        console.log('Fetch Error :-S', err);
+      });
+  }, []);
 
   return (
     <div>
-      <Button
+      {/* <Button
         shape="round"
         size="xs"
         onClick={() => {
@@ -133,11 +177,12 @@ const App = () => {
           setActiveIndex(activeIndex);
         }}
         tabs={tabs}
-      />
+      /> */}
       <Table
         columns={columns}
-        dataSource={data.user}
+        dataSource={dataSource}
         bordered
+        loading={loading}
         rowSelection={{
           onChange: (selectedRowKeys) => {
             console.log(`selectedRowKeys: ${selectedRowKeys}`);

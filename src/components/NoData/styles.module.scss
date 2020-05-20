@@ -1,0 +1,13 @@
+@import '../common/settings';
+
+.mono__no-data {
+  font-family: Inconsolata, Montserrat, Arial;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $clr_dark_gray;
+  &--text {
+    margin-top: 8px;
+  }
+}
