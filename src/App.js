@@ -194,6 +194,15 @@ const App = () => {
             console.log('onSelectAll', selected, selectedRows);
           },
         }}
+        pagination={{
+          current: 1,
+          pageSize: 5,
+          total: dataSource.length,
+          onChange: (page) => {
+            // console.log('onChange to', page);
+          },
+          onShowSizeChange: () => {},
+        }}
       />
     </div>
   );

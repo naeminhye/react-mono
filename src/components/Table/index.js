@@ -8,13 +8,20 @@ import Icons from '../Icons';
 import LoadingRows from '../LoadingRows';
 import NoData from '../NoData';
 
+// Pagination: start with 1
+
 const renderDefaultNoData = () => <NoData />;
+// TODO: create utils
+const getNumOfPgs = (total, size) => {
+  return total % size > 0
+    ? Math.floor(total / size) + 1
+    : Math.floor(total / size);
+};
 
 const Table = (props) => {
   const {
     className,
     rowSelection,
-    pagination,
     hover,
     title,
     columns,
@@ -26,11 +33,16 @@ const Table = (props) => {
     sorting,
     loading,
     renderNoData,
+    pagination,
     ...others
   } = props;
 
   const [selectedRows, setSelectedRows] = useState([]);
   const [sortingRule, setSortingRule] = useState(null);
+  const [currentPage, setCurrentPage] = useState(
+    (pagination && pagination.current) || 1
+  );
+  const [pageSize] = useState((pagination && pagination.pageSize) || 1);
   const tableRef = useRef(null);
 
   const classes = classNames({
@@ -122,6 +134,21 @@ const Table = (props) => {
     sortTable(sortDirection, colIndex);
   };
 
+  const getShownData = () => {
+    if (!pagination) return dataSource;
+
+    if (currentPage > getNumOfPgs(dataSource.length, pageSize)) return [];
+
+    return dataSource.filter((_, index) => {
+      return Math.floor(index / pageSize) + 1 === currentPage;
+    });
+  };
+
+  const onDefaultPaginationChange = (targetPage) => {
+    setCurrentPage(targetPage);
+    pagination.onChange(targetPage);
+  };
+
   return (
     <>
       <div className={styles['mono__table--container']}>
@@ -201,8 +228,8 @@ const Table = (props) => {
                   <LoadingRows rows={5} loading={loading} />
                 </td>
               </tr>
-            ) : dataSource.length > 0 ? (
-              dataSource.map((data, rowIndex) => {
+            ) : getShownData().length > 0 ? (
+              getShownData().map((data, rowIndex) => {
                 let keys = Object.keys(data);
                 let row = [];
                 columns.map((col) => {
@@ -300,7 +327,14 @@ const Table = (props) => {
           <tfoot className={styles['mono__table--foot']}></tfoot>
         </table>
       </div>
-      {pagination && <Pagination {...pagination} total={dataSource.length} />}
+      {pagination && (
+        <Pagination
+          {...pagination}
+          total={pagination.total || dataSource.length}
+          onChange={onDefaultPaginationChange}
+          current={currentPage}
+        />
+      )}
     </>
   );
 };
@@ -356,9 +390,11 @@ Table.propTypes = {
     })
   ),
   pagination: PropTypes.objectOf({
-    current: PropTypes.number,
-    pageSize: PropTypes.number,
-    pageSizeOptions: PropTypes.array,
+    current: PropTypes.number.isRequired,
+    pageSize: PropTypes.number.isRequired,
+    pageSizeOptions: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ),
     total: PropTypes.number,
     onChange: PropTypes.func,
     onShowSizeChange: PropTypes.func,
