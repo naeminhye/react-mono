@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
-import { Icons } from "../index";
+import React, { useState } from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
+import { Icons } from '../index';
 
 const Pagination = (props) => {
   const {
@@ -22,8 +22,9 @@ const Pagination = (props) => {
       ? Math.floor(_total / _size) + 1
       : Math.floor(_total / _size);
   };
+
   const classes = classNames({
-    [styles["mono__pagination"]]: true,
+    [styles['mono__pagination']]: true,
     [className]: className,
   });
 
@@ -42,10 +43,11 @@ const Pagination = (props) => {
   return (
     <ul className={classes} {...others}>
       <li
+        key="previouse-page"
         title="Previous Page"
         className={classNames({
-          [styles["mono__pagination--item"]]: true,
-          [styles["mono__pagination--item-prev"]]: true,
+          [styles['mono__pagination--item']]: true,
+          [styles['mono__pagination--item-prev']]: true,
         })}
         aria-disabled="true"
         onClick={prev}
@@ -55,10 +57,11 @@ const Pagination = (props) => {
 
       {[...Array(getNumOfPgs())].map((e, i) => (
         <li
+          key={`Page ${i + 1}`}
           title={i + 1}
           className={classNames({
-            [styles["mono__pagination--item"]]: true,
-            [styles["mono__pagination--item-active"]]: i + 1 === currentPage,
+            [styles['mono__pagination--item']]: true,
+            [styles['mono__pagination--item-active']]: i + 1 === currentPage,
           })}
           tabIndex={i}
           onClick={() => {
@@ -70,11 +73,12 @@ const Pagination = (props) => {
         </li>
       ))}
       <li
+        key="next-page"
         title="Next Page"
         tabIndex="0"
         className={classNames({
-          [styles["mono__pagination--item"]]: true,
-          [styles["mono__pagination--item-next"]]: true,
+          [styles['mono__pagination--item']]: true,
+          [styles['mono__pagination--item-next']]: true,
         })}
         aria-disabled="false"
         onClick={next}
@@ -88,7 +92,7 @@ const Pagination = (props) => {
 Pagination.defaultProps = {
   current: 1,
   pageSize: 5,
-  pageSizeOptions: ["5", "10", "20", "30", "40"],
+  pageSizeOptions: ['5', '10', '20', '30', '40'],
 };
 
 Pagination.propTypes = {

@@ -1,14 +1,27 @@
-import React, { useState, useRef } from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./styles.module.scss";
-import { CheckBox, Pagination, Icons } from "../index";
+import React, { useState, useRef } from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './styles.module.scss';
+import CheckBox from '../CheckBox';
+import Pagination from '../Pagination';
+import Icons from '../Icons';
+import LoadingRows from '../LoadingRows';
+import NoData from '../NoData';
+
+// Pagination: start with 1
+
+const renderDefaultNoData = () => <NoData />;
+// TODO: create utils
+const getNumOfPgs = (total, size) => {
+  return total % size > 0
+    ? Math.floor(total / size) + 1
+    : Math.floor(total / size);
+};
 
 const Table = (props) => {
   const {
     className,
-    selectable,
-    pagination,
+    rowSelection,
     hover,
     title,
     columns,
@@ -18,15 +31,22 @@ const Table = (props) => {
     striped,
     width,
     sorting,
+    loading,
+    renderNoData,
+    pagination,
     ...others
   } = props;
 
   const [selectedRows, setSelectedRows] = useState([]);
   const [sortingRule, setSortingRule] = useState(null);
+  const [currentPage, setCurrentPage] = useState(
+    (pagination && pagination.current) || 1
+  );
+  const [pageSize] = useState((pagination && pagination.pageSize) || 1);
   const tableRef = useRef(null);
 
   const classes = classNames({
-    [styles["mono__table"]]: true,
+    [styles['mono__table']]: true,
     [className]: className,
     [styles.bordered]: bordered,
     [styles.striped]: striped,
@@ -57,8 +77,8 @@ const Table = (props) => {
         shouldSwitch = false;
         /*Get the two elements you want to compare,
           one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[colIndex];
-        y = rows[i + 1].getElementsByTagName("TD")[colIndex];
+        x = rows[i].getElementsByTagName('TD')[colIndex];
+        y = rows[i + 1].getElementsByTagName('TD')[colIndex];
         /*check if the two rows should switch place,
           based on the direction, asc or desc:*/
         if (isAsc) {
@@ -114,16 +134,31 @@ const Table = (props) => {
     sortTable(sortDirection, colIndex);
   };
 
+  const getShownData = () => {
+    if (!pagination) return dataSource;
+
+    if (currentPage > getNumOfPgs(dataSource.length, pageSize)) return [];
+
+    return dataSource.filter((_, index) => {
+      return Math.floor(index / pageSize) + 1 === currentPage;
+    });
+  };
+
+  const onDefaultPaginationChange = (targetPage) => {
+    setCurrentPage(targetPage);
+    pagination.onChange(targetPage);
+  };
+
   return (
-    <div>
-      <div className={styles["mono__table--container"]}>
+    <>
+      <div className={styles['mono__table--container']}>
         <table className={classes} {...others} ref={tableRef}>
-          <thead className={styles["mono__table--head"]}>
+          <thead className={styles['mono__table--head']}>
             <tr>
-              {selectable && (
-                <th className={styles["checkbox"]}>
+              {rowSelection && (
+                <th className={styles['checkbox']}>
+                  {/* Select/Deselect All Checkbox */}
                   <CheckBox
-                    type="checkbox"
                     halfCheck={
                       dataSource.length > selectedRows.length &&
                       selectedRows.length > 0
@@ -131,17 +166,23 @@ const Table = (props) => {
                     checked={dataSource.length === selectedRows.length}
                     onChange={(event) => {
                       let checkedAll = event.target.checked;
-                      let _selectedRows = [];
+                      let selectedRowKeys = [];
                       if (checkedAll) {
                         dataSource.map((data, rowIndex) => {
                           let key = data.key || rowIndex;
-                          if (_selectedRows.indexOf(key) === -1) {
-                            _selectedRows.push(key);
+                          if (selectedRowKeys.indexOf(key) === -1) {
+                            selectedRowKeys.push(key);
                           }
                           return null;
                         });
                       }
-                      setSelectedRows(_selectedRows);
+                      setSelectedRows(selectedRowKeys);
+                      if (rowSelection) {
+                        // Callback executed when select/deselect all rows
+                        if (rowSelection.onSelectAll) {
+                          rowSelection.onSelectAll(checkedAll, selectedRowKeys);
+                        }
+                      }
                     }}
                   />
                 </th>
@@ -166,7 +207,7 @@ const Table = (props) => {
                     {sortIcon && (
                       <div
                         onClick={() => handleSort(colIndex)}
-                        className={styles["mono__table--sort-icon"]}
+                        className={styles['mono__table--sort-icon']}
                       >
                         {sortIcon}
                       </div>
@@ -176,72 +217,138 @@ const Table = (props) => {
               })}
             </tr>
           </thead>
-          <tbody className={styles["mono__table--body"]}>
-            {dataSource.map((data, rowIndex) => {
-              let keys = Object.keys(data);
-              let row = [];
-              columns.map((col) => {
-                if (keys.indexOf(col.dataIndex) !== -1) {
-                  if (!col.render) {
-                    row.push(
-                      <td key={col.dataIndex}>{data[col.dataIndex]}</td>
-                    );
+          {/* Check Loading Status */}
+          <tbody className={styles['mono__table--body']}>
+            {loading ? (
+              <tr>
+                <td
+                  colSpan={rowSelection ? columns.length + 1 : columns.length}
+                  className={styles['table-cell-loader']}
+                >
+                  <LoadingRows rows={5} loading={loading} />
+                </td>
+              </tr>
+            ) : getShownData().length > 0 ? (
+              getShownData().map((data, rowIndex) => {
+                let keys = Object.keys(data);
+                let row = [];
+                columns.map((col) => {
+                  if (keys.indexOf(col.dataIndex) !== -1) {
+                    if (!col.render) {
+                      row.push(
+                        <td key={col.dataIndex}>{data[col.dataIndex]}</td>
+                      );
+                    } else {
+                      row.push(
+                        <td key={col.dataIndex}>
+                          {col.render(data[col.dataIndex], data)}
+                        </td>
+                      );
+                    }
                   } else {
-                    row.push(
-                      <td key={col.dataIndex}>
-                        {col.render(data[col.dataIndex], data)}
-                      </td>
-                    );
+                    if (!col.render) {
+                      row.push(<td key={col.key}></td>);
+                    } else {
+                      row.push(<td key={col.key}>{col.render(null, data)}</td>);
+                    }
                   }
-                } else {
-                  row.push(<td key={col.dataIndex}></td>);
-                }
-                return null;
-              });
+                  return null;
+                });
 
-              return (
-                <tr key={`row--${data.key || rowIndex}`}>
-                  {selectable && (
-                    <td
-                      key={`row--${data.key || rowIndex}--checkbox`}
-                      className={styles["checkbox"]}
-                    >
-                      <CheckBox
-                        type="checkbox"
-                        checked={
-                          data.key
-                            ? selectedRows.indexOf(data.key) !== -1
-                            : selectedRows.indexOf(rowIndex) !== -1
-                        }
-                        onChange={(event) => {
-                          let checked = event.target.checked;
-                          let key = data.key || rowIndex;
-                          let _selectedRows = [...selectedRows];
-
-                          if (checked && _selectedRows.indexOf(key) === -1) {
-                            _selectedRows.push(key);
-                          } else if (
-                            !checked &&
-                            _selectedRows.indexOf(key) !== -1
-                          ) {
-                            _selectedRows.splice(_selectedRows.indexOf(key), 1);
+                return (
+                  <tr key={`row--${data.key || rowIndex}`}>
+                    {rowSelection && (
+                      <td
+                        key={`row--${data.key || rowIndex}--checkbox`}
+                        className={styles['checkbox']}
+                      >
+                        <CheckBox
+                          checked={
+                            //
+                            data.key
+                              ? selectedRows.indexOf(data.key) !== -1
+                              : // : selectedRows.indexOf(rowIndex) !== -1
+                                selectedRows.indexOf(
+                                  (currentPage - 1) * pageSize + rowIndex
+                                ) !== -1
                           }
+                          onChange={(event) => {
+                            let checked = event.target.checked;
+                            let key =
+                              data.key ||
+                              (currentPage - 1) * pageSize + rowIndex;
+                            let selectedRowKeys = [...selectedRows];
 
-                          setSelectedRows(_selectedRows);
-                        }}
-                      />
-                    </td>
-                  )}
-                  {row}
-                </tr>
-              );
-            })}
+                            if (
+                              checked &&
+                              selectedRowKeys.indexOf(key) === -1
+                            ) {
+                              selectedRowKeys.push(key);
+                            } else if (
+                              !checked &&
+                              selectedRowKeys.indexOf(key) !== -1
+                            ) {
+                              selectedRowKeys.splice(
+                                selectedRowKeys.indexOf(key),
+                                1
+                              );
+                            }
+
+                            setSelectedRows(selectedRowKeys);
+
+                            if (rowSelection) {
+                              // Callback executed when select/deselect one row
+                              if (rowSelection.onSelect) {
+                                rowSelection.onSelect(
+                                  data, // record of row data
+                                  checked, // true or false
+                                  selectedRowKeys,
+                                  event // nativeEvent
+                                );
+                              }
+                              // Callback executed when selected rows change
+                              if (rowSelection.onChange) {
+                                rowSelection.onChange(selectedRowKeys);
+                              }
+                            }
+                          }}
+                        />
+                      </td>
+                    )}
+                    {row}
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td
+                  colSpan={rowSelection ? columns.length + 1 : columns.length}
+                  className={styles['table-cell-loader']}
+                >
+                  {renderNoData()}
+                </td>
+              </tr>
+            )}
           </tbody>
-          <tfoot className={styles["mono__table--foot"]}></tfoot>
+          <tfoot className={styles['mono__table--foot']}></tfoot>
         </table>
       </div>
-      <Pagination {...pagination} total={dataSource.length} />
-    </div>
+      <div className={styles['mono__table--extra']}>
+        {rowSelection && (
+          <div className={styles['mono__table--extra-selected-count']}>
+            Selected {selectedRows.length}/{dataSource.length} item(s)
+          </div>
+        )}
+        {pagination && (
+          <Pagination
+            {...pagination}
+            total={pagination.total || dataSource.length}
+            onChange={onDefaultPaginationChange}
+            current={currentPage}
+          />
+        )}
+      </div>
+    </>
   );
 };
 
@@ -250,6 +357,10 @@ Table.defaultProps = {
   bordered: false,
   striped: false,
   hover: false,
+  rowSelection: null,
+  pagination: null,
+  loading: false,
+  renderNoData: renderDefaultNoData,
 };
 
 Table.propTypes = {
@@ -264,7 +375,22 @@ Table.propTypes = {
     })
   ).isRequired,
   dataSource: PropTypes.array.isRequired,
-  selectable: PropTypes.bool,
+  rowSelection: PropTypes.object,
+  /**
+   * columnWidth
+   * columnTitle
+   * fixed
+   * getCheckboxProps
+   * hideDefaultSelections
+   * renderCell
+   * selectedRowKeys
+   * selections
+   * type: checkbox | radio
+   * onChange
+   * onSelect: Callback executed when select/deselect one row
+   * onSelectAll
+   * onSelectInvert
+   */
   bordered: PropTypes.bool,
   striped: PropTypes.bool,
   hover: PropTypes.bool,
@@ -273,17 +399,21 @@ Table.propTypes = {
   sorting: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
-      sortDirection: PropTypes.oneOf(["ascending", "descending"]),
+      sortDirection: PropTypes.oneOf(['ascending', 'descending']),
     })
   ),
   pagination: PropTypes.objectOf({
-    current: PropTypes.number,
-    pageSize: PropTypes.number,
-    pageSizeOptions: PropTypes.array,
+    current: PropTypes.number.isRequired,
+    pageSize: PropTypes.number.isRequired,
+    pageSizeOptions: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ),
     total: PropTypes.number,
     onChange: PropTypes.func,
     onShowSizeChange: PropTypes.func,
   }),
+  loading: PropTypes.bool,
+  renderNoData: PropTypes.func,
 };
 
 export default Table;
