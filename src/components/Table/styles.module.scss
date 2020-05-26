@@ -36,6 +36,7 @@
     &.separated {
       border-collapse: separate;
     }
+
     &--head {
       .checkbox {
         width: fit-content;
@@ -49,6 +50,20 @@
     }
     &--foot {
     }
+  }
+}
+
+.mono__table--extra {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  &-selected-count {
+    font-family: Inconsolata, Montserrat, Arial;
+  }
+
+  ul {
+    flex: 1;
   }
 }
 

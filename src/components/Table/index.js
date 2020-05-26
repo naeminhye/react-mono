@@ -264,13 +264,19 @@ const Table = (props) => {
                       >
                         <CheckBox
                           checked={
+                            //
                             data.key
                               ? selectedRows.indexOf(data.key) !== -1
-                              : selectedRows.indexOf(rowIndex) !== -1
+                              : // : selectedRows.indexOf(rowIndex) !== -1
+                                selectedRows.indexOf(
+                                  (currentPage - 1) * pageSize + rowIndex
+                                ) !== -1
                           }
                           onChange={(event) => {
                             let checked = event.target.checked;
-                            let key = data.key || rowIndex;
+                            let key =
+                              data.key ||
+                              (currentPage - 1) * pageSize + rowIndex;
                             let selectedRowKeys = [...selectedRows];
 
                             if (
@@ -327,14 +333,21 @@ const Table = (props) => {
           <tfoot className={styles['mono__table--foot']}></tfoot>
         </table>
       </div>
-      {pagination && (
-        <Pagination
-          {...pagination}
-          total={pagination.total || dataSource.length}
-          onChange={onDefaultPaginationChange}
-          current={currentPage}
-        />
-      )}
+      <div className={styles['mono__table--extra']}>
+        {rowSelection && (
+          <div className={styles['mono__table--extra-selected-count']}>
+            Selected {selectedRows.length}/{dataSource.length} item(s)
+          </div>
+        )}
+        {pagination && (
+          <Pagination
+            {...pagination}
+            total={pagination.total || dataSource.length}
+            onChange={onDefaultPaginationChange}
+            current={currentPage}
+          />
+        )}
+      </div>
     </>
   );
 };
