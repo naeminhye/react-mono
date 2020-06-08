@@ -87,3 +87,5 @@ const App = () => (
 - [ ] [Add **Timeline** component.](https://www.w3schools.com/howto/howto_css_timeline.asp)
 - [ ] Add **Message, Alert, Notification, Toast...** component.
 - [ ] ThemeProvider
+- [ ] [Transition](https://react.semantic-ui.com/modules/transition/#types-transition)
+- [ ] [Dropdown](https://react.semantic-ui.com/modules/dropdown/)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Button } from 'components';
+import { Table, Tag, Button, Tabs } from 'components';
 
 // import data from './mock/userData';
 
@@ -167,9 +167,9 @@ const App = () => {
         Hello
       </Modal>
       <Breadcrumb></Breadcrumb>
-      <Editor placeholder="Edit" textAlignment="center" />
+      <Editor placeholder="Edit" textAlignment="center" />*/}
       <Tabs
-        direction="vertical"
+        // direction="vertical"
         roundCornered
         bordered
         activeIndex={activeIndex}
@@ -177,7 +177,7 @@ const App = () => {
           setActiveIndex(activeIndex);
         }}
         tabs={tabs}
-      /> */}
+      />
       <Table
         columns={columns}
         dataSource={dataSource}
