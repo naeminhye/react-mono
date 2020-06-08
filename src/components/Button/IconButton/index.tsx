@@ -3,9 +3,22 @@ import classNames from 'classnames';
 import styles from '../styles.module.scss';
 import Button from '../index';
 
-const IconButton = (props) => {
-  const { className, size, shape, children, ...others } = props;
+export interface IconButtonProps {
+  shape?: 'circle' | 'round' | 'square';
+  className?: string;
+  children?: string;
+  type?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+}
 
+const IconButton = ({
+  className = '',
+  size = 'md',
+  shape = 'square',
+  children,
+  ...others
+}: IconButtonProps) => {
   const classes = classNames({
     [styles[`mono__icon-btn`]]: true,
     [className]: className,
