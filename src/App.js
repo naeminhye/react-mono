@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Button, Tabs } from 'components';
+import { Table, Tag, Button, Tabs, Input } from 'components';
 
 // import data from './mock/userData';
 
@@ -147,6 +147,7 @@ const App = () => {
 
   return (
     <div>
+      <Input.Number bordered />
       {/* <Button
         shape="round"
         size="xs"
