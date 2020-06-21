@@ -9,6 +9,23 @@
   font-size: 18px;
   color: $clr_eclipse;
 
+  /** sizes */
+  &--size-xs {
+    .mono__dropdown--input-text {
+      line-height: 32px;
+    }
+    .mono__dropdown__list {
+      top: 30px;
+    }
+  }
+  &--size-sm {
+    line-height: 36px;
+  }
+
+  &--size-lg {
+    line-height: 48px;
+  }
+
   //   @media (min-width: 768px) {
   //     width: 70%;
   //   }

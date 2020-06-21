@@ -147,7 +147,6 @@ const App = () => {
 
   return (
     <div>
-      <Input.Number bordered />
       {/* <Button
         shape="round"
         size="xs"
@@ -169,8 +168,7 @@ const App = () => {
       </Modal>
       <Breadcrumb></Breadcrumb>
       <Editor placeholder="Edit" textAlignment="center" />*/}
-      <Tabs
-        // direction="vertical"
+      {/* <Tabs
         roundCornered
         bordered
         activeIndex={activeIndex}
@@ -178,7 +176,7 @@ const App = () => {
           setActiveIndex(activeIndex);
         }}
         tabs={tabs}
-      />
+      /> */}
       <Table
         columns={columns}
         dataSource={dataSource}
