@@ -3,7 +3,19 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
-import { Icons } from '../index';
+import Icons from '../Icons';
+import DropDown from '../DropDown';
+
+const showPageSizeOptions = (options) => {
+  let result = [];
+  options.forEach((op) => {
+    result.push({
+      value: op,
+      label: op,
+    });
+  });
+  return result;
+};
 
 const Pagination = (props) => {
   const {
@@ -13,11 +25,13 @@ const Pagination = (props) => {
     className,
     onChange,
     onShowSizeChange,
+    pageSizeOptions,
     ...others
   } = props;
   const [currentPage, setCurrentPage] = useState(current);
+  const [_pageSize, setPageSize] = useState(pageSize);
 
-  const getNumOfPgs = (_total = total, _size = pageSize) => {
+  const getNumOfPgs = (_total = total, _size = _pageSize) => {
     return _total % _size > 0
       ? Math.floor(_total / _size) + 1
       : Math.floor(_total / _size);
@@ -31,12 +45,14 @@ const Pagination = (props) => {
   const prev = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
+      onChange && onChange(currentPage - 1);
     }
   };
 
   const next = () => {
     if (currentPage !== getNumOfPgs()) {
       setCurrentPage(currentPage + 1);
+      onChange && onChange(currentPage + 1);
     }
   };
 
@@ -85,6 +101,20 @@ const Pagination = (props) => {
       >
         <Icons.ArrowRight size={18} />
       </li>
+      {pageSizeOptions && (
+        <li className={styles['mono__pagination--options']}>
+          <DropDown
+            size="xs"
+            style={{ width: '100px' }}
+            value={pageSizeOptions[0]}
+            options={showPageSizeOptions(pageSizeOptions)}
+            onChange={(targetPageSize) => {
+              setPageSize(targetPageSize);
+              onShowSizeChange(currentPage, parseInt(targetPageSize));
+            }}
+          />
+        </li>
+      )}
     </ul>
   );
 };

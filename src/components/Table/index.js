@@ -42,7 +42,9 @@ const Table = (props) => {
   const [currentPage, setCurrentPage] = useState(
     (pagination && pagination.current) || 1
   );
-  const [pageSize] = useState((pagination && pagination.pageSize) || 1);
+  const [pageSize, setPageSize] = useState(
+    (pagination && pagination.pageSize) || 1
+  );
   const tableRef = useRef(null);
 
   const classes = classNames({
@@ -147,6 +149,13 @@ const Table = (props) => {
   const onDefaultPaginationChange = (targetPage) => {
     setCurrentPage(targetPage);
     pagination.onChange(targetPage);
+  };
+
+  const onDefaultShowSizeChange = (currentPage, pageSize) => {
+    console.log('===', currentPage, pageSize);
+    setCurrentPage(1);
+    setPageSize(pageSize);
+    pagination.onShowSizeChange(currentPage, pageSize);
   };
 
   return (
@@ -344,6 +353,7 @@ const Table = (props) => {
             {...pagination}
             total={pagination.total || dataSource.length}
             onChange={onDefaultPaginationChange}
+            onShowSizeChange={onDefaultShowSizeChange}
             current={currentPage}
           />
         )}

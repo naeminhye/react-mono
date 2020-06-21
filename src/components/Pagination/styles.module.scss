@@ -1,4 +1,4 @@
-@import "../common/settings";
+@import '../common/settings';
 
 .mono__pagination {
   font-family: Inconsolata, Montserrat, Arial;
@@ -42,5 +42,7 @@
       color: #fff;
       border-color: #0a3961;
     }
+  }
+  &--options {
   }
 }
