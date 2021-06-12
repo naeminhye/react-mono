@@ -8,8 +8,21 @@ import CheckBox from "../CheckBox";
 
 import styles from "./styles.module.scss";
 
+const recursiveSearch = (obj, searchKey, results = []) => {
+  const r = results;
+  Object.keys(obj).forEach((key) => {
+    const value = obj[key];
+    if (key === searchKey && typeof value !== "object") {
+      r.push(value);
+    } else if (typeof value === "object") {
+      recursiveSearch(value, searchKey, r);
+    }
+  });
+  return r;
+};
+
 const getAllChildKeys = (children) =>
-  children && children.length > 0 ? children.map((item) => item.value) : [];
+  children && children.length > 0 ? recursiveSearch(children, "value") : [];
 
 const SingleTree = ({ value, title, children, ...others }) => {
   const {
@@ -33,7 +46,6 @@ const SingleTree = ({ value, title, children, ...others }) => {
     setCheckedList = () => {},
   } = others;
 
-  // TODO: get deeper
   const childKeys = useMemo(() => getAllChildKeys(children), [children]);
 
   const collapsed = useMemo(
@@ -153,7 +165,7 @@ const SingleTree = ({ value, title, children, ...others }) => {
         event: e,
       });
     },
-    [checked, checkedList, onCheck, setCheckedList, value]
+    [checked, checkedList, childKeys, onCheck, setCheckedList, value]
   );
 
   return (
