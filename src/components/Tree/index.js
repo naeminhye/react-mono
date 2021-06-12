@@ -37,7 +37,7 @@ const SingleTree = ({ value, title, children, ...others }) => {
     expandedIcon,
     selectable = false,
     multiple = false,
-    checkable = true,
+    checkable = false,
     selectedList = [],
     setSelectedList = () => {},
     expandedList = [],
