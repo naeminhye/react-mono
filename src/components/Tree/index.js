@@ -1,11 +1,15 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
 import Icons from "../Icons";
+import CheckBox from "../CheckBox";
 
 import styles from "./styles.module.scss";
+
+const getAllChildKeys = (children) =>
+  children && children.length > 0 ? children.map((item) => item.value) : [];
 
 const SingleTree = ({ value, title, children, ...others }) => {
   const {
@@ -13,15 +17,24 @@ const SingleTree = ({ value, title, children, ...others }) => {
     treeViewClassName,
     childrenClassName,
     switcherClassName,
-    onExpand,
+    onExpand = () => {},
+    onSelect = () => {},
+    onCheck = () => {},
     collapsedIcon,
     expandedIcon,
     selectable = false,
+    multiple = false,
+    checkable = true,
     selectedList = [],
     setSelectedList = () => {},
     expandedList = [],
     setExpandedList = () => {},
+    checkedList = [],
+    setCheckedList = () => {},
   } = others;
+
+  // TODO: get deeper
+  const childKeys = useMemo(() => getAllChildKeys(children), [children]);
 
   const collapsed = useMemo(
     () => expandedList.indexOf(value) === -1,
@@ -32,6 +45,43 @@ const SingleTree = ({ value, title, children, ...others }) => {
     () => selectedList.indexOf(value) !== -1,
     [selectedList, value]
   );
+
+  const isHalfCheck = useMemo(() => {
+    if (childKeys.length > 0) {
+      const isCheckedAll = childKeys.every(
+        (item) => checkedList.indexOf(item) !== -1
+      );
+      const atLeastOne = childKeys.some(
+        (item) => checkedList.indexOf(item) !== -1
+      );
+      return atLeastOne && !isCheckedAll;
+    }
+    return false;
+  }, [checkedList, childKeys]);
+
+  // If this node is included in the `checkedList` => checked
+  const checked = useMemo(
+    () => checkedList.indexOf(value) !== -1,
+    [checkedList, value]
+  );
+
+  /**
+   * If all child nodes are checked => add this node to the `checkedList`
+   */
+  useEffect(() => {
+    if (childKeys.length > 0) {
+      const isCheckedAll = childKeys.every(
+        (item) => checkedList.indexOf(item) !== -1
+      );
+
+      if (isCheckedAll && checkedList.indexOf(value) === -1) {
+        setCheckedList([...checkedList, value]);
+      } else if (!isCheckedAll && checkedList.indexOf(value) !== -1) {
+        // Remove from checkedList
+        setCheckedList(checkedList.filter((key) => key !== value));
+      }
+    }
+  }, [checkedList, childKeys, setCheckedList, value]);
 
   const handleExpand = useCallback(() => {
     const isExpanding = collapsed;
@@ -45,13 +95,13 @@ const SingleTree = ({ value, title, children, ...others }) => {
       // Remove this key from expandedList
       setExpandedList(expandedList.filter((key) => key !== value));
     }
-    onExpand && onExpand(value, isExpanding);
+    onExpand(expandedList, { expanded: isExpanding, current: value });
   }, [collapsed, expandedList, onExpand, setExpandedList, value]);
 
   const handleSelect = useCallback(
     (e) => {
       const isSelecting = !selected;
-      const isMulti = e.metaKey || e.ctrlKey;
+      const isMulti = multiple && (e.metaKey || e.ctrlKey);
 
       // Selecting
       if (isSelecting) {
@@ -65,8 +115,45 @@ const SingleTree = ({ value, title, children, ...others }) => {
           isMulti ? selectedList.filter((key) => key !== value) : []
         );
       }
+      onSelect(selectedList, {
+        selected: isSelecting,
+        current: value,
+        event: e,
+      });
     },
-    [selected, selectedList, setSelectedList, value]
+    [multiple, onSelect, selected, selectedList, setSelectedList, value]
+  );
+
+  const handleCheck = useCallback(
+    (e) => {
+      const isChecking = !checked;
+
+      // Selecting
+      if (isChecking) {
+        setCheckedList([
+          ...checkedList,
+          // Add this key to selectedList
+          value,
+          // Check all children nodes
+          ...childKeys,
+        ]);
+      }
+      // Deselecting
+      else {
+        // Remove this key from selectedList
+        setCheckedList(
+          checkedList.filter(
+            (key) => key !== value && childKeys.indexOf(key) === -1
+          )
+        );
+      }
+      onCheck(checkedList, {
+        checked: isChecking,
+        current: value,
+        event: e,
+      });
+    },
+    [checked, checkedList, onCheck, setCheckedList, value]
   );
 
   return (
@@ -95,6 +182,15 @@ const SingleTree = ({ value, title, children, ...others }) => {
               : expandedIcon || <Icons.ArrowDown size={8} />
             : null}
         </span>
+        {checkable && (
+          <span className={styles[`mono__tree--item-checkbox`]}>
+            <CheckBox
+              checked={checked}
+              onChange={handleCheck}
+              halfCheck={isHalfCheck}
+            />
+          </span>
+        )}
         <span
           className={classNames({
             [styles[`mono__tree--item-title`]]: true,
@@ -131,6 +227,7 @@ const Tree = ({
   dataSource,
   defaultSelectedKeys = [],
   defaultExpandedKeys = [],
+  defaultCheckedKeys = [],
   ...others
 }) => {
   const classes = classNames({
@@ -140,6 +237,7 @@ const Tree = ({
 
   const [expandedList, setExpandedList] = useState(defaultExpandedKeys);
   const [selectedList, setSelectedList] = useState(defaultSelectedKeys);
+  const [checkedList, setCheckedList] = useState(defaultCheckedKeys);
 
   return (
     <div className={classes}>
@@ -149,10 +247,12 @@ const Tree = ({
             <SingleTree
               {...node}
               {...others}
-              setExpandedList={setExpandedList}
               expandedList={expandedList}
+              setExpandedList={setExpandedList}
               selectedList={selectedList}
               setSelectedList={setSelectedList}
+              checkedList={checkedList}
+              setCheckedList={setCheckedList}
             />
           </div>
         );
