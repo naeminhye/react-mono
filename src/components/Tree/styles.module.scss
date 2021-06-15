@@ -1,0 +1,43 @@
+@import "../common/settings";
+
+.mono__tree {
+  font-family: Inconsolata, Montserrat, Arial;
+  overflow-y: hidden;
+  cursor: pointer;
+
+  &--switcher {
+    width: 16px;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &--children {
+    margin-left: 16px;
+
+    &-collapsed {
+      height: 0px;
+    }
+  }
+  &--item {
+    height: 24px;
+    display: flex;
+    align-items: center;
+
+    &-title {
+      padding: 2px 4px;
+    }
+    &-title:hover {
+      background-color: $clr_whisper;
+    }
+    &-title-selected,
+    &-title-selected:hover {
+      background-color: $clr_classic_blue;
+      color: $clr_white;
+    }
+
+    &-checkbox {
+      margin-right: 8px;
+    }
+  }
+}

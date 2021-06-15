@@ -27,6 +27,7 @@ import Tabs from './Tabs';
 import Tag from './Tag';
 import ToggleSwitch from './ToggleSwitch';
 import Tooltip from './Tooltip';
+import Tree from './Tree';
 import Uploader from './Uploader';
 
 export {
@@ -59,5 +60,6 @@ export {
   Tag,
   ToggleSwitch,
   Tooltip,
+  Tree,
   Uploader,
 };
