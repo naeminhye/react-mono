@@ -8,11 +8,16 @@
     font-family: Inconsolata, Montserrat, Arial;
     width: 100%;
     border-collapse: collapse;
-    td,
-    th {
+    white-space: nowrap;
+    display: table;
+    box-sizing: border-box;
+    display: table;
+    &--td,
+    &--th {
       padding: 15px;
+      display: table-cell;
     }
-    th {
+    &--th {
       .mono__table--sort-icon {
         float: right;
         cursor: pointer;
@@ -21,14 +26,14 @@
     &.bordered {
       @include defaultBorder();
       border-collapse: collapse;
-      td,
-      th {
+      .mono__table--td,
+      .mono__table--th {
         @include defaultBorder();
       }
     }
     &.striped {
       .mono__table--body {
-        tr:nth-child(odd) {
+        &.mono__table--tr:nth-child(odd) {
           background-color: #f2f2f2;
         }
       }
@@ -47,6 +52,9 @@
         width: fit-content;
         text-align: center;
       }
+    }
+    &--tr {
+      display: table-row;
     }
     &--foot {
     }
