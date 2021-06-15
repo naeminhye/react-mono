@@ -64,25 +64,27 @@ const Table = (props) => {
       shouldSwitch,
       switchcount = 0;
     table = tableRef.current;
+
     switching = true;
     //Set the sorting direction to ascending:
     /*Make a loop that will continue until
       no switching has been done:*/
     while (switching) {
-      //start by saying: no switching is done:
+      // start by saying: no switching is done:
       switching = false;
-      rows = table.rows;
-      /*Loop through all table rows (except the
-        first, which contains table headers):*/
+      rows = table.children;
+      /** Loop through all table rows (except the
+       *  first, which contains table headers): */
       for (i = 1; i < rows.length - 1; i++) {
         //start by saying there should be no switching:
         shouldSwitch = false;
-        /*Get the two elements you want to compare,
-          one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName('TD')[colIndex];
-        y = rows[i + 1].getElementsByTagName('TD')[colIndex];
+        /** Get the two elements you want to compare,
+         *  one from current row and one from the next: */
+        x = rows[i].children[colIndex];
+        y = rows[i + 1].children[colIndex];
         /*check if the two rows should switch place,
           based on the direction, asc or desc:*/
+
         if (isAsc) {
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
             //if so, mark as a switch and break the loop:
@@ -91,18 +93,18 @@ const Table = (props) => {
           }
         } else {
           if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop:
+            // if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
           }
         }
 
         // numerical sorting
-        // if (Number(x.innerHTML) > Number(y.innerHTML)) {
-        //   //if so, mark as a switch and break the loop:
-        //   shouldSwitch = true;
-        //   break;
-        // }
+        if (Number(x.innerHTML) > Number(y.innerHTML)) {
+          // if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
       }
       if (shouldSwitch) {
         /*If a switch has been marked, make the switch
@@ -152,7 +154,6 @@ const Table = (props) => {
   };
 
   const onDefaultShowSizeChange = (currentPage, pageSize) => {
-    console.log('===', currentPage, pageSize);
     setCurrentPage(1);
     setPageSize(pageSize);
     pagination.onShowSizeChange(currentPage, pageSize);
@@ -161,186 +162,231 @@ const Table = (props) => {
   return (
     <>
       <div className={styles['mono__table--container']}>
-        <table className={classes} {...others} ref={tableRef}>
-          <thead className={styles['mono__table--head']}>
-            <tr>
-              {rowSelection && (
-                <th className={styles['checkbox']}>
-                  {/* Select/Deselect All Checkbox */}
-                  <CheckBox
-                    halfCheck={
-                      dataSource.length > selectedRows.length &&
-                      selectedRows.length > 0
-                    }
-                    checked={dataSource.length === selectedRows.length}
-                    onChange={(event) => {
-                      let checkedAll = event.target.checked;
-                      let selectedRowKeys = [];
-                      if (checkedAll) {
-                        dataSource.map((data, rowIndex) => {
-                          let key = data.key || rowIndex;
-                          if (selectedRowKeys.indexOf(key) === -1) {
-                            selectedRowKeys.push(key);
-                          }
-                          return null;
-                        });
-                      }
-                      setSelectedRows(selectedRowKeys);
-                      if (rowSelection) {
-                        // Callback executed when select/deselect all rows
-                        if (rowSelection.onSelectAll) {
-                          rowSelection.onSelectAll(checkedAll, selectedRowKeys);
+        <div className={classes} {...others} ref={tableRef}>
+          {/* Check Loading Status */}
+          <div
+            className={classNames(
+              styles['mono__table--head'],
+              styles['mono__table--tr']
+            )}
+          >
+            {rowSelection && (
+              <div
+                className={classNames(
+                  styles['checkbox'],
+                  styles['mono__table--th']
+                )}
+              >
+                {/* Select/Deselect All Checkbox */}
+                <CheckBox
+                  halfCheck={
+                    dataSource.length > selectedRows.length &&
+                    selectedRows.length > 0
+                  }
+                  checked={dataSource.length === selectedRows.length}
+                  onChange={(event) => {
+                    let checkedAll = event.target.checked;
+                    let selectedRowKeys = [];
+                    if (checkedAll) {
+                      dataSource.map((data, rowIndex) => {
+                        let key = data.key || rowIndex;
+                        if (selectedRowKeys.indexOf(key) === -1) {
+                          selectedRowKeys.push(key);
                         }
-                      }
-                    }}
-                  />
-                </th>
-              )}
-              {columns.map((col, colIndex) => {
-                let sortIcon = null;
-                if (col.sortable) {
-                  sortIcon = <Icons.Sort size={16} fill="gray" />;
-                  if (sortingRule && sortingRule.colIndex === colIndex) {
-                    if (sortingRule.sortDirection) {
-                      //=== "ascending"
-                      sortIcon = <Icons.SortDown size={16} fill="gray" />;
-                    } else {
-                      // === "descending"
-                      sortIcon = <Icons.SortUp size={16} fill="gray" />;
+                        return null;
+                      });
                     }
+                    setSelectedRows(selectedRowKeys);
+                    if (rowSelection) {
+                      // Callback executed when select/deselect all rows
+                      if (rowSelection.onSelectAll) {
+                        rowSelection.onSelectAll(checkedAll, selectedRowKeys);
+                      }
+                    }
+                  }}
+                />
+              </div>
+            )}
+            {columns.map((col, index) => {
+              const colIndex = rowSelection ? index + 1 : index;
+              let sortIcon = null;
+              if (col.sortable) {
+                sortIcon = <Icons.Sort size={16} fill="gray" />;
+                if (sortingRule && sortingRule.colIndex === colIndex) {
+                  if (sortingRule.sortDirection) {
+                    //=== "ascending"
+                    sortIcon = <Icons.SortDown size={16} fill="gray" />;
+                  } else {
+                    // === "descending"
+                    sortIcon = <Icons.SortUp size={16} fill="gray" />;
                   }
                 }
-                return (
-                  <th key={col.key}>
-                    {col.title}
-                    {sortIcon && (
+              }
+              return (
+                <div key={col.key} className={styles['mono__table--th']}>
+                  {col.title}
+                  {sortIcon && (
+                    <div
+                      onClick={() => handleSort(colIndex)}
+                      className={styles['mono__table--sort-icon']}
+                    >
+                      {sortIcon}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {loading ? (
+            <div
+              className={classNames(
+                styles['mono__table--body'],
+                styles['mono__table--tr']
+              )}
+            >
+              <div
+                colSpan={rowSelection ? columns.length + 1 : columns.length}
+                className={classNames(
+                  styles['table-cell-loader'],
+                  styles['mono__table--td']
+                )}
+              >
+                <LoadingRows rows={5} loading={loading} />
+              </div>
+            </div>
+          ) : getShownData().length > 0 ? (
+            getShownData().map((data, rowIndex) => {
+              let keys = Object.keys(data);
+              let row = [];
+              columns.map((col) => {
+                if (keys.indexOf(col.dataIndex) !== -1) {
+                  if (!col.render) {
+                    row.push(
                       <div
-                        onClick={() => handleSort(colIndex)}
-                        className={styles['mono__table--sort-icon']}
+                        className={styles['mono__table--td']}
+                        key={col.dataIndex}
                       >
-                        {sortIcon}
+                        {data[col.dataIndex]}
                       </div>
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-          {/* Check Loading Status */}
-          <tbody className={styles['mono__table--body']}>
-            {loading ? (
-              <tr>
-                <td
-                  colSpan={rowSelection ? columns.length + 1 : columns.length}
-                  className={styles['table-cell-loader']}
-                >
-                  <LoadingRows rows={5} loading={loading} />
-                </td>
-              </tr>
-            ) : getShownData().length > 0 ? (
-              getShownData().map((data, rowIndex) => {
-                let keys = Object.keys(data);
-                let row = [];
-                columns.map((col) => {
-                  if (keys.indexOf(col.dataIndex) !== -1) {
-                    if (!col.render) {
-                      row.push(
-                        <td key={col.dataIndex}>{data[col.dataIndex]}</td>
-                      );
-                    } else {
-                      row.push(
-                        <td key={col.dataIndex}>
-                          {col.render(data[col.dataIndex], data)}
-                        </td>
-                      );
-                    }
+                    );
                   } else {
-                    if (!col.render) {
-                      row.push(<td key={col.key}></td>);
-                    } else {
-                      row.push(<td key={col.key}>{col.render(null, data)}</td>);
-                    }
-                  }
-                  return null;
-                });
-
-                return (
-                  <tr key={`row--${data.key || rowIndex}`}>
-                    {rowSelection && (
-                      <td
-                        key={`row--${data.key || rowIndex}--checkbox`}
-                        className={styles['checkbox']}
+                    row.push(
+                      <div
+                        className={styles['mono__table--td']}
+                        key={col.dataIndex}
                       >
-                        <CheckBox
-                          checked={
-                            //
-                            data.key
-                              ? selectedRows.indexOf(data.key) !== -1
-                              : // : selectedRows.indexOf(rowIndex) !== -1
-                                selectedRows.indexOf(
-                                  (currentPage - 1) * pageSize + rowIndex
-                                ) !== -1
-                          }
-                          onChange={(event) => {
-                            let checked = event.target.checked;
-                            let key =
-                              data.key ||
-                              (currentPage - 1) * pageSize + rowIndex;
-                            let selectedRowKeys = [...selectedRows];
+                        {col.render(data[col.dataIndex], data)}
+                      </div>
+                    );
+                  }
+                } else {
+                  if (!col.render) {
+                    row.push(
+                      <div
+                        className={styles['mono__table--td']}
+                        key={col.key}
+                      ></div>
+                    );
+                  } else {
+                    row.push(
+                      <div className={styles['mono__table--td']} key={col.key}>
+                        {col.render(null, data)}
+                      </div>
+                    );
+                  }
+                }
+                return null;
+              });
 
-                            if (
-                              checked &&
-                              selectedRowKeys.indexOf(key) === -1
-                            ) {
-                              selectedRowKeys.push(key);
-                            } else if (
-                              !checked &&
-                              selectedRowKeys.indexOf(key) !== -1
-                            ) {
-                              selectedRowKeys.splice(
-                                selectedRowKeys.indexOf(key),
-                                1
+              return (
+                <div
+                  className={classNames(
+                    styles['mono__table--body'],
+                    styles['mono__table--tr']
+                  )}
+                  key={`row--${data.key || rowIndex}`}
+                >
+                  {rowSelection && (
+                    <div
+                      key={`row--${data.key || rowIndex}--checkbox`}
+                      className={classNames(
+                        styles['checkbox'],
+                        styles['mono__table--td']
+                      )}
+                    >
+                      <CheckBox
+                        checked={
+                          //
+                          data.key
+                            ? selectedRows.indexOf(data.key) !== -1
+                            : // : selectedRows.indexOf(rowIndex) !== -1
+                              selectedRows.indexOf(
+                                (currentPage - 1) * pageSize + rowIndex
+                              ) !== -1
+                        }
+                        onChange={(event) => {
+                          let checked = event.target.checked;
+                          let key =
+                            data.key || (currentPage - 1) * pageSize + rowIndex;
+                          let selectedRowKeys = [...selectedRows];
+
+                          if (checked && selectedRowKeys.indexOf(key) === -1) {
+                            selectedRowKeys.push(key);
+                          } else if (
+                            !checked &&
+                            selectedRowKeys.indexOf(key) !== -1
+                          ) {
+                            selectedRowKeys.splice(
+                              selectedRowKeys.indexOf(key),
+                              1
+                            );
+                          }
+
+                          setSelectedRows(selectedRowKeys);
+
+                          if (rowSelection) {
+                            // Callback executed when select/deselect one row
+                            if (rowSelection.onSelect) {
+                              rowSelection.onSelect(
+                                data, // record of row data
+                                checked, // true or false
+                                selectedRowKeys,
+                                event // nativeEvent
                               );
                             }
-
-                            setSelectedRows(selectedRowKeys);
-
-                            if (rowSelection) {
-                              // Callback executed when select/deselect one row
-                              if (rowSelection.onSelect) {
-                                rowSelection.onSelect(
-                                  data, // record of row data
-                                  checked, // true or false
-                                  selectedRowKeys,
-                                  event // nativeEvent
-                                );
-                              }
-                              // Callback executed when selected rows change
-                              if (rowSelection.onChange) {
-                                rowSelection.onChange(selectedRowKeys);
-                              }
+                            // Callback executed when selected rows change
+                            if (rowSelection.onChange) {
+                              rowSelection.onChange(selectedRowKeys);
                             }
-                          }}
-                        />
-                      </td>
-                    )}
-                    {row}
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td
-                  colSpan={rowSelection ? columns.length + 1 : columns.length}
-                  className={styles['table-cell-loader']}
-                >
-                  {renderNoData()}
-                </td>
-              </tr>
-            )}
-          </tbody>
-          <tfoot className={styles['mono__table--foot']}></tfoot>
-        </table>
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+                  {row}
+                </div>
+              );
+            })
+          ) : (
+            <div
+              className={classNames(
+                styles['mono__table--body'],
+                styles['mono__table--tr']
+              )}
+            >
+              <div
+                colSpan={rowSelection ? columns.length + 1 : columns.length}
+                className={classNames(
+                  styles['table-cell-loader'],
+                  styles['mono__table--td']
+                )}
+              >
+                {renderNoData()}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles['mono__table--extra']}>
         {rowSelection && (
