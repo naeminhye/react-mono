@@ -9,17 +9,20 @@ const columns = [
     key: 'name',
     dataIndex: 'name',
     sortable: true,
+    align: 'center',
   },
   {
     title: 'Gender',
     key: 'gender',
     dataIndex: 'gender',
     render: (value) => (value ? <Tag>Male</Tag> : <Tag>Female</Tag>),
+    align: 'center',
   },
   {
     title: 'Phone',
     key: 'phone',
     dataIndex: 'phone',
+    align: 'right',
   },
   {
     title: 'Address',

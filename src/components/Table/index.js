@@ -223,7 +223,14 @@ const Table = (props) => {
                 }
               }
               return (
-                <div key={col.key} className={styles['mono__table--th']}>
+                <div
+                  key={col.key}
+                  className={classNames([
+                    styles['mono__table--th'],
+                    styles[`mono__table--td-${col.align || 'left'}`],
+                  ])}
+                  //  className={styles['mono__table--th']}
+                >
                   {col.title}
                   {sortIcon && (
                     <div
@@ -264,7 +271,10 @@ const Table = (props) => {
                   if (!col.render) {
                     row.push(
                       <div
-                        className={styles['mono__table--td']}
+                        className={classNames([
+                          styles['mono__table--td'],
+                          styles[`mono__table--td-${col.align || 'left'}`],
+                        ])}
                         key={col.dataIndex}
                       >
                         {data[col.dataIndex]}
@@ -273,7 +283,10 @@ const Table = (props) => {
                   } else {
                     row.push(
                       <div
-                        className={styles['mono__table--td']}
+                        className={classNames([
+                          styles['mono__table--td'],
+                          styles[`mono__table--td-${col.align || 'left'}`],
+                        ])}
                         key={col.dataIndex}
                       >
                         {col.render(data[col.dataIndex], data)}
@@ -284,13 +297,22 @@ const Table = (props) => {
                   if (!col.render) {
                     row.push(
                       <div
-                        className={styles['mono__table--td']}
+                        className={classNames([
+                          styles['mono__table--td'],
+                          styles[`mono__table--td-${col.align || 'left'}`],
+                        ])}
                         key={col.key}
                       ></div>
                     );
                   } else {
                     row.push(
-                      <div className={styles['mono__table--td']} key={col.key}>
+                      <div
+                        className={classNames([
+                          styles['mono__table--td'],
+                          styles[`mono__table--td-${col.align || 'left'}`],
+                        ])}
+                        key={col.key}
+                      >
                         {col.render(null, data)}
                       </div>
                     );
