@@ -6,6 +6,7 @@ import Carousel from './Carousel';
 import CheckBox from './CheckBox';
 import CheckGroup from './CheckGroup';
 import Collapse from './Collapse';
+import Cursor from './Cursor';
 import DatePicker from './DatePicker';
 import FlipCard from './FlipCard';
 import DropDown from './DropDown';
@@ -39,6 +40,7 @@ export {
   CheckBox,
   CheckGroup,
   Collapse,
+  Cursor,
   DatePicker,
   DropDown,
   Input,
