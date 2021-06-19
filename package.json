@@ -34,6 +34,7 @@
     "cleave.js": "^1.6.0",
     "draft-js": "^0.11.5",
     "fabric-webpack": "^1.6.0-rc.1",
+    "gsap": "^3.7.0",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
