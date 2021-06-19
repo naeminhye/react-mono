@@ -23,7 +23,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf build && rm -rf dist",
     "prepublish": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
@@ -31,14 +30,10 @@
     "generate": "node ./tools/generate.js"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
     "cleave.js": "^1.6.0",
     "draft-js": "^0.11.5",
     "fabric-webpack": "^1.6.0-rc.1",
-    "generate-template-files": "^2.3.1",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
@@ -65,6 +60,7 @@
   "devDependencies": {
     "@babel/cli": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
+    "generate-template-files": "^3.0.0",
     "gh-pages": "^2.2.0"
   }
 }
