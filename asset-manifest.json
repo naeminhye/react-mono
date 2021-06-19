@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-mono-storybook/static/css/main.3a1a36f1.chunk.css",
+    "main.js": "/react-mono-storybook/static/js/main.63d63489.chunk.js",
+    "main.js.map": "/react-mono-storybook/static/js/main.63d63489.chunk.js.map",
+    "runtime-main.js": "/react-mono-storybook/static/js/runtime-main.a058d739.js",
+    "runtime-main.js.map": "/react-mono-storybook/static/js/runtime-main.a058d739.js.map",
+    "static/js/2.f53427bd.chunk.js": "/react-mono-storybook/static/js/2.f53427bd.chunk.js",
+    "static/js/2.f53427bd.chunk.js.map": "/react-mono-storybook/static/js/2.f53427bd.chunk.js.map",
+    "index.html": "/react-mono-storybook/index.html",
+    "precache-manifest.83cd8bcca8e2eead8fd70bce9447de95.js": "/react-mono-storybook/precache-manifest.83cd8bcca8e2eead8fd70bce9447de95.js",
+    "service-worker.js": "/react-mono-storybook/service-worker.js",
+    "static/css/main.3a1a36f1.chunk.css.map": "/react-mono-storybook/static/css/main.3a1a36f1.chunk.css.map",
+    "static/js/2.f53427bd.chunk.js.LICENSE.txt": "/react-mono-storybook/static/js/2.f53427bd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a058d739.js",
+    "static/js/2.f53427bd.chunk.js",
+    "static/css/main.3a1a36f1.chunk.css",
+    "static/js/main.63d63489.chunk.js"
+  ]
+}
