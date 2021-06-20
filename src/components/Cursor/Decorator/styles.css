@@ -10,13 +10,4 @@
     pointer-events: none;
     opacity: 0;
   }
-  .cursor__inner {
-    /* Cursor styles */
-    --cursor-stroke: gray;
-    --cursor-fill: none;
-    --cursor-stroke-width: 1px;
-    fill: var(--cursor-fill);
-    stroke: var(--cursor-stroke);
-    stroke-width: var(--cursor-stroke-width);
-  }
 }
