@@ -12,13 +12,12 @@ window.addEventListener('mousemove', (ev) => (mouse = getMousePos(ev)));
 export default class Cursor extends EventEmitter {
   constructor(props) {
     super();
-    this.DOM = { ...props };
+    const { size, zoomRatio, distortDuration, el } = props;
+    this.DOM = { size, zoomRatio, distortDuration, el };
     this.DOM.el.style.opacity = 0;
     this.DOM.circleInner = this.DOM.el.querySelector('.cursor__inner');
-    this.filterId = '#filter-1';
-    this.DOM.feTurbulence = document.querySelector(
-      `${this.filterId} > feTurbulence`
-    );
+    this.filterId = '#filter';
+    this.DOM.feTurbulence = document.querySelector('feTurbulence');
 
     this.primitiveValues = { turbulence: 0 };
 
@@ -29,7 +28,7 @@ export default class Cursor extends EventEmitter {
     this.renderedStyles = {
       tx: { previous: 0, current: 0, amt: 0.2 },
       ty: { previous: 0, current: 0, amt: 0.2 },
-      radius: { previous: this.DOM.radius, current: this.DOM.radius, amt: 0.2 },
+      radius: { previous: this.DOM.size, current: this.DOM.size, amt: 0.2 },
     };
 
     this.listen();
@@ -89,19 +88,18 @@ export default class Cursor extends EventEmitter {
           },
         })
         .to(this.primitiveValues, {
-          duration: 0.4,
+          duration: this.DOM.distortDuration,
           startAt: { turbulence: 0.09 },
           turbulence: 0,
         });
     }
   }
   enter() {
-    this.renderedStyles['radius'].current =
-      this.DOM.radius * this.DOM.zoomRatio;
+    this.renderedStyles['radius'].current = this.DOM.size * this.DOM.zoomRatio;
     this.tl && this.tl.restart();
   }
   leave() {
-    this.renderedStyles['radius'].current = this.DOM.radius;
+    this.renderedStyles['radius'].current = this.DOM.size;
     this.tl && this.tl.progress(1).kill();
   }
   listen() {

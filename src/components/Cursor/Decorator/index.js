@@ -18,21 +18,38 @@ const isTouchDevice =
 
 const CursorDecorator = forwardRef(
   (
-    { feTurbulence = false, radius = 60, zoomRatio = 2, strokeWidth = 1 },
+    {
+      size = 60,
+      zoomRatio = 2,
+      fill = 'none',
+      stroke = '#000000',
+      strokeWidth = 1,
+      distorted = false,
+      distortDuration = 0.4,
+      type = 'circle', // 'circle' | 'rect' | 'custom'
+      // This allows to customize the decorator
+      renderCustomDecorator, // if type === 'custom'
+    },
     ref
   ) => {
     const [, setCursor] = useContext(CursorContext);
 
     const viewBoxSize = useMemo(
-      () => radius * (zoomRatio + 2) + strokeWidth * 2,
-      [radius, strokeWidth, zoomRatio]
+      () =>
+        size * (zoomRatio + 2) + strokeWidth * 2 + (distorted ? size / 2 : 0),
+      [distorted, size, strokeWidth, zoomRatio]
     );
 
     const cursorRef = useRef(null);
     useEffect(() => {
-      let _cursor = new Cursor({ el: cursorRef?.current, radius, zoomRatio });
+      let _cursor = new Cursor({
+        el: cursorRef?.current,
+        size,
+        zoomRatio,
+        distortDuration,
+      });
       setCursor(_cursor);
-    }, [setCursor, radius, zoomRatio]);
+    }, [setCursor, size, zoomRatio, distortDuration]);
 
     useImperativeHandle(
       ref,
@@ -53,10 +70,10 @@ const CursorDecorator = forwardRef(
         height={viewBoxSize}
         viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       >
-        {feTurbulence && (
+        {distorted && (
           <defs>
             <filter
-              id="filter-1"
+              id="filter"
               x="-50%"
               y="-50%"
               width="200%"
@@ -69,26 +86,57 @@ const CursorDecorator = forwardRef(
                 numOctaves="1"
                 result="warp"
               />
-              <feOffset dx={-radius / 2} result="warpOffset" />
+              <feOffset dx={-size / 2} result="warpOffset" />
               <feDisplacementMap
                 xChannelSelector="R"
                 yChannelSelector="G"
-                scale={radius / 2}
+                scale={size / 2}
                 in="SourceGraphic"
                 in2="warpOffset"
               />
             </filter>
           </defs>
         )}
-        <circle
-          className="cursor__inner"
-          cx={viewBoxSize / 2}
-          cy={viewBoxSize / 2}
-          r={radius}
-          style={{
-            strokeWidth,
-          }}
-        />
+        {
+          {
+            circle: (
+              <circle
+                className="cursor__inner"
+                cx={viewBoxSize / 2}
+                cy={viewBoxSize / 2}
+                r={size}
+                style={{
+                  fill,
+                  stroke,
+                  strokeWidth,
+                }}
+              />
+            ),
+            rect: (
+              <rect
+                className="cursor__inner"
+                x={viewBoxSize / 2 - size}
+                y={viewBoxSize / 2 - size}
+                width={size * 2}
+                height={size * 2}
+                style={{
+                  fill,
+                  stroke,
+                  strokeWidth,
+                }}
+              />
+            ),
+            custom:
+              renderCustomDecorator &&
+              renderCustomDecorator({
+                className: 'cursor__inner',
+                x: viewBoxSize / 2 - size,
+                y: viewBoxSize / 2 - size,
+                width: size * 2,
+                height: size * 2,
+              }),
+          }[type]
+        }
       </svg>
     );
   }

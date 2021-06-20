@@ -1,5 +1,8 @@
 import React from 'react';
 
+// https://www.flaticon.com/free-icon/cherry-blossom_1762755
+import { ReactComponent as CherryBlossom } from './cherry-blossom.svg';
+
 import { Cursor } from 'components';
 const { CursorProvider, useCursorHandlers, CursorDecorator } = Cursor;
 
@@ -15,7 +18,7 @@ const Hover = (props) => {
 
 const CursorExample = () => {
   return (
-    <CursorProvider>
+    <CursorProvider hideCursor>
       <div
         style={{
           width: '100%',
@@ -43,7 +46,16 @@ const CursorExample = () => {
         >
           NORMAL TEXT
         </div>
-        <CursorDecorator feTurbulence radius={50} />
+        <CursorDecorator
+          size={16}
+          // distorted
+          // distortDuration={1}
+          // type="circle"
+          // fill="none"
+          // stroke="red"
+          type="custom"
+          renderCustomDecorator={(props) => <CherryBlossom {...props} />}
+        />
       </div>
     </CursorProvider>
   );

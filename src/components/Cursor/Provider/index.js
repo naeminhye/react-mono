@@ -2,12 +2,12 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const CursorContext = createContext({ active: false });
 
-const CursorProvider = ({ children }) => {
+const CursorProvider = ({ children, hideCursor = false }) => {
   const [cursor, setCursor] = useState(null);
 
   return (
     <CursorContext.Provider value={[cursor, setCursor]}>
-      {children}
+      <div style={hideCursor ? { cursor: 'none' } : {}}>{children}</div>
     </CursorContext.Provider>
   );
 };
